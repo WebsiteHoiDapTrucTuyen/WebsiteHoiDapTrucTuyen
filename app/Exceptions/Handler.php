@@ -48,11 +48,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        // if ($exception instanceof Exception) {
-        //     return [
-        //         'errors' => 'Cannot get data'
-        //     ];
-        // }
+        if ($exception instanceof Exception) {
+            return [
+                'errors' => 'Catch errors'
+            ];
+        }
         return parent::render($request, $exception);
     }
 }
