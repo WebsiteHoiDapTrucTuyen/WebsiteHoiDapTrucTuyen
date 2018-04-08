@@ -19,6 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
             'id' => $request->user()->id,
             'name' => $request->user()->name,
             'name_url' => $request->user()->name_url,
+            'avatar' => $request->user()->avatar,
         ] 
     ];
 });

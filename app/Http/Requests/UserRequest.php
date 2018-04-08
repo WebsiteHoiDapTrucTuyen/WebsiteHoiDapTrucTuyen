@@ -27,6 +27,7 @@ class UserRequest extends FormRequest
             'name' => 'required|min:6|max:32',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6|max:32',
+            'confirm_password' => 'required|min:6|max:32|same:password',
         ];
     }
 }

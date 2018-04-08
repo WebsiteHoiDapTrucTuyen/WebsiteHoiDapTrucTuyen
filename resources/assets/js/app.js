@@ -7,16 +7,38 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import router from './router/router';
+import store from './store/index';
+import Auth from './packages/auth/Auth';
+
+Vue.use(Auth)
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+router.beforeEach((to, from, next) => {
+	if (to.matched.some(record => record.meta.guest)) {
+		if (Vue.auth.isAuthenticated()) {
+			next({ name: 'home' })
+		}
+		else {
+			next()
+		}
+	}
+	else {
+		next()
+	}
+})
 
 const app = new Vue({
-    el: '#app'
-});
+    router,
+    store,
+}).$mount('#app');
+
+// Vue.config.devtools = false
+// Vue.config.debug = false
+// Vue.config.silent = true
