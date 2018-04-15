@@ -1,14 +1,15 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Auth from '../packages/auth/Auth.js';
 
 Vue.use(VueRouter)
-Vue.use(Auth)
 
 import App from '../App.vue';
 import Home from '../components/Home.vue';
 import Login from '../components/auth/Login.vue';
 import Register from '../components/auth/Register.vue'
+import Question from '../components/questions/Question.vue'
+import ListQuestion from '../components/questions/ListQuestion.vue'
+
 
 const router = new VueRouter({
     mode: 'history',
@@ -16,7 +17,7 @@ const router = new VueRouter({
         { 
             path: '/', 
             component: App, 
-            children:[
+            children: [
                 {
                     path: '',
                     component: Home,
@@ -37,6 +38,17 @@ const router = new VueRouter({
                     meta: {
                         guest: true
                     }
+                },
+                {
+                    path: 'questions',
+                    component: Question,
+                    children: [
+                        {
+                            path: '',
+                            component: ListQuestion,
+                            name: 'list-question'
+                        }
+                    ]
                 }
             ]
         }

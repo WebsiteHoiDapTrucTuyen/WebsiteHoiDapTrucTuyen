@@ -17,7 +17,7 @@
                 <!--danh mục-->
                 <ul class="navbar-nav">
                     <li class="nav-item mr-sm-3">
-                        <a class="nav-link" href=""><strong>Câu Hỏi</strong></a>
+                        <router-link :to="{ name: 'list-question' }" class="nav-link"><strong>Câu Hỏi</strong></router-link>
                     </li>
                     <li class="nav-item mr-sm-3">
                         <a class="nav-link" href=""><strong>Tài Liệu</strong></a>

@@ -15,6 +15,11 @@
             Navbar: Navbar,
             Footer: Footer,
         },
+        created() {
+            this.$store.dispatch('asset/fetchInformationQuestion')
+            this.$store.dispatch('asset/fetchLeaderboard')
+            this.$store.dispatch('asset/fetchCommonTag')
+        },
         mounted() {
             console.log('Component mounted.')
         }
