@@ -63,15 +63,15 @@
                 };
 
                 axios.post('/oauth/token', oauth)
-                    .then(response => {
-                        // console.log(response);
-                        this.$auth.setToken(response.data.token_type + ' ' + response.data.access_token, response.data.expires_in + Date.now());
-                        this.$store.dispatch('user/fetchCurrentUser', this.$auth.getToken());
-                        this.$router.push({ name: 'home' });
-                    })
-                    .catch(error => {
-                        // console.log(error);
-                    });
+                .then(response => {
+                    // console.log(response);
+                    this.$auth.setToken(response.data.token_type + ' ' + response.data.access_token, response.data.expires_in + Date.now());
+                    this.$store.dispatch('user/fetchCurrentUser');
+                    this.$router.push({ name: 'home' });
+                })
+                .catch(error => {
+                    // console.log(error);
+                });
             }
         },
         mounted() {

@@ -23,7 +23,7 @@
     export default {
         computed: {
             information() {
-                return this.$store.getters['asset/getInformationQuestion'];
+                return this.$store.getters['asset/getInformationQuestion'].data;
             }
         },
         mounted() {

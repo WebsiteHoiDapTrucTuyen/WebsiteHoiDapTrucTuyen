@@ -53,7 +53,7 @@
                         <router-link :to="{ name: 'register' }"><button type="button" class="btn colr">Đăng Ký</button></router-link>
                     </div>
                     <div v-else>
-                        <div class="dropdown">
+                        <div class="dropdown" v-if="currentUser">
                             <div class="avatar_login" id="dropdownMenuButton" data-toggle="dropdown">
                                 <img :src="sourceImage(currentUser.avatar)" class="rounded-circle" >
                             </div>
@@ -89,8 +89,8 @@
     export default {
         computed: {
             currentUser() {
-                return this.$store.getters['user/getCurrentUser'];
-            }
+                return this.$store.getters['user/getCurrentUser'].data
+            },
         },
         methods: {
             sourceImage(url) {
@@ -98,11 +98,12 @@
             },
             logout() {
                 this.$auth.destroyToken();
-                this.$store.dispatch('user/fetchCurrentUser', this.$auth.getToken());
+                this.$store.dispatch('user/logout');
+                this.$router.push({ name: 'home' })
             }
         },
         created() {
-            this.$store.dispatch('user/fetchCurrentUser', this.$auth.getToken());
+            this.$store.dispatch('user/fetchCurrentUser');
         },
         mounted() {
             // console.log('Component mounted.')

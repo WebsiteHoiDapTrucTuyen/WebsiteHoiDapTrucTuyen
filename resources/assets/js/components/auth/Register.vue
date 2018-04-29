@@ -76,27 +76,29 @@
         },
         methods: {
             register() {
-                var user = {
-                    name: this.name,
-                    email: this.email,
-                    password: this.password,
-                    confirm_password: this.confirm_password,
+                let payload = {
+                    'user': {
+                        name: this.name,
+                        email: this.email,
+                        password: this.password,
+                        confirm_password: this.confirm_password,   
+                    }
                 }
-                console.log(this.message)
+                // console.log(this.message)
                 this.$store.dispatch('user/register', user)
-                    .then(response => {
-                        if (response.data.hasOwnProperty('errors')) {
-                            this.message['errors'] = 'Đăng ký không thành công';
-                            this.password = null;
-                            this.confirm_password = null;
-                        }
-                        else {
-                            this.$router.push({ name: 'login' });    
-                        }
-                    })
-                    .catch(error => {
-                        // console.log(error);
-                    });
+                .then(response => {
+                    if (response.data.hasOwnProperty('errors')) {
+                        this.message['errors'] = 'Đăng ký không thành công';
+                        this.password = null;
+                        this.confirm_password = null;
+                    }
+                    else {
+                        this.$router.push({ name: 'login' });    
+                    }
+                })
+                .catch(error => {
+                    // console.log(error);
+                });
             },
             checkName(value) {
                 if (value.length < 6 || value.length > 32) {

@@ -54,20 +54,20 @@ class DocumentationController extends Controller
 
     public function related($id) {
         $documentation = Documentation::find($id);
-        $tags = $documentation->tags;
+        $tags = $documentation->tags->unique('id');
         $all_documentation_related = new Collection;   
         foreach ($tags as $tag) {
-            $documentations_related = $tag->documentations->where('id', '!=', $documentation->id)->unique()->values();
+            $documentations_related = $tag->documentations->where('id', '!=', $documentation->id)->unique('id');
             foreach ($documentations_related as $doc) {
                 $all_documentation_related->push($doc);
             }  
         }
 
-        $top10_documentation_related = $all_documentation_related->unique()->sortByDesc(function($documentation) {
+        $top10_documentation_related = $all_documentation_related->unique('id')->sortByDesc(function($documentation) {
             $countvotes_up = $documentation->votes->where('vote_action', 'up')->count();
             $countvotes_down = $documentation->votes->where('vote_action', 'down')->count();
             return $countvotes_up - $countvotes_down;
-        })->values()->take(10);
+        })->take(10);
 
         return DocumentationRelated::collection($top10_documentation_related);
     }

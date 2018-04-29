@@ -16,6 +16,15 @@
 
 <script>
     export default {
+        computed: {
+
+        },
+        methods: {
+
+        },
+        created() {
+
+        },
         mounted() {
             // console.log('Component mounted.')
         }

@@ -9,6 +9,7 @@ import Login from '../components/auth/Login.vue';
 import Register from '../components/auth/Register.vue'
 import Question from '../components/questions/Question.vue'
 import ListQuestion from '../components/questions/ListQuestion.vue'
+import DetailQuestion from '../components/questions/DetailQuestion.vue'
 
 
 const router = new VueRouter({
@@ -47,6 +48,11 @@ const router = new VueRouter({
                             path: '',
                             component: ListQuestion,
                             name: 'list-question'
+                        },
+                        {
+                            path: ':id',
+                            component: DetailQuestion,
+                            name: 'detail-question'
                         }
                     ]
                 }

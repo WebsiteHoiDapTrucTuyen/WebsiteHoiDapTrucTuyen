@@ -1,5 +1,5 @@
 <template>
-    <div class="rank-reputation">
+    <div class="rank-reputation" v-if="leaderboard">
         <div class="rank-header">
             <h4>Bảng xếp hạng</h4>
         </div>
@@ -29,7 +29,7 @@
     export default {
         computed: {
             leaderboard() {
-                return this.$store.getters['asset/getLeaderboard']
+                return this.$store.getters['asset/getLeaderboard'].data
             }
         },
         methods: {

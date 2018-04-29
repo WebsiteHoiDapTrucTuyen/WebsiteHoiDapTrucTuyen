@@ -20,7 +20,7 @@ class AnswerController extends Controller
 		$this->middleware('auth:api')->only('store', 'update', 'destroy');
 	}
 
-	public function index($question_id)
+	public function index(Request $request, $question_id)
 	{
 		$answers = Question::find($question_id)->answers->sortByDesc('best_answer')
 			->sortByDesc(function($answer) {
@@ -28,7 +28,7 @@ class AnswerController extends Controller
 				$countvotes_down = $answer->votes->where('vote_action', 'down')->count();
 				return $countvotes_up - $countvotes_down;
 			});
-		// $answers = $this->paginate($answers, 10, $request->page,['path' => LengthAwarePaginator::resolveCurrentPath()]);
+		$answers = $this->paginate($answers, 5, $request->page,['path' => LengthAwarePaginator::resolveCurrentPath()]);
 		return AnswerList::collection($answers);
 	}
 

@@ -16,6 +16,7 @@
             Footer: Footer,
         },
         created() {
+            this.$auth.setAuthorizationHeader()
             this.$store.dispatch('asset/fetchInformationQuestion')
             this.$store.dispatch('asset/fetchLeaderboard')
             this.$store.dispatch('asset/fetchCommonTag')

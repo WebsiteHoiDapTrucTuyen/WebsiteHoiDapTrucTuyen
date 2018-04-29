@@ -78,19 +78,19 @@ class QuestionController extends Controller
 
     public function related($id) {
         $question = Question::find($id);
-        $tags = $question->tags;
+        $tags = $question->tags->unique('id');
         $all_question_related = new Collection;   
         foreach ($tags as $tag) {
-            $questions_related = $tag->questions->where('id', '!=', $question->id)->unique()->values();
+            $questions_related = $tag->questions->where('id', '!=', $question->id)->unique('id');
             foreach ($questions_related as $qs) {
                 $all_question_related->push($qs);
             }  
         }
-        $top10_question_related = $all_question_related->unique()->sortByDesc(function($question) {
+        $top10_question_related = $all_question_related->unique('id')->sortByDesc(function($question) {
             $countvotes_up = $question->votes->where('vote_action', 'up')->count();
             $countvotes_down = $question->votes->where('vote_action', 'down')->count();
             return $countvotes_up - $countvotes_down;
-        })->values()->take(10);
+        })->take(10);
         return QuestionRelated::collection($top10_question_related);
     }
 

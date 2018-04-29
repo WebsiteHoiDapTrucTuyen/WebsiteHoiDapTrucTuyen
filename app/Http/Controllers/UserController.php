@@ -10,12 +10,33 @@ use App\Http\Requests\UserRequest;
 use Carbon\Carbon;
 use App\Http\Resources\User\UserInformation;
 use App\Http\Requests\UserInformationRequest;
+use Auth;
+use DB;
 
 class UserController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api')->only('update');
+        $this->middleware('auth:api')->only('update', 'logout');
+    }
+
+    public function logout() {
+        $accessToken = Auth::user()->token();
+
+        DB::table('oauth_refresh_tokens')
+            ->where('access_token_id', $accessToken->id)
+            ->update([
+                'revoked' => true
+            ]);
+
+        if ($accessToken->revoke()) {
+            return [
+                'success' => 'Logout successfully'
+            ];
+        }
+        return [
+            'errors' => 'Logout errors'
+        ];
     }
 
     public function leaderboard()

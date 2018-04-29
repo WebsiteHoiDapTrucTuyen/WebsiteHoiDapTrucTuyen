@@ -96,3 +96,5 @@ Route::group(['prefix' => 'search'], function() {
     Route::get('questions', 'QuestionController@search');
     Route::get('documentations', 'DocumentationController@search');
 });
+
+Route::post('logout', 'UserController@logout');

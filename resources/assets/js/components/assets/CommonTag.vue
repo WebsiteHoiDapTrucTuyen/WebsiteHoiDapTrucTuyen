@@ -21,7 +21,7 @@
     export default {
         computed: {
             common() {
-                return this.$store.getters['asset/getCommonTag']
+                return this.$store.getters['asset/getCommonTag'].data
             }
         },
         mounted() {
