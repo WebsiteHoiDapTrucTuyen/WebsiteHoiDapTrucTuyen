@@ -29,7 +29,7 @@ class DocumentationDetail extends JsonResource
             'viewed' => $this->view,
             'voted' => $this->countVote($this->votes),
             'tags' => TagList::collection($this->tags),
-            'user_owner' => new UserOwner($this->user),
+            'user' => new UserOwner($this->user),
             'comments' => CommentList::collection($this->comments),
             'subject' => new SubjectResource($this->subject),
         ];

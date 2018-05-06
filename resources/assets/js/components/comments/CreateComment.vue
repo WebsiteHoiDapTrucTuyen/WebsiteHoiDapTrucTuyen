@@ -7,11 +7,19 @@
                 @keyup.enter="addComment(type, id, index)"></textarea>
             </div>
         </div>
+        <sweet-modal icon="error" title="Đã xảy ra lỗi" ref="modal">
+            {{ message }}
+        </sweet-modal>
     </div>
 </template>
 
 <script>
+    import { SweetModal } from 'sweet-modal-vue'
+
     export default {
+        components: {
+            SweetModal
+        },
         props: {
             id: {
                 type: Number,
@@ -27,12 +35,13 @@
         },
         data() {
             return {
-                content: null
+                content: '',
+                message: ''
             }
         },
         computed: {
             checkAuthenticated() {
-                return this.$store.getters['user/checkAuthenticated'].data
+                return this.$store.getters['user/checkAuthenticated']
             },
         },
         methods: {
@@ -55,10 +64,19 @@
                                 'comment': response.data.data,
                                 'index': index
                             }
-                            this.$store.dispatch(this.type + '/addComment', payload)
-                                .then( this.content = null )
+                            this.$store.dispatch(type + '/addComment', payload)
+                                .then( this.content = '' )
+                        }
+                        else {
+                            this.message = 'Không thể thực hiện thao tác. Vui lòng thử lại sau'
+                            this.$refs.modal.open()
                         }
                     });
+                }
+                else {
+                    this.content = ''
+                    this.message = 'Vui lòng nhập nội dung cho câu bình luận'
+                    this.$refs.modal.open()
                 }
             }
         },

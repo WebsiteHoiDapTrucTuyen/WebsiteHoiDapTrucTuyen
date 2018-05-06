@@ -21,6 +21,24 @@ const mutations = {
 	[types.EDIT_COMMENT]: (state, payload) => {
 		state.answers.data[payload.indexAnswer].comments.splice(payload.indexComment, 1, payload.comment);
 	},
+	[types.DELETE_COMMENT]: (state, payload) => {
+		state.answers.data[payload.indexAnswer].comments.splice(payload.indexComment, 1);
+	},
+	[types.ADD_ANSWER]: (state, payload) => {
+		if (payload.data) {
+			state.answers.data.push(payload.data);			
+		}
+	},
+	[types.EDIT_ANSWER]: (state, payload) => {
+		if (payload.data) {
+			state.answers.data.splice(payload.index, 1, payload.data);			
+		}
+	},
+	[types.DELETE_ANSWER]: (state, payload) => {
+		if (payload) {
+			state.answers.data.splice(payload.index, 1);			
+		}
+	},
 }
 // Actions
 const actions = {
@@ -56,6 +74,77 @@ const actions = {
 			resolve();
 		});
 
+	},
+	deleteComment: ({ commit }, payload ) => {
+		return new Promise((resolve, reject) => {
+			commit(types.DELETE_COMMENT, payload);
+			resolve();
+		});
+
+	},
+	fetchStoreAnswer: ({ commit }, payload ) => {
+		return new Promise((resolve, reject) => {
+			axios.post('/api/answers/' + payload.id, payload.data)
+			.then(response => {
+	            // console.log(response);
+	            if (response.data.hasOwnProperty('errors')) {
+	            	commit(types.ADD_ANSWER, [])
+	            }
+	            else {
+	            	commit(types.ADD_ANSWER, response.data);
+	            }
+	            resolve(response);
+	        })
+			.catch(error => {
+	            // console.log(error);
+	            reject(error);
+	        });
+		});
+	},
+	fetchUpdateAnswer: ({ commit }, payload ) => {
+		return new Promise((resolve, reject) => {
+			axios.put('/api/answers/' + payload.id, payload.data)
+			.then(response => {
+	            // console.log(response);
+	            if (response.data.hasOwnProperty('errors')) {
+	            	commit(types.EDIT_ANSWER, [])
+	            }
+	            else {
+	            	let data = {
+	            		'data': response.data.data,
+	            		'index': payload.index
+	            	}
+	            	commit(types.EDIT_ANSWER, data);
+	            }
+	            resolve(response);
+	        })
+			.catch(error => {
+	            // console.log(error);
+	            reject(error);
+	        });
+		});
+	},
+	fetchDeleteAnswer: ({ commit }, payload ) => {
+		return new Promise((resolve, reject) => {
+			axios.delete('/api/answers/' + payload.id)
+			.then(response => {
+	            // console.log(response);
+	            if (response.data.hasOwnProperty('errors')) {
+	            	
+	            }
+	            else {
+	            	let data = {
+	            		'index': payload.index
+	            	}
+	            	commit(types.DELETE_ANSWER, data);
+	            }
+	            resolve(response);
+	        })
+			.catch(error => {
+	            // console.log(error);
+	            reject(error);
+	        });
+		});
 	},
 }
 

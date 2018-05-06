@@ -10,13 +10,15 @@ const getters = {
 		return state.current_user;
 	},
 	checkAuthenticated: state => {
-		return state.current_user ? true : false
+		return !_.isEmpty(state.current_user);
 	}
 }
 // Mutations
 const mutations = {
 	[types.CURRENT_USER]: (state, user) => {
-		state.current_user = user;
+		if (user) {
+			state.current_user = user;
+		}
 	},
 }
 // Actions

@@ -35,6 +35,9 @@ const mutations = {
 	[types.EDIT_COMMENT]: (state, payload) => {
 		state.question.data.comments.splice(payload.indexComment, 1, payload.comment);
 	},
+	[types.DELETE_COMMENT]: (state, payload) => {
+		state.question.data.comments.splice(payload.indexComment, 1);
+	},
 }
 // Actions
 const actions = {
@@ -108,6 +111,13 @@ const actions = {
 	editComment: ({ commit }, payload ) => {
 		return new Promise((resolve, reject) => {
 			commit(types.EDIT_COMMENT, payload);
+			resolve();
+		});
+
+	},
+	deleteComment: ({ commit }, payload ) => {
+		return new Promise((resolve, reject) => {
+			commit(types.DELETE_COMMENT, payload);
 			resolve();
 		});
 

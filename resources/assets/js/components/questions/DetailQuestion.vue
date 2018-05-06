@@ -10,7 +10,7 @@
                                 <div class="col-lg-1">
                                     <div class="detail-left">
                                         <div class="avatar-circle d-flex justify-content-center">
-                                            <img :src="sourceImage(question.user_owner.avatar)" class="rounded-circle" width="40" height="40">
+                                            <img :src="sourceImage(question.user.avatar)" class="rounded-circle" width="40" height="40">
                                         </div>
                                         <div class="vote-widget">
                                             <div class="vote-up d-flex justify-content-center">
@@ -28,7 +28,7 @@
                                 <div class="col-lg-11 break-word">
                                     <div class="detail-right">
                                         <div class="avatar-name">
-                                            <a href="">{{ question.user_owner.name }}</a> 
+                                            <a href="">{{ question.user.name }}</a> 
                                         </div>
                                         <div class="question-detail-title">
                                             {{ question.title }}

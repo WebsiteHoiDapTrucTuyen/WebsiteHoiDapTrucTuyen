@@ -4,7 +4,7 @@
             <div class="col-lg-1">
                 <div class="detail-left">
                     <div class="avatar-circle d-flex justify-content-center">
-                        <img :src="sourceImage(answer.user_owner.avatar)" class="rounded-circle" width="40" height="40">
+                        <img :src="sourceImage(answer.user.avatar)" class="rounded-circle" width="40" height="40">
                     </div>
                     <div class="vote-widget">
                         <div class="vote-up d-flex justify-content-center">
@@ -25,33 +25,55 @@
             <div class="col-lg-11 break-word">
                 <div class="detail-right">
                     <div class="avatar-name">
-                        <a href="">{{ answer.user_owner.name }}</a> <span class="text-muted mr-3">
+                        <a href="">{{ answer.user.name }}</a> <span class="text-muted mr-3">
                             đã trả lời vào {{ answer.date_answer.date }}
                         </span>
                     </div>
                     <div id="answer" class="answer-detail-content">
-                        <div v-html="answer.content">
+                        <div v-if="!isEdit">
+                            <div v-html=answer.content>
+                                
+                            </div>
+                            <div v-if="checkOwner">
+                                <button class="btn btn-warning" @click="edit">Chỉnh sửa</button>
+                                <button class="btn btn-danger" @click="deleteEntry()">Xóa</button>
+                            </div>
 
                         </div>
+                        <div v-else>
+                            <editor rows="10" api-key="jaghjq8xkau4fx4v7ct8j1y2pvughbdsgz57qkwotbooubbv" v-model="content" :init="config"></editor>
+                            <div class="float-right">
+                                <a @click="cancelEditAnswer()"><span style="color: red; font-size: 15px;" class="oi oi-circle-x mr-2"></span></a>
+                                <a @click="editAnswer(answer.id, index)"><span style="color: green; font-size: 15px;" class="oi oi-circle-check"></span></a>
+                            </div>
+                        </div>
                     </div>
-                    <!-- <div>
-                        <a href="" style="border-right: solid 1px black; padding-right: 10px;">Chỉnh sửa</a>
-                        <a href="" style=" padding-left: 5px" onclick="return confirm('Bạn có chắc là muốn xóa không?')">Xóa</a>
-                    </div> -->
                     <br><br>
                     <Comment :comments="answer.comments" :id="answer.id" :type="'answer'" :index="index"></Comment>
                 </div>
             </div>
         </div>
         <hr>
+        <sweet-modal icon="error" title="Đã xảy ra lỗi" ref="modal">
+            {{ message }}
+        </sweet-modal>
+        <sweet-modal icon="warning" title="Cảnh báo" ref="modalDelete">
+            Bạn chắc chắn muốn xóa bình luận này
+            <button class="btn btn-success" style="margin: 20px 20px" @click="deleteAnswer(answer.id, index)">Đồng ý</button>
+            <button class="btn btn-danger" style="margin: 20px 20px" @click="cancelDeleteAnswer()">Hủy bỏ</button>
+        </sweet-modal>
     </div>
 </template>
 
 <script>
     import Comment from '../comments/Comment.vue'
+    import Editor from '@tinymce/tinymce-vue'
+    import { SweetModal } from 'sweet-modal-vue'
 
     export default {
         components: {
+            Editor,
+            SweetModal,
             Comment: Comment
         },
         props: {
@@ -64,15 +86,95 @@
                 require: true
             }
         },
+        data() {
+            return {
+                isEdit: false,
+                content: this.answer.content,
+                config: {
+                    selector: 'textarea.tinymce',
+                    language_url: '../js/vi_VN.js',
+                    menubar: true,
+                    plugins: [
+                    'advlist autolink lists link image charmap print preview anchor textcolor',
+                    'searchreplace visualblocks code fullscreen',
+                    'insertdatetime media table contextmenu paste code help emoticons codesample'
+                    ],
+                    toolbar: 'insert | undo redo |  formatselect | fontsizeselect | codesample code | emoticons | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help',
+                },
+                message: ''
+            }
+        },
         computed: {
             currentUser() {
                 return this.$store.getters['user/getCurrentUser'].data
+            },
+            checkOwner() {
+                return this.currentUser && this.answer.user.id === this.currentUser.id
             },
         },
         methods: {
             sourceImage(url) {
                 return "/images/avatar_users/" + url;
             },
+            edit() {
+                this.isEdit = true
+            },
+            deleteEntry() {
+                this.$refs.modalDelete.open()
+            },
+            deleteAnswer(id, index) {
+                let payload = {
+                    'id': id,
+                    'index': index,
+                }
+                this.$store.dispatch('answer/fetchDeleteAnswer', payload)
+                .then(response => {
+                    // console.log(response)
+                    if (!response.data.hasOwnProperty('errors')) {
+                        this.cancelDeleteAnswer
+                    }
+                    else {
+                        this.cancelDeleteAnswer
+                        this.message = 'Không thể thực hiện thao tác. Vui lòng thử lại sau'
+                        this.$refs.modal.open()
+                    }
+                });
+            },
+            cancelDeleteAnswer() {
+                this.$refs.modalDelete.close()
+            },
+            editAnswer(id ,index) {
+                let content = this.content.trim(); 
+                if (content.length > 0) {
+                    let payload = {
+                        'id': id,
+                        'data': {
+                            'content': content,
+                        },
+                        'index': index
+                    }
+
+                    this.$store.dispatch('answer/fetchUpdateAnswer', payload)
+                    .then(response => {
+                        // console.log(response)
+                        if (!response.data.hasOwnProperty('errors')) {
+                            this.cancelEditAnswer()
+                        }
+                        else {
+                            this.message = 'Không thể thực hiện thao tác. Vui lòng thử lại sau'
+                            this.$refs.modal.open()
+                        }
+                    });
+                }
+                else {
+                    this.content = this.answer.content
+                    this.message = 'Vui lòng nhập nội dung câu trả lời'
+                    this.$refs.modal.open()
+                }
+            },
+            cancelEditAnswer() {
+                this.isEdit = false
+            }
         },
         mounted() {
             // console.log('Component mounted.')

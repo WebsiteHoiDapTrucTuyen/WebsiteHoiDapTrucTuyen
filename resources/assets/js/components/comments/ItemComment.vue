@@ -28,30 +28,43 @@
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
                                 <a class="dropdown-item" @click="edit(indexComment)">Chỉnh sửa...</a>
-                                <a class="dropdown-item" >Xóa...</a>
+                                <a class="dropdown-item" @click="deleteEntry()" >Xóa...</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row" v-else>
                     <div class="col-lg-12">
-                        <form accept-charset="utf-8">
+                        <div>
                             <textarea id="content_new" class="form-control input-size" v-model="content"></textarea>
                             <div class="float-right">
                                 <a @click="cancelEditComment()"><span style="color: red; font-size: 15px;" class="oi oi-circle-x mr-2"></span></a>
                                 <a @click="editComment(type, comment.id, indexAnswer, indexComment)"><span style="color: green; font-size: 15px;" class="oi oi-circle-check"></span></a>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <hr>
+        <sweet-modal icon="error" ref="modal">
+            {{ message }}
+        </sweet-modal>
+        <sweet-modal icon="warning" title="Cảnh báo" ref="modalDelete">
+            Bạn chắc chắn muốn xóa bình luận này
+            <button class="btn btn-success" style="margin: 20px 20px" @click="deleteComment(type, comment.id, indexAnswer, indexComment)">Đồng ý</button>
+            <button class="btn btn-danger" style="margin: 20px 20px" @click="cancelDeleteComment()">Hủy bỏ</button>
+        </sweet-modal>
     </div>
 </template>
 
 <script>
+    import { SweetModal } from 'sweet-modal-vue'
+
     export default {
+        components: {
+            SweetModal
+        },
         props: {
             comment: {
                 type: Object,
@@ -77,6 +90,7 @@
         data() {
             return {
                 content: this.comment.content,
+                message: ''
             }
         },
         computed: {
@@ -94,8 +108,33 @@
             edit(index) {
                 this.$emit('edit', index)
             },
-            delete() {
-
+            deleteEntry() {
+                this.$refs.modalDelete.open()
+            },
+            deleteComment(type, id, indexAnswer, indexComment) {
+                let payload = {
+                    'id': id,
+                }
+                this.$store.dispatch('comment/fetchDeleteComment', payload)
+                .then(response => {
+                    // console.log(response)
+                    if (!response.data.hasOwnProperty('errors')) {
+                        let payload = { 
+                            'indexAnswer': indexAnswer,
+                            'indexComment': indexComment
+                        }
+                        this.$store.dispatch(type + '/deleteComment', payload)
+                            .then( this.cancelDeleteComment() )
+                    }
+                    else {
+                        this.cancelDeleteComment()
+                        this.message = 'Không thể thực hiện thao tác. Vui lòng thử lại sau'
+                        this.$refs.modal.open()
+                    }
+                });
+            },
+            cancelDeleteComment() {
+                this.$refs.modalDelete.close()
             },
             editComment(type, id, indexAnswer, indexComment) {
                 let content = this.content.trim(); 
@@ -118,7 +157,16 @@
                             this.$store.dispatch(type + '/editComment', payload)
                                 .then( this.cancelEditComment() )
                         }
+                        else {
+                            this.message = 'Không thể thực hiện thao tác. Vui lòng thử lại sau'
+                            this.$refs.modal.open()
+                        }
                     });
+                }
+                else {
+                    this.content = this.comment.content
+                    this.message = 'Vui lòng nhập nội dung cho câu bình luận'
+                    this.$refs.modal.open()
                 }
             },
             cancelEditComment() {

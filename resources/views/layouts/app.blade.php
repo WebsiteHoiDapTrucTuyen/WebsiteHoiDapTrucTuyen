@@ -22,6 +22,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap-social/bootstrap-social.css') }}" rel="stylesheet"> 
+    <link href="{{ asset('css/prism.css') }}" rel="stylesheet"> 
 </head>
 <body>
     <div id="app">
@@ -80,5 +81,6 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('js/arrow34.js') }}" defer></script>
+    <script src="{{ asset('js/prism.js') }}" defer></script>
 </body>
 </html>

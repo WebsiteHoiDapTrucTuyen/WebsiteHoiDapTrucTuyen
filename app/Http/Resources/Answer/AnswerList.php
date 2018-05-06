@@ -24,7 +24,7 @@ class AnswerList extends JsonResource
             'voted' => $this->countVote($this->votes),
             'best_answer' => $this->best_answer,
             'date_answer' => $this->created_at,
-            'user_owner' => new UserOwner($this->user),
+            'user' => new UserOwner($this->user),
             'comments' => CommentList::collection($this->comments),
             'current_user_voted' => new VoteResource($this->currentUserVoted($this->votes)),
         ];

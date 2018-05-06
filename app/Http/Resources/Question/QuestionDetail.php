@@ -31,7 +31,7 @@ class QuestionDetail extends JsonResource
             'voted' => $this->countVote($this->votes),
             'current_user_voted' => new VoteResource($this->currentUserVoted($this->votes)),
             'tags' => TagTagged::collection($this->tags),
-            'user_owner' => new UserOwner($this->user),
+            'user' => new UserOwner($this->user),
             'comments' => CommentList::collection($this->comments),
         ];
     }

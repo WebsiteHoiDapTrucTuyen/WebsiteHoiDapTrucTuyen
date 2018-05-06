@@ -8,3 +8,7 @@ export const LIST_ANSWER = 'LIST_ANSWER';
 export const RELATED_QUESTION = 'RELATED_QUESTION';
 export const ADD_COMMENT = 'ADD_COMMENT';
 export const EDIT_COMMENT = 'EDIT_COMMENT';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
+export const ADD_ANSWER = 'ADD_ANSWER';
+export const EDIT_ANSWER = 'EDIT_ANSWER';
+export const DELETE_ANSWER = 'DELETE_ANSWER';

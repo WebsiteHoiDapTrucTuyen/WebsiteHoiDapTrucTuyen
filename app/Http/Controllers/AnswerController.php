@@ -12,6 +12,7 @@ use App\Events\ActivityEvent;
 use App\Events\PointReputationEvent;
 use App\Events\RemoveReferencesEvent;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\Exceptions\UserAnswerExist;
 
 class AnswerController extends Controller
 {
@@ -35,6 +36,8 @@ class AnswerController extends Controller
 	public function store(AnswerRequest $request, $question_id)
 	{
 		$question = Question::find($question_id);
+
+		$this->CheckUserAnswerExist($question->answers);
 
 		$answer = new Answer;
 		$answer->user_id = Auth::id();
@@ -75,5 +78,11 @@ class AnswerController extends Controller
 		$answer->delete();
 
 		return null;
+	}
+
+	public function CheckUserAnswerExist($answers) {
+		if ($answers->contains('user_id', Auth::id())) {
+			throw new UserAnswerExist;
+		}
 	}
 }

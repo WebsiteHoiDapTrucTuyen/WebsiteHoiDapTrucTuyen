@@ -12,10 +12,8 @@ import VueRouter from 'vue-router';
 import router from './router/router';
 import store from './store/index';
 import Auth from './packages/auth/Auth';
-import tinymce from 'vue-tinymce-editor'
 
 Vue.use(Auth)
-Vue.component('tinymce', tinymce) 
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
