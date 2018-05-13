@@ -11,6 +11,10 @@ import Question from '../components/questions/Question.vue'
 import ListQuestion from '../components/questions/ListQuestion.vue'
 import DetailQuestion from '../components/questions/DetailQuestion.vue'
 
+//
+import Document from '../components/documents/Document.vue';
+import ListDocument from '../components/documents/ListDocument.vue';
+
 
 const router = new VueRouter({
     mode: 'history',
@@ -53,6 +57,17 @@ const router = new VueRouter({
                             path: ':id',
                             component: DetailQuestion,
                             name: 'detail-question'
+                        }
+                    ]
+                },
+                {
+                    path: 'documents',
+                    component: Document,
+                    children:[
+                        {
+                            path:'',
+                            component: ListDocument,
+                            name: 'list-document'
                         }
                     ]
                 }

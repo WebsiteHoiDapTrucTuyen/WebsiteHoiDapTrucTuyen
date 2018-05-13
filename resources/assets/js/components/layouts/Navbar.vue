@@ -20,7 +20,7 @@
                         <router-link :to="{ name: 'list-question' }" class="nav-link"><strong>Câu Hỏi</strong></router-link>
                     </li>
                     <li class="nav-item mr-sm-3">
-                        <a class="nav-link" href=""><strong>Tài Liệu</strong></a>
+                        <router-link :to="{ name: 'list-document' }" class="nav-link"><strong>Tài Liệu</strong></router-link>
                     </li>
                     <li class="nav-item mr-sm-3">
                         <a class="nav-link" href=""><strong>Thẻ</strong></a>
