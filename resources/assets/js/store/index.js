@@ -5,6 +5,8 @@ import question from './modules/question'
 import asset from './modules/asset'
 import answer from './modules/answer'
 import comment from './modules/comment'
+//
+import documentation from './modules/documentation'
 
 Vue.use(Vuex);
 
@@ -15,6 +17,7 @@ export default new Vuex.Store ({
 		asset,
 		answer,
 		comment,
+		documentation,
 	},
 	strict: true,
 })

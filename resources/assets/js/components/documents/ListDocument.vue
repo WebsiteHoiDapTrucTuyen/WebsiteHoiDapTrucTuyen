@@ -30,11 +30,7 @@
                                             <div class="col-lg-3">
                                                 <select class="form-control" name="subject">
                                                     <option value="0">--- Chủ đề ---</option>
-                                                    <!-- @foreach ($subjects as $sj)
-                                                    <option value="{{ $sj->id }}" >
-                                                        {{ $sj->name }}
-                                                    </option>
-                                                    @endforeach -->
+                                                      <ListSubject v-for="subject in subjects" :key="subject.id" :subject="subject"></ListSubject>
                                                 </select>
                                             </div>
                                             <div class="col-lg-9">
@@ -48,20 +44,20 @@
                                 <div class="tabs">
                                     <ul class="nav nav-tabs d-flex justify-content-end" id="TagsTabContent" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link active" id="new" href="" role="tab">Mới Nhất</a>
+                                            <a class="nav-link" id="newest" :class="{ active: tab === 'newest' }" @click="changeTab">Mới Nhất</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" id="view" href="" role="tab">Lượt Xem</a>
+                                            <a class="nav-link" id="view" :class="{ active: tab === 'view' }" @click="changeTab">Lượt Xem</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" id="favorite" href="" role="tab">Yêu thích</a>
+                                            <a class="nav-link" id="vote" :class="{ active: tab === 'vote' }" @click="changeTab">Yêu thích</a>
                                         </li>
                                     </ul>
                                     <div class="tab-content" id="">
-
-                                            <ItemDocument></ItemDocument>
-                                        
+                                            <ItemDocument v-for="documentation in documentations" :key="documentation.id" :documentation="documentation"></ItemDocument>
                                     </div>
+                                    <br>
+                                    <Pagination v-if="pagination" :pagination="pagination" @paginate="paginate($event)" :offset="4"></Pagination>
                                 </div>
                             </div>
                         </div>
@@ -74,10 +70,8 @@
                         <div class="btn-documentation">
                             <a style="text-decoration: none;" href=""><button type="button" class="btn btn-success btn-block btn-lg">Chia sẻ tài liệu ngay !!!</button></a>
                         </div>
-                        <!--rank-tag-->
                         <LeaderBoard></LeaderBoard>
                         <CommonTag></CommonTag>
-                        <!--endrank-tag-->
                     </div>
                 </div>
                 
@@ -90,18 +84,54 @@
 <script>
     import ItemDocument from './ItemDocument.vue'
     import Pagination from '../assets/Pagination.vue'
-    import InformationQuestion from '../assets/InformationQuestion.vue'
     import LeaderBoard from '../assets/LeaderBoard.vue'
     import CommonTag from '../assets/CommonTag.vue'
+    import ListSubject from './ListSubject.vue'
 
     export default {
         components: {
             ItemDocument: ItemDocument,
             Pagination: Pagination,
-            InformationQuestion: InformationQuestion,
             LeaderBoard: LeaderBoard,
-            CommonTag: CommonTag
+            CommonTag: CommonTag,
+            ListSubject: ListSubject,
         },
         
+        data() {
+            return {
+                tab: 'newest'
+            }
+        },
+        computed: {
+            documentations() {
+                return this.$store.getters['documentation/getListDocumentation'].data;
+            },
+            subjects(){
+                return this.$store.getters['documentation/getSubject'].data;
+            },
+            pagination() {
+                return this.$store.getters['documentation/getListDocumentation'].meta;
+            }
+        },
+        methods: {
+            changeTab() {
+                this.tab = event.target.id;
+                this.fetchListDocumentation(this.tab);
+            },
+            paginate(page) {
+                this.fetchListDocumentation(this.tab, page)
+            },
+            fetchListDocumentation(sort = 'newest', page = 1) {
+                let payload = { 'sort': sort, 'page': page }
+                this.$store.dispatch('documentation/fetchListDocumentation', payload);
+            },
+            fetchListSubject() {
+                this.$store.dispatch('documentation/fetchListSubject');
+            }
+        },
+        created() {
+            this.fetchListDocumentation();
+            this.fetchListSubject();
+        },
     }
 </script>

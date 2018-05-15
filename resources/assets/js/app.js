@@ -15,6 +15,9 @@ import Auth from './packages/auth/Auth';
 
 Vue.use(Auth)
 
+//convert date
+Vue.use(require('vue-moment'));
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

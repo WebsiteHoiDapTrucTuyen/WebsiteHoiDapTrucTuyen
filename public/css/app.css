@@ -10175,14 +10175,18 @@ button {
 
 .summary .started {
   float: right;
-  padding: 5px;
 }
 
 .started .user,
 .action,
 .time {
+  padding-left: 5px;
   display: inline-block;
-  font-size: 13px;
+  font-size: 12px;
+}
+
+.started .user {
+  width: 25%;
 }
 
 .started .time {
@@ -11388,5 +11392,11 @@ button {
 
 .name-list-user {
   font-size: 15px;
+}
+
+.hide-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
