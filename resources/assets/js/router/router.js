@@ -17,6 +17,8 @@ import ListDocument from '../components/documents/ListDocument.vue';
 //
 import Tag from '../components/tags/Tag.vue';
 import ListTag from '../components/tags/ListTag.vue';
+import User from '../components/users/User.vue';
+import ListUser from '../components/users/ListUser.vue';
 
 
 const router = new VueRouter({
@@ -82,6 +84,17 @@ const router = new VueRouter({
                             path:'',
                             component: ListTag,
                             name: 'list-tag'
+                        }
+                    ]
+                },
+                {
+                    path: 'users',
+                    component: User,
+                    children:[
+                        {
+                            path:'',
+                            component: ListUser,
+                            name: 'list-user'
                         }
                     ]
                 },

@@ -8,6 +8,7 @@ import comment from './modules/comment'
 //
 import documentation from './modules/documentation'
 import tag from './modules/tag'
+import listuser from './modules/listuser'
 
 Vue.use(Vuex);
 
@@ -20,6 +21,7 @@ export default new Vuex.Store ({
 		comment,
 		documentation,
 		tag,
+		listuser,
 	},
 	strict: true,
 })

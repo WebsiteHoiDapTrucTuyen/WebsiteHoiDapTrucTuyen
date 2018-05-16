@@ -26,10 +26,10 @@
                         <router-link :to="{ name: 'list-tag' }" class="nav-link"><strong>Thẻ</strong></router-link>
                     </li>
                     <li class="nav-item mr-sm-3">
-                        <a class="nav-link" href=""><strong>Người Dùng</strong></a>
+                        <router-link :to="{ name: 'list-user' }" class="nav-link"><strong>Người Dùng</strong></router-link>
                     </li>
                     <li class="nav-item mr-sm-3">
-                        <a class="nav-link mr-sm-5" href=""><strong>Giới Thiệu</strong></a>
+                        <router-link :to="{ name: 'list-user' }" class="nav-link"><strong>Giới Thiệu</strong></router-link>
                     </li>
                 </ul>
                 <!--/danh mục-->
