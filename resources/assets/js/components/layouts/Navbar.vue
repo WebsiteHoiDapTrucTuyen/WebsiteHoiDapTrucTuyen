@@ -23,7 +23,7 @@
                         <router-link :to="{ name: 'list-document' }" class="nav-link"><strong>Tài Liệu</strong></router-link>
                     </li>
                     <li class="nav-item mr-sm-3">
-                        <a class="nav-link" href=""><strong>Thẻ</strong></a>
+                        <router-link :to="{ name: 'list-tag' }" class="nav-link"><strong>Thẻ</strong></router-link>
                     </li>
                     <li class="nav-item mr-sm-3">
                         <a class="nav-link" href=""><strong>Người Dùng</strong></a>

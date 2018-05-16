@@ -7,6 +7,7 @@ import answer from './modules/answer'
 import comment from './modules/comment'
 //
 import documentation from './modules/documentation'
+import tag from './modules/tag'
 
 Vue.use(Vuex);
 
@@ -18,6 +19,7 @@ export default new Vuex.Store ({
 		answer,
 		comment,
 		documentation,
+		tag,
 	},
 	strict: true,
 })

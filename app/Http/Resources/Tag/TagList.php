@@ -20,6 +20,7 @@ class TagList extends JsonResource
             'count' => $this->kount,
             'question_used' => $this->questions->count(),
             'documentation_used' => $this->documentations->count(),
+            'description' => $this->description,
         ];
     }
 }

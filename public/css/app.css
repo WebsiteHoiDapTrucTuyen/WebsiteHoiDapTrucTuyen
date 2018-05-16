@@ -11400,3 +11400,7 @@ button {
   text-overflow: ellipsis;
 }
 
+.card-text-height {
+  height: 120px;
+}
+
