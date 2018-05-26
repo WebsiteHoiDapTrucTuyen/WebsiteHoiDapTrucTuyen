@@ -10,6 +10,7 @@ import Register from '../components/auth/Register.vue'
 import Question from '../components/questions/Question.vue'
 import ListQuestion from '../components/questions/ListQuestion.vue'
 import DetailQuestion from '../components/questions/DetailQuestion.vue'
+import CreateQuestion from '../components/questions/CreateQuestion.vue'
 
 //
 import Document from '../components/documents/Document.vue';
@@ -62,8 +63,13 @@ const router = new VueRouter({
                             path: ':id',
                             component: DetailQuestion,
                             name: 'detail-question'
-                        }
+                        },
                     ]
+                },
+                {
+                    path: 'create-question',
+                    component: CreateQuestion,
+                    name: 'create-question'
                 },
                 {
                     path: 'documents',

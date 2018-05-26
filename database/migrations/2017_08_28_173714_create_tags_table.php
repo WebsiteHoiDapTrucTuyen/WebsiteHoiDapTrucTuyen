@@ -18,7 +18,7 @@ class CreateTagsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->string('name');
             $table->string('name_url');
-            $table->string('description');
+            $table->string('description')->default('Chưa cập nhật');
             $table->boolean('is_new')->default(true);
             // $table->boolean('active')->default(true);
             $table->timestamps();

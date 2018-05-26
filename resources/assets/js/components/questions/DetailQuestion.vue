@@ -55,9 +55,9 @@
                 <div class="col-lg-3">
                     <div class="sub-content">
                         <div class="btn-question">
-                            <a href="">
+                            <router-link :to="{ name: 'create-question' }">
                                 <button type="button" class="btn btn-success btn-block btn-lg">Đặt câu hỏi ngay !!!</button>
-                            </a>
+                            </router-link>
                         </div>
                         <div class="content-card">
                             <div class="question-info">

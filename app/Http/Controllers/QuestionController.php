@@ -110,7 +110,7 @@ class QuestionController extends Controller
         event(new TagEvent($question, $request->tags));
         event((new PointReputationEvent(1, 10)));
 
-        return new QuestionDetail(Question::find($question->id));
+        return new QuestionList(Question::find($question->id));
     }
 
     public function update(QuestionRequest $request, $id)
@@ -127,7 +127,7 @@ class QuestionController extends Controller
         event(new ActivityEvent($question, 'đã chỉnh sửa'));
         event(new TagEvent($question, $request->tags));
 
-        return new QuestionDetail(Question::find($question->id));
+        return new QuestionList(Question::find($question->id));
     }
 
     public function destroy($id)

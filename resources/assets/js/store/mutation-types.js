@@ -12,6 +12,9 @@ export const DELETE_COMMENT = 'DELETE_COMMENT';
 export const ADD_ANSWER = 'ADD_ANSWER';
 export const EDIT_ANSWER = 'EDIT_ANSWER';
 export const DELETE_ANSWER = 'DELETE_ANSWER';
+export const LIST_TAG_PURE = 'LIST_TAG_PURE';
+export const ADD_TAG = 'ADD_TAG';
+export const ADD_QUESTION = 'ADD_QUESTION';
 //
 export const LIST_DOCUMENTATION = 'LIST_DOCUMENTATION';
 export const DETAIL_DOCUMENTATION = 'DETAIL_DOCUMENTATION';

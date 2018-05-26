@@ -31,9 +31,9 @@
                     </a>
                 </div>
                 <div class="started col-lg-5">
-                    <p class="user"><a href="">{{ question.user_last_interact.name }}</a></p>
+                    <p class="user hide-text"><a href="">{{ question.user_last_interact.name }}</a></p>
                     <p class="action">{{ question.user_last_interact.interact }}</p>
-                    <p class="time">{{ question.user_last_interact.date_interact.date }}</p>
+                    <p class="time">{{ question.user_last_interact.date_interact.date | moment("DD-MM-YYYY") }}</p>
                 </div>
             </div>
         </div>

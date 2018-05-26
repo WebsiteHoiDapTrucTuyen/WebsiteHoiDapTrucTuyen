@@ -24,8 +24,8 @@ class QuestionRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required',
-            'content' => 'required',
+            'title' => 'required|min:16|max:256',
+            'content' => 'required|min:64',
             'tags' => 'required'
         ];
     }

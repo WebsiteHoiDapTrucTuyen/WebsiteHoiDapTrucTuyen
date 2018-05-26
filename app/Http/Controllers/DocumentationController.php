@@ -98,7 +98,7 @@ class DocumentationController extends Controller
         event(new TagEvent($documentation, $request->tags));
         event((new PointReputationEvent(1, 100)));
 
-        return new DocumentationDetail(Documentation::find($documentation->id));
+        return new DocumentationList(Documentation::find($documentation->id));
     }
 
     public function update(DocumentationRequest $request, $id)
@@ -115,7 +115,7 @@ class DocumentationController extends Controller
         event(new ActivityEvent($documentation, 'đã chỉnh sửa'));
         event(new TagEvent($documentation, $request->tags));
 
-        return new DocumentationDetail(Documentation::find($documentation->id));
+        return new DocumentationList(Documentation::find($documentation->id));
     }
 
     public function destroy($id)

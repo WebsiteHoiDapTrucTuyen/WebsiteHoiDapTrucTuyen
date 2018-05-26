@@ -25,10 +25,10 @@ class DocumentationRequest extends FormRequest
     {
         return [
             'subject' => 'required',
-            'title' => 'required',
-            'summary' => 'required',
-            'content' => 'required',
-            'link' => 'required',
+            'title' => 'required|min:16|max:256',
+            'summary' => 'required|min:16|max:256',
+            'content' => 'required|min:64',
+            'link' => 'required|url',
             'tags' => 'required'
         ];
     }

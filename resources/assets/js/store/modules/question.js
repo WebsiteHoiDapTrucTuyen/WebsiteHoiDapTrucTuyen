@@ -38,6 +38,11 @@ const mutations = {
 	[types.DELETE_COMMENT]: (state, payload) => {
 		state.question.data.comments.splice(payload.indexComment, 1);
 	},
+	[types.ADD_QUESTION]: (state, question) => {
+		if (question.data) {
+			state.questions.data.unshift(question.data);
+		}
+	},
 }
 // Actions
 const actions = {
@@ -121,6 +126,25 @@ const actions = {
 			resolve();
 		});
 
+	},
+	fetchStoreQuestion: ({ commit }, payload ) => {
+		return new Promise((resolve, reject) => {
+			axios.post('/api/questions/', payload.data)
+			.then(response => {
+	            // console.log(response);
+	            if (response.data.hasOwnProperty('errors')) {
+	            	commit(types.ADD_QUESTION, [])
+	            }
+	            else {
+	            	commit(types.ADD_QUESTION, response.data);
+	            }
+	            resolve(response);
+	        })
+			.catch(error => {
+	            // console.log(error);
+	            reject(error);
+	        });
+		});
 	},
 }
 

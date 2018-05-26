@@ -67,11 +67,11 @@
     export default {
         data() {
             return {
-                name: null,
-                email: null,
-                password: null,
-                confirm_password: null,
-                message: [],
+                name: '',
+                email: '',
+                password: '',
+                confirm_password: '',
+                message: {},
             }
         },
         methods: {
@@ -85,12 +85,14 @@
                     }
                 }
                 // console.log(this.message)
-                this.$store.dispatch('user/register', user)
+                this.$store.dispatch('user/register', payload)
                 .then(response => {
                     if (response.data.hasOwnProperty('errors')) {
-                        this.message['errors'] = 'Đăng ký không thành công';
-                        this.password = null;
-                        this.confirm_password = null;
+                        this.message['errors'] = 'Đăng ký không thành công. Vui lòng thử lại bằng email khác';
+                        this.name = '';
+                        this.email = '';
+                        this.password = '';
+                        this.confirm_password = '';
                     }
                     else {
                         this.$router.push({ name: 'login' });    
@@ -105,7 +107,7 @@
                     this.message['name'] = 'Tên hiển thị phải có độ dài từ 6 đến 32 ký tự';
                 }
                 else {
-                    this.message['name'] = null;
+                    this.message['name'] = '';
                 }
             },
             checkEmail(value){
@@ -113,7 +115,7 @@
                     this.message['email'] = 'Email không hợp lệ';
                 }
                 else {
-                    this.message['email'] = null;
+                    this.message['email'] = '';
                 }
             },
             checkPassword(value) {
@@ -121,7 +123,7 @@
                     this.message['password'] = 'Mật khẩu phải có độ dài từ 6 đến 32 ký tự';
                 }
                 else {
-                    this.message['password'] = null;
+                    this.message['password'] = '';
                 }
             },
             checkConfirmPassword(value) {
@@ -133,7 +135,7 @@
                         this.message['confirm_password'] = 'Xác nhận mật khẩu không trùng khớp';
                     }
                     else {
-                        this.message['confirm_password'] = null;
+                        this.message['confirm_password'] = '';
                     }
                 }
             }

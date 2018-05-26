@@ -8,6 +8,7 @@ use App\Http\Resources\Tag\TagCommon;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Http\Requests\TagRequest;
 use App\Http\Resources\Tag\TagList;
+use App\Http\Resources\Tag\TagListPure;
 use Auth;
 use Carbon\Carbon;
 
@@ -61,11 +62,17 @@ class TagController extends Controller
     	$tag->user_id = Auth::id();
     	$tag->name = $request->name;
     	$tag->name_url = changeTitle($request->name);
-    	$tag->description = $request->description;
+    	// $tag->description = $request->description;
     	$tag->created_at = Carbon::now();
     	$tag->updated_at = Carbon::now();
     	$tag->save();
     	
-    	return new TagList($tag);  
+    	return new TagListPure($tag);  
+    }
+
+    public function indexPure() {
+    	$tags = Tag::all();
+    	$tags = $tags->sortBy('name_url');
+    	return TagListPure::collection($tags);
     }
 }

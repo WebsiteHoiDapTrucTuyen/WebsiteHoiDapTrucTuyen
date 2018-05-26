@@ -74,6 +74,7 @@ Route::group(['prefix' => 'subjects'], function() {
 Route::group(['prefix' => 'tags'], function() {
     Route::get('', 'TagController@index');
     Route::post('', 'TagController@store');
+    Route::get('pure', 'TagController@indexPure');
 });
 
 // User
