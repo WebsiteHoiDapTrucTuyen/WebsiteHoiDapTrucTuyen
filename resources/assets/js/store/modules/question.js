@@ -43,6 +43,20 @@ const mutations = {
 			state.questions.data.unshift(question.data);
 		}
 	},
+	[types.UPDATE_QUESTION]: (state, question) => {
+		if (question.data) {
+			state.questions.data = state.questions.data.filter((item) => {
+				return item.id === question.data.id ? question.data : item
+			})
+		}
+	},
+	[types.DELETE_QUESTION]: (state, payload) => {
+		if (payload) {
+			state.questions.data = state.questions.data.filter((item) => {
+				return item.id !== payload.id
+			})
+		}
+	},
 }
 // Actions
 const actions = {
@@ -137,6 +151,46 @@ const actions = {
 	            }
 	            else {
 	            	commit(types.ADD_QUESTION, response.data);
+	            }
+	            resolve(response);
+	        })
+			.catch(error => {
+	            // console.log(error);
+	            reject(error);
+	        });
+		});
+	},
+	fetchUpdateQuestion: ({ commit }, payload ) => {
+		return new Promise((resolve, reject) => {
+			axios.put('/api/questions/' + payload.id, payload.data)
+			.then(response => {
+	            if (response.data.hasOwnProperty('errors')) {
+	            	commit(types.UPDATE_QUESTION, [])
+	            }
+	            else {
+	            	commit(types.UPDATE_QUESTION, response.data);
+	            }
+	            resolve(response);
+	        })
+			.catch(error => {
+	            // console.log(error);
+	            reject(error);
+	        });
+		});
+	},
+	fetchDeleteQuestion: ({ commit }, payload ) => {
+		return new Promise((resolve, reject) => {
+			axios.delete('/api/questions/' + payload.id)
+			.then(response => {
+	            // console.log(response);
+	            if (response.data.hasOwnProperty('errors')) {
+	            	
+	            }
+	            else {
+	            	let data = {
+	            		'id': payload.id
+	            	}
+	            	commit(types.DELETE_QUESTION, data);
 	            }
 	            resolve(response);
 	        })

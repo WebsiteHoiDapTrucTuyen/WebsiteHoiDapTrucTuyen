@@ -11,6 +11,7 @@ import Question from '../components/questions/Question.vue'
 import ListQuestion from '../components/questions/ListQuestion.vue'
 import DetailQuestion from '../components/questions/DetailQuestion.vue'
 import CreateQuestion from '../components/questions/CreateQuestion.vue'
+import EditQuestion from '../components/questions/EditQuestion.vue'
 
 //
 import Document from '../components/documents/Document.vue';
@@ -64,12 +65,17 @@ const router = new VueRouter({
                             component: DetailQuestion,
                             name: 'detail-question'
                         },
+                        {
+                            path: '/questions-create',
+                            component: CreateQuestion,
+                            name: 'create-question'
+                        },
+                        {
+                            path: ':id/edit',
+                            component: EditQuestion,
+                            name: 'edit-question'
+                        },
                     ]
-                },
-                {
-                    path: 'create-question',
-                    component: CreateQuestion,
-                    name: 'create-question'
                 },
                 {
                     path: 'documents',

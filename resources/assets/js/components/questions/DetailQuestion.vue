@@ -44,6 +44,13 @@
                                             </a>
                                         </div>
                                         <br><br>
+                                        <div v-if="checkOwner">
+                                            <router-link :to="{ name: 'edit-question', params: { id: question.id } }">
+                                                <button class="btn btn-warning">Chỉnh sửa</button>
+                                            </router-link>
+                                            <button class="btn btn-danger" @click="deleteEntry()">Xóa</button>
+                                        </div>
+                                        <br>
                                         <Comment :comments="question.comments" :id="question.id" :type="'question'"></Comment>
                                     </div>
                                 </div>
@@ -116,6 +123,11 @@
 
             </div>
         </div>
+        <sweet-modal icon="warning" title="Cảnh báo" ref="modalDelete">
+            Bạn chắc chắn muốn xóa bình luận này
+            <button class="btn btn-success" style="margin: 20px 20px" @click="deleteQuestion(question.id)">Đồng ý</button>
+            <button class="btn btn-danger" style="margin: 20px 20px" @click="cancelDeleteQuestion()">Hủy bỏ</button>
+        </sweet-modal>
     </div>
     <!-- end Content -->
 </template>
@@ -123,17 +135,25 @@
 <script>
     import Answer from '../answers/Answer.vue'
     import RelatedQuestion from './RelatedQuestion.vue'
-    import Comment from '../comments/Comment.vue'    
+    import Comment from '../comments/Comment.vue' 
+    import { SweetModal } from 'sweet-modal-vue'   
 
     export default {
         components: {
             Answer: Answer,
             RelatedQuestion: RelatedQuestion,
             Comment: Comment,
+            SweetModal
         },
         computed: {
             question() {
                 return this.$store.getters['question/getDetailQuestion'].data;
+            },
+            currentUser() {
+                return this.$store.getters['user/getCurrentUser'].data
+            },
+            checkOwner() {
+                return this.currentUser && this.question.user.id === this.currentUser.id
             },
         },
         methods: {
@@ -144,6 +164,30 @@
                 let payload = { 'id': id }
                 this.$store.dispatch('question/fetchDetailQuestion', payload)
             },
+            deleteEntry() {
+                this.$refs.modalDelete.open()
+            },
+            cancelDeleteQuestion() {
+                this.$refs.modalDelete.close()
+            },
+            deleteQuestion(id) {
+                let payload = {
+                    'id': id,
+                }
+                this.$store.dispatch('question/fetchDeleteQuestion', payload)
+                .then(response => {
+                    // console.log(response)
+                    if (!response.data.hasOwnProperty('errors')) {
+                        this.cancelDeleteQuestion()
+                        this.$router.push({ name: 'list-question' });
+                    }
+                    else {
+                        this.cancelDeleteQuestion()
+                        this.message = 'Không thể thực hiện thao tác. Vui lòng thử lại sau'
+                        this.$refs.modal.open()
+                    }
+                });
+            }
         },
         created() {
             this.fetchDetailQuestion(this.$route.params.id)
