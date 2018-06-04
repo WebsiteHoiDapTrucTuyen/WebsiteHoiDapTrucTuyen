@@ -16,6 +16,7 @@ import EditQuestion from '../components/questions/EditQuestion.vue'
 //
 import Document from '../components/documents/Document.vue';
 import ListDocument from '../components/documents/ListDocument.vue';
+import DetailDocument from '../components/documents/DetailDocument.vue';
 //
 import Tag from '../components/tags/Tag.vue';
 import ListTag from '../components/tags/ListTag.vue';
@@ -85,7 +86,12 @@ const router = new VueRouter({
                             path:'',
                             component: ListDocument,
                             name: 'list-document'
-                        }
+                        },
+                        {
+                            path: ':id',
+                            component: DetailDocument,
+                            name: 'detail-document'
+                        },
                     ]
                 },
                 {

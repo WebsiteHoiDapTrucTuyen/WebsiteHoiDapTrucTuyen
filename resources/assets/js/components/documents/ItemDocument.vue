@@ -15,7 +15,9 @@
 			<div class="col-lg-10">
 				<div class="summary">
 					<div class="summary-title">
-						<h6><a href="">{{documentation.title}}</a></h6>
+						<h6>
+							<router-link :to="{ name: 'detail-document', params: { id: documentation.id } }">{{documentation.title}}</router-link>
+						</h6>
 					</div>
 					<div class="summary-description">
 						{{documentation.summary}}
