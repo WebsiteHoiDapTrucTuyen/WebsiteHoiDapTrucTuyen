@@ -57,7 +57,7 @@
                 var oauth = {
                     grant_type: 'password',
                     client_id: 2,
-                    client_secret: 'ktgzB8qRzUTkYovTR2N2zLRuv8xz1C1ZS9VvtiqN',
+                    client_secret: 'bCKEYqMr3pAyFutnbGn6FUZjNTl0AjUPGqIo2S3J',
                     username: this.email,
                     password: this.password
                 };

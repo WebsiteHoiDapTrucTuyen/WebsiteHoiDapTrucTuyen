@@ -106,9 +106,11 @@ class DocumentationController extends Controller
         $documentation = Documentation::find($id);
 
         $this->CheckOwner($documentation);
-
+        $documentation->subject_id = $request->subject;
         $documentation->title = $request->title;
+        $documentation->summary = $request->summary;
         $documentation->title_url = changeTitle($request->title);
+        $documentation->link = $request->link;
         $documentation->content = $request->content;
         $documentation->save();
 

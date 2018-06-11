@@ -28,10 +28,12 @@
 										</div>
 										<br>
 										<br>
-										<div v-if="checkOwner">
-											<a href="" style="border-left: solid 1px black; padding-left: 10px; border-right: solid 1px black; padding-right: 10px;">Chỉnh sửa</a>
-											<a href="" style=" padding-left: 5px; border-right: solid 1px black; padding-right: 10px;">Xóa</a>
-										</div>
+										<!-- <div v-if="checkOwner"> -->
+											<router-link :to="{ name: 'edit-document', params: { id: documentation.id } }">
+											<a style="border-left: solid 1px black; padding-left: 10px; border-right: solid 1px black; padding-right: 10px;"> Chỉnh sửa</a>
+										</router-link>
+											<a @click="deleteEntry()" style=" padding-left: 5px; border-right: solid 1px black; padding-right: 10px;">Xóa</a>
+										<!-- </div> -->
 											
 											<!-- @if (!$documentation->active)
 												<a href="{{ route('restore-documentation', ['documentation_id' => $documentation->id]) }}" style=" padding-left: 5px; border-left: solid 1px black; padding-left: 10px; border-right: solid 1px black; padding-right: 10px;" onclick="return confirm('Bạn có chắc là muốn khôi phục không?')">Khôi phục</a>
@@ -42,12 +44,12 @@
 							</div>
 							<hr>
 							<div class="documentation-content">
-								{{ documentation.content }}
+								<div v-html="documentation.content"></div>
 								<br>
 								<br>
 								<br>
 								<div style="border-left: solid orange 10px;" class="alert alert-warning" role="alert">
-									<strong>Link:</strong> <a :href="documentation.link" target="_blank">{{ documentation.title }}</a>
+									<strong>Link:</strong> <a :href="documentation.link" target="_blank">{{ documentation.link }}</a>
 								</div>
 							</div>
 
@@ -68,7 +70,9 @@
 				<div class="col-lg-3">
 					<div class="sub-content" >
 						<div class="btn-documentation">
-							<a style="text-decoration: none;" href=""><button type="button" class="btn btn-success btn-block btn-lg">Chia sẽ tài liệu ngay !!!</button></a>
+							<router-link :to="{ name: 'create-document' }">
+								<button type="button" class="btn btn-success btn-block btn-lg">Chia sẽ tài liệu ngay !!!</button>
+							</router-link>
 						</div>
 						<div class="content-card">
 							<div class="documentation-author">
@@ -145,20 +149,25 @@
 				</div>
 			</div>
 		</div>
+		<sweet-modal icon="warning" title="Cảnh báo" ref="modalDelete">
+            Bạn chắc chắn muốn xóa tài liệu này?
+            <button class="btn btn-success" style="margin: 20px 20px" @click="deleteDocumentation(documentation.id)">Đồng ý</button>
+            <button class="btn btn-danger" style="margin: 20px 20px" @click="cancelDeleteDocumentation()">Hủy bỏ</button>
+        </sweet-modal>
 	</div>
 </template>
 <script>
     import RelatedDocument from './RelatedDocument.vue'
     import RelatedSubject from './RelatedSubject.vue'
     import Comment from '../comments/Comment.vue' 
-    //import { SweetModal } from 'sweet-modal-vue'   
+    import { SweetModal } from 'sweet-modal-vue'   
 
     export default {
         components: {
             RelatedDocument: RelatedDocument,
             RelatedSubject: RelatedSubject,
             Comment: Comment,
-            //SweetModal
+            SweetModal
         },
         computed: {
             documentation() {
@@ -179,6 +188,30 @@
                 let payload = { 'id': id }
                 this.$store.dispatch('documentation/fetchDetailDocumentation', payload)
             },
+            deleteEntry() {
+                this.$refs.modalDelete.open()
+            },
+            cancelDeleteDocumentation() {
+                this.$refs.modalDelete.close()
+            },
+            deleteDocumentation(id) {
+                let payload = {
+                    'id': id,
+                }
+                this.$store.dispatch('documentation/fetchDeleteDocumentation', payload)
+                .then(response => {
+                	 //console.log(response.data.hasOwnProperty('errors'))
+                    if (!response.data.hasOwnProperty('errors')) {
+                        this.cancelDeleteDocumentation()
+                        this.$router.push({ name: 'list-document' });
+                    }
+                    else {
+                        this.cancelDeleteDocumentation()
+                        this.message = 'Không thể thực hiện thao tác. Vui lòng thử lại sau'
+                        this.$refs.modal.open()
+                    }
+                });
+            }
         },
         created() {
             this.fetchDetailDocumentation(this.$route.params.id)

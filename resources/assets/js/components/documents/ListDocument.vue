@@ -28,9 +28,9 @@
                                     <div class="collapse" id="collapseExample">
                                         <div class="row">
                                             <div class="col-lg-3">
-                                                <select class="form-control" name="subject">
+                                                <select class="form-control" v-model="subject">
                                                     <option value="0">--- Chủ đề ---</option>
-                                                      <ListSubject v-for="subject in subjects" :key="subject.id" :subject="subject"></ListSubject>
+                                                    <option v-for="subject in subjects"  :value='subject.id'>{{ subject.name }}</option>
                                                 </select>
                                             </div>
                                             <div class="col-lg-9">
@@ -86,7 +86,6 @@
     import Pagination from '../assets/Pagination.vue'
     import LeaderBoard from '../assets/LeaderBoard.vue'
     import CommonTag from '../assets/CommonTag.vue'
-    import ListSubject from './ListSubject.vue'
 
     export default {
         components: {
@@ -94,12 +93,12 @@
             Pagination: Pagination,
             LeaderBoard: LeaderBoard,
             CommonTag: CommonTag,
-            ListSubject: ListSubject,
         },
         
         data() {
             return {
-                tab: 'newest'
+                tab: 'newest',
+                subject: 0,
             }
         },
         computed: {
