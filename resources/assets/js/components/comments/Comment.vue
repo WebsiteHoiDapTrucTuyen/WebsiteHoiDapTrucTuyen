@@ -1,6 +1,6 @@
 <template>
     <div class="comments-container">
-        <a href="" style="pointer-events: none;">({{ comments.length }}) bình luận cho câu hỏi này</a><br><br>
+        <a href="" style="pointer-events: none;">({{ comments.length }}) bình luận <!-- cho câu hỏi này --></a><br><br>
         <CreateComment :id="id" :type="type" :index="index"></CreateComment>
         <ListComment :comments="comments" :type="type" :indexAnswer="index"></ListComment>
     </div>

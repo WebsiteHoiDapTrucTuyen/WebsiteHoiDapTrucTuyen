@@ -57,7 +57,7 @@
                                     </div>
                                     <div class="user_active" v-for="doc in data.top_documentation">
                                         <p class="point non-answered-accepted" :class="{ 'answered-accepted': doc.best_answer }" >{{ doc.voted }}</p>
-                                        <router-link :to="{ name: 'detail-documentation', params: { id: doc.id } }">{{ doc.title }}</router-link>                            
+                                        <router-link :to="{ name: 'detail-document', params: { id: doc.id } }">{{ doc.title }}</router-link>                            
                                         <p class=" date float-right text-muted">{{ doc.date.date | moment("DD-MM-YYYY") }}</p>
                                     </div>
                                 </div>

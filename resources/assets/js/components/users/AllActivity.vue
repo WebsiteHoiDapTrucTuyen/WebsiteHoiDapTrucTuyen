@@ -66,7 +66,7 @@
             },
             generateUrlNameType() {
                 if (this.tab === 'documentations') {
-                    return 'detail-documentation'
+                    return 'detail-document'
                 }
                 return 'detail-question'                
             },

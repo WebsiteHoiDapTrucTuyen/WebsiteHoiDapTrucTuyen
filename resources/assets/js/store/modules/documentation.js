@@ -5,6 +5,7 @@ const state = {
 	documentations: [],
 	documentation: [],
 	related_documentation: [],
+	related_subject: [],
 	subject: []
 }
 // Getters
@@ -20,6 +21,9 @@ const getters = {
 	},
 	getRelatedDocumentation: state => {
 		return state.related_documentation;
+	},
+	getRelatedSubject: state => {
+		return state.related_subject;
 	}
 }
 // Mutations
@@ -33,9 +37,26 @@ const mutations = {
 	[types.RELATED_DOCUMENTATION]: (state, related_documentation) => {
 		state.related_documentation = related_documentation;
 	},
+	[types.RELATED_SUBJECT]: (state, related_subject) => {
+		state.related_subject = related_subject;
+	},
 	[types.LIST_SUBJECT]: (state, subject) => {
 		state.subject = subject;
 	},
+	[types.DELETE_DOCUMENTATION]: (state, payload) => {
+		if (payload) {
+			state.documentations.data = state.documentations.data.filter((item) => {
+				return item.id !== payload.id
+			})
+		}
+	},
+	// [types.UPDATE_DOCUMENTATION]: (state, documentation) => {
+	// 	if (documentation.data && state.documentations.data) {
+	// 		state.documentations.data = state.documentations.data.filter((item) => {
+	// 			return item.id === documentation.data.id ? documentation.data : item
+	// 		})
+	// 	}
+	// },
 	// [types.ADD_COMMENT]: (state, payload) => {
 	// 	state.question.data.comments.push(payload.comment);
 	// },
@@ -84,46 +105,125 @@ const actions = {
 		});
 
 	},
-	// fetchDetailDocumentation: ({ commit }, payload ) => {
-	// 	return new Promise((resolve, reject) => {
-	// 		axios.get('/api/questions/' + payload.id)
-	// 		.then(response => {
-	//             // console.log(response);
-	//             if (response.data.hasOwnProperty('errors')) {
-	//             	commit(types.DETAIL_QUESTION, [])
-	//             }
-	//             else {
-	//             	commit(types.DETAIL_QUESTION, response.data);
-	//             }
-	//             resolve(response);
-	//         })
-	// 		.catch(error => {
-	//             // console.log(error);
-	//             reject(error);
-	//         });
-	// 	});
+	fetchRelatedDocumentation: ({ commit }, payload ) => {
+		return new Promise((resolve, reject) => {
+			axios.get('/api/documentations/' + payload.id + '/related')
+			.then(response => {
+	            // console.log(response);
+	            if (response.data.hasOwnProperty('errors')) {
+	            	commit(types.RELATED_DOCUMENTATION, [])
+	            }
+	            else {
+	            	commit(types.RELATED_DOCUMENTATION, response.data);
+	            }
+	            resolve(response);
+	        })
+			.catch(error => {
+	            // console.log(error);
+	            reject(error);
+	        });
+		});
+	},
+	fetchRelatedSubject: ({ commit }, payload ) => {
+		return new Promise((resolve, reject) => {
+			axios.get('/api/documentations/' + payload.id + '/related-subject')
+			.then(response => {
+	            // console.log(response);
+	            if (response.data.hasOwnProperty('errors')) {
+	            	commit(types.RELATED_SUBJECT, [])
+	            }
+	            else {
+	            	commit(types.RELATED_SUBJECT, response.data);
+	            }
+	            resolve(response);
+	        })
+			.catch(error => {
+	            // console.log(error);
+	            reject(error);
+	        });
+		});
+	},
+	fetchDetailDocumentation: ({ commit }, payload ) => {
+		return new Promise((resolve, reject) => {
+			axios.get('/api/documentations/' + payload.id)
+			.then(response => {
+	            // console.log(response);
+	            if (response.data.hasOwnProperty('errors')) {
+	            	commit(types.DETAIL_DOCUMENTATION, [])
+	            }
+	            else {
+	            	commit(types.DETAIL_DOCUMENTATION, response.data);
+	            }
+	            resolve(response);
+	        })
+			.catch(error => {
+	            // console.log(error);
+	            reject(error);
+	        });
+		});
 
-	// },
-	// fetchRelatedDocumentation: ({ commit }, payload ) => {
-	// 	return new Promise((resolve, reject) => {
-	// 		axios.get('/api/questions/' + payload.id + '/related')
-	// 		.then(response => {
-	//             // console.log(response);
-	//             if (response.data.hasOwnProperty('errors')) {
-	//             	commit(types.RELATED_QUESTION, [])
-	//             }
-	//             else {
-	//             	commit(types.RELATED_QUESTION, response.data);
-	//             }
-	//             resolve(response);
-	//         })
-	// 		.catch(error => {
-	//             // console.log(error);
-	//             reject(error);
-	//         });
-	// 	});
-
-	// },
+	},
+	fetchDeleteDocumentation: ({ commit }, payload ) => {
+		return new Promise((resolve, reject) => {
+			axios.delete('/api/documentations/' + payload.id)
+			.then(response => {
+	            if (response.data.hasOwnProperty('errors')) {
+	            	
+	            }
+	            else {
+	            	let data = {
+	            		'id': payload.id
+	            	}
+	            	commit(types.DELETE_DOCUMENTATION, data);
+	            }
+	            resolve(response);
+	        })
+			.catch(error => {
+	            // console.log(error);
+	            reject(error);
+	        });
+		});
+	},
+	fetchUpdateDocumentation: ({ commit }, payload ) => {
+		return new Promise((resolve, reject) => {
+			axios.put('/api/documentations/' + payload.id, payload.data)
+			.then(response => {
+				//console.log(response);
+	            if (response.data.hasOwnProperty('errors')) {
+	            	
+	            	//commit(types.UPDATE_DOCUMENTATION, [])
+	            }
+	            else {
+	            	//commit(types.UPDATE_DOCUMENTATION, response.data);
+	            }
+	            resolve(response);
+	        })
+			.catch(error => {
+	            // console.log(error);
+	            reject(error);
+	        });
+		});
+	},
+	fetchCreateDocumentation: ({ commit }, payload ) => {
+		return new Promise((resolve, reject) => {
+			axios.post('/api/documentations/', payload.data)
+			.then(response => {
+				//console.log(response);
+	            if (response.data.hasOwnProperty('errors')) {
+	            	
+	            	//commit(types.UPDATE_DOCUMENTATION, [])
+	            }
+	            else {
+	            	//commit(types.UPDATE_DOCUMENTATION, response.data);
+	            }
+	            resolve(response);
+	        })
+			.catch(error => {
+	            // console.log(error);
+	            reject(error);
+	        });
+		});
+	},
 	// addComment: ({ commit }, payload ) => {
 	// 	return new Promise((resolve, reject) => {
 	// 		commit(types.ADD_COMMENT, payload);
