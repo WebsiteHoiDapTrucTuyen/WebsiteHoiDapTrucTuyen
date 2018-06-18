@@ -12,8 +12,8 @@
                             {{ question.voted }}
                         </div>
                         <div class="col-lg-9">
-                            <!-- <router-link :to="{ name: 'detail-question', params: { id: question.id } }">{{ question.title }}</router-link> -->
-                            <a href="" @click=changeQuestion(question.id)>{{ question.title }}</a>
+                            <router-link :to="{ name: 'detail-question', params: { id: question.id } }">{{ question.title }}</router-link>
+                            <!-- <a href="" @click=changeQuestion(question.id)>{{ question.title }}</a> -->
                         </div>
                     </div>
                 </div>
@@ -36,6 +36,11 @@
             fetchRelatedQuestion(id) {
                 let payload = { 'id': id }
                 this.$store.dispatch('question/fetchRelatedQuestion', payload)
+            }
+        },
+        watch: {
+            '$route' (to, from) {
+                this.fetchRelatedQuestion(to.params.id)
             }
         },
         created() {

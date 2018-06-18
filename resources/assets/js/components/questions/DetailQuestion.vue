@@ -189,6 +189,11 @@
                 });
             }
         },
+        watch: {
+            '$route' (to, from) {
+                this.fetchDetailQuestion(to.params.id)
+            }
+        },
         created() {
             this.fetchDetailQuestion(this.$route.params.id)
         },

@@ -45,6 +45,11 @@
                 this.$store.dispatch('answer/fetchListAnswer', payload);
             },
         },
+        watch: {
+            '$route' (to, from) {
+                this.fetchListAnswer(to.params.id)
+            }
+        },
         created() {
             this.fetchListAnswer(this.$route.params.id)
         },

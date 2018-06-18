@@ -12,7 +12,8 @@ import ListQuestion from '../components/questions/ListQuestion.vue'
 import DetailQuestion from '../components/questions/DetailQuestion.vue'
 import CreateQuestion from '../components/questions/CreateQuestion.vue'
 import EditQuestion from '../components/questions/EditQuestion.vue'
-
+import InformationUser from '../components/users/InformationUser.vue'
+import EditInformationUser from '../components/users/EditInformationUser.vue'
 //
 import Document from '../components/documents/Document.vue';
 import ListDocument from '../components/documents/ListDocument.vue';
@@ -107,12 +108,25 @@ const router = new VueRouter({
                             path:'',
                             component: ListUser,
                             name: 'list-user'
-                        }
+                        },
+                        {
+                            path: ':id',
+                            component: InformationUser,
+                            name: 'information-user'
+                        },
+                        {
+                            path: ':id/edit',
+                            component: EditInformationUser,
+                            name: 'edit-information-user'
+                        },
                     ]
                 },
             ]
         }
-    ]
+    ],
+    scrollBehavior (to, from, savedPosition) {
+        return { x: 0, y: 0 }
+    }
 });
 
 export default router;
