@@ -65,10 +65,10 @@
                                         69 
                                     </span>
                                 </a>
-                                <a class="dropdown-item">
+                                <router-link class="dropdown-item" :to="{ name: 'information-user', params: { id: currentUser.id }}">
                                     <span class="oi oi-person"></span>
                                     <span>Thông Tin Cá Nhân</span>
-                                </a>
+                                </router-link>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" @click="logout">
                                     <span class="oi oi-power-standby"></span>
@@ -86,27 +86,27 @@
 </template>
 
 <script>
-    export default {
-        computed: {
-            currentUser() {
-                return this.$store.getters['user/getCurrentUser'].data
-            },
-        },
-        methods: {
-            sourceImage(url) {
-                return "/images/avatar_users/" + url;
-            },
-            logout() {
-                this.$auth.destroyToken();
-                this.$store.dispatch('user/logout');
-                this.$router.push({ name: 'home' })
-            }
-        },
-        created() {
-            this.$store.dispatch('user/fetchCurrentUser');
-        },
-        mounted() {
-            // console.log('Component mounted.')
-        }
+export default {
+  computed: {
+    currentUser() {
+      return this.$store.getters["user/getCurrentUser"].data;
     }
+  },
+  methods: {
+    sourceImage(url) {
+      return "/images/avatar_users/" + url;
+    },
+    logout() {
+      this.$auth.destroyToken();
+      this.$store.dispatch("user/logout");
+      this.$router.push({ name: "home" });
+    }
+  },
+  created() {
+    this.$store.dispatch("user/fetchCurrentUser");
+  },
+  mounted() {
+    // console.log('Component mounted.')
+  }
+};
 </script>

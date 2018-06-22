@@ -39,19 +39,19 @@ const mutations = {
 		state.question.data.comments.splice(payload.indexComment, 1);
 	},
 	[types.ADD_QUESTION]: (state, question) => {
-		if (question.data) {
+		if (question.data && state.questions.data) {
 			state.questions.data.unshift(question.data);
 		}
 	},
 	[types.UPDATE_QUESTION]: (state, question) => {
-		if (question.data) {
+		if (question.data && state.questions.data) {
 			state.questions.data = state.questions.data.filter((item) => {
 				return item.id === question.data.id ? question.data : item
 			})
 		}
 	},
 	[types.DELETE_QUESTION]: (state, payload) => {
-		if (payload) {
+		if (payload && state.questions.data) {
 			state.questions.data = state.questions.data.filter((item) => {
 				return item.id !== payload.id
 			})

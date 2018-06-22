@@ -21,6 +21,7 @@ class AnswerRelated extends JsonResource
             'voted' => $this->voted,
             'answered' => $this->answers->count() > 0 ? true : false,
             'best_answer' => $this->answers->where('best_answer', true)->count() > 0 ? true : false,
+            'date' => $this->created_at
         ];
     }
 }

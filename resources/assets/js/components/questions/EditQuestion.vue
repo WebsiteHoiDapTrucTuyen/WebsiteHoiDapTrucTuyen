@@ -7,7 +7,7 @@
                     <div class="main-content">
                         <div class="content-card">
                             <div class="note-content">
-                                <h1 style="text-align: center;">Tạo câu hỏi mới</h1>
+                                <h1 style="text-align: center;">Chỉnh sửa câu hỏi</h1>
                                 <br>
                                 <div v-if="message.errors" class="alert alert-danger">
                                     {{ message.errors }}
@@ -111,7 +111,7 @@
                     }
                 })
                 .catch(error => {
-                    // console.log(error);
+                    console.log(error);
                 });
                 
             },

@@ -3,7 +3,7 @@
 		<div class="media">
 			<a href="" ><img :src="sourceImage(user.avatar)" class="rounded-circle mr-3" width="50" height="50"></a>
 			<div class="media-body">
-				<a class="name-list-user" href="" >{{ user.name }}</a>
+				<router-link :to="{ name: 'information-user', params: { id: user.id } }" class="name-list-user">{{ user.name }}</router-link>
 				<div class="text-muted info-list-user">
 					<span>{{ user.location }}</span>
 					<span>Điểm: {{ user.point }}</span>

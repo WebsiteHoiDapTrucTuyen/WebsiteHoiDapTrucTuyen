@@ -24,6 +24,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     ];
 });
 
+// Auth
+Route::post('register', 'UserController@register');
+Route::post('logout', 'UserController@logout');
+Route::put('update-information', 'UserController@updateInformation');
+Route::put('update-password', 'UserController@updatePassword');
+Route::put('update-avatar', 'UserController@updateAvatar');
+
 // Question
 Route::group(['prefix' => 'questions'], function() {
     Route::get('', 'QuestionController@index');
@@ -80,9 +87,10 @@ Route::group(['prefix' => 'tags'], function() {
 // User
 Route::group(['prefix' => 'users'], function() {
     Route::get('', 'UserController@index');
-    Route::post('', 'UserController@store');
     Route::get('{user_id}', 'UserController@show');
-    Route::put('{user_id}', 'UserController@update');
+    Route::get('{user_id}/questions', 'UserController@questions');    
+    Route::get('{user_id}/answers', 'UserController@answers');    
+    Route::get('{user_id}/documentations', 'UserController@documentations');    
 });
 
 // Statistic
@@ -97,5 +105,3 @@ Route::group(['prefix' => 'search'], function() {
     Route::get('questions', 'QuestionController@search');
     Route::get('documentations', 'DocumentationController@search');
 });
-
-Route::post('logout', 'UserController@logout');

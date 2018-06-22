@@ -19,6 +19,7 @@ class DocumentationRelated extends JsonResource
             'title' => $this->title,
             'title_url' => $this->title_url,
             'voted' => $this->countVote($this->votes),
+            'date' => $this->created_at
         ];
     }
 
