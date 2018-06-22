@@ -50,22 +50,15 @@ const mutations = {
 			})
 		}
 	},
-	// [types.UPDATE_DOCUMENTATION]: (state, documentation) => {
-	// 	if (documentation.data && state.documentations.data) {
-	// 		state.documentations.data = state.documentations.data.filter((item) => {
-	// 			return item.id === documentation.data.id ? documentation.data : item
-	// 		})
-	// 	}
-	// },
-	// [types.ADD_COMMENT]: (state, payload) => {
-	// 	state.question.data.comments.push(payload.comment);
-	// },
-	// [types.EDIT_COMMENT]: (state, payload) => {
-	// 	state.question.data.comments.splice(payload.indexComment, 1, payload.comment);
-	// },
-	// [types.DELETE_COMMENT]: (state, payload) => {
-	// 	state.question.data.comments.splice(payload.indexComment, 1);
-	// },
+	[types.ADD_COMMENT]: (state, payload) => {
+		state.documentation.data.comments.push(payload.comment);
+	},
+	[types.EDIT_COMMENT]: (state, payload) => {
+		state.documentation.data.comments.splice(payload.indexComment, 1, payload.comment);
+	},
+	[types.DELETE_COMMENT]: (state, payload) => {
+		state.documentation.data.comments.splice(payload.indexComment, 1);
+	},
 }
 // Actions
 const actions = {
@@ -224,27 +217,27 @@ const actions = {
 	        });
 		});
 	},
-	// addComment: ({ commit }, payload ) => {
-	// 	return new Promise((resolve, reject) => {
-	// 		commit(types.ADD_COMMENT, payload);
-	// 		resolve();
-	// 	});
+	addComment: ({ commit }, payload ) => {
+		return new Promise((resolve, reject) => {
+			commit(types.ADD_COMMENT, payload);
+			resolve();
+		});
 
-	// },
-	// editComment: ({ commit }, payload ) => {
-	// 	return new Promise((resolve, reject) => {
-	// 		commit(types.EDIT_COMMENT, payload);
-	// 		resolve();
-	// 	});
+	},
+	editComment: ({ commit }, payload ) => {
+		return new Promise((resolve, reject) => {
+			commit(types.EDIT_COMMENT, payload);
+			resolve();
+		});
 
-	// },
-	// deleteComment: ({ commit }, payload ) => {
-	// 	return new Promise((resolve, reject) => {
-	// 		commit(types.DELETE_COMMENT, payload);
-	// 		resolve();
-	// 	});
+	},
+	deleteComment: ({ commit }, payload ) => {
+		return new Promise((resolve, reject) => {
+			commit(types.DELETE_COMMENT, payload);
+			resolve();
+		});
 
-	// },
+	},
 }
 
 export default {

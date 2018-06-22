@@ -44,13 +44,13 @@
                                 <div class="tabs">
                                     <ul class="nav nav-tabs d-flex justify-content-end" id="TagsTabContent" role="tablist">
                                         <li class="nav-item">
-                                            <a class="nav-link" id="newest" :class="{ active: tab === 'newest' }" @click="changeTab">Mới Nhất</a>
+                                            <a style="cursor: pointer;" class="nav-link" id="newest" :class="{ active: tab === 'newest' }" @click="changeTab">Mới Nhất</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" id="view" :class="{ active: tab === 'view' }" @click="changeTab">Lượt Xem</a>
+                                            <a style="cursor: pointer;" class="nav-link" id="view" :class="{ active: tab === 'view' }" @click="changeTab">Lượt Xem</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" id="vote" :class="{ active: tab === 'vote' }" @click="changeTab">Yêu thích</a>
+                                            <a style="cursor: pointer;" class="nav-link" id="vote" :class="{ active: tab === 'vote' }" @click="changeTab">Yêu thích</a>
                                         </li>
                                     </ul>
                                     <div class="tab-content" id="">
@@ -68,7 +68,9 @@
                 <div class="col-lg-3">
                     <div class="sub-content" >
                         <div class="btn-documentation">
-                            <a style="text-decoration: none;" href=""><button type="button" class="btn btn-success btn-block btn-lg">Chia sẻ tài liệu ngay !!!</button></a>
+                            <router-link :to="{ name: 'create-document' }" style="text-decoration: none;">
+                                <button type="button" class="btn btn-success btn-block btn-lg">Chia sẻ tài liệu ngay !!!</button>
+                            </router-link>
                         </div>
                         <LeaderBoard></LeaderBoard>
                         <CommonTag></CommonTag>
