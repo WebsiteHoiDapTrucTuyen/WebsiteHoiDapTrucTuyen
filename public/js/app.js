@@ -67451,7 +67451,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   created: function created() {
-    this.$store.dispatch("user/fetchCurrentUser");
+    this.$store.dispatch("user/fetchCurrentUser").then(function (response) {}).catch(function (error) {});
   },
   mounted: function mounted() {
     // console.log('Component mounted.')
@@ -68999,7 +68999,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var oauth = {
                 grant_type: 'password',
                 client_id: 2,
-                client_secret: 'bCKEYqMr3pAyFutnbGn6FUZjNTl0AjUPGqIo2S3J',
+                client_secret: 'cgf0Xd2Z3rVKBzvNBbevT1VfaMg9d0flrGkSPjs5',
                 username: this.email,
                 password: this.password
             };
@@ -71317,6 +71317,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -71371,6 +71373,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     _this.message = 'Không thể thực hiện thao tác. Vui lòng thử lại sau';
                     _this.$refs.modal.open();
                 }
+            });
+        },
+        isVoted: function isVoted(action) {
+            if (this.question.current_user_voted && this.question.current_user_voted.action === action) {
+                return 'active-vote';
+            }
+            return '';
+        },
+        vote: function vote(type, id, action) {
+            this.fetchVoteAction(type, id, action);
+        },
+        fetchVoteAction: function fetchVoteAction(type, id, action) {
+            var _this2 = this;
+
+            var payload = {
+                type: type,
+                id: id,
+                data: {
+                    action: action
+                }
+            };
+            this.$store.dispatch('vote/fetchVoteAction', payload).then(function (response) {
+                _this2.fetchDetailQuestion(id);
             });
         }
     },
@@ -71711,6 +71736,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -71816,6 +71843,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         cancelEditAnswer: function cancelEditAnswer() {
             this.isEdit = false;
+        },
+        isVoted: function isVoted(action) {
+            if (this.answer.current_user_voted && this.answer.current_user_voted.action === action) {
+                return 'active-vote';
+            }
+            return '';
+        },
+        vote: function vote(type, id, action) {
+            this.fetchVoteAction(type, id, action);
+        },
+        fetchVoteAction: function fetchVoteAction(type, id, action) {
+            var _this3 = this;
+
+            var payload = {
+                type: type,
+                id: id,
+                data: {
+                    action: action
+                }
+            };
+            this.$store.dispatch('vote/fetchVoteAction', payload).then(function (response) {
+                _this3.fetchVoteAnswer(id, _this3.index);
+            });
+        },
+        fetchVoteAnswer: function fetchVoteAnswer(id, index) {
+            var payload = {
+                id: id,
+                index: index
+            };
+            this.$store.dispatch('answer/fetchVoteAnswer', payload);
         }
     },
     mounted: function mounted() {
@@ -73941,7 +73998,23 @@ var render = function() {
             ),
             _vm._v(" "),
             _c("div", { staticClass: "vote-widget" }, [
-              _vm._m(0),
+              _c(
+                "div",
+                { staticClass: "vote-up d-flex justify-content-center" },
+                [
+                  _c("span", {
+                    staticClass: "oi oi-caret-top",
+                    class: _vm.isVoted("up"),
+                    staticStyle: { display: "block" },
+                    attrs: { id: "up" },
+                    on: {
+                      click: function($event) {
+                        _vm.vote("answer", _vm.answer.id, "up")
+                      }
+                    }
+                  })
+                ]
+              ),
               _vm._v(" "),
               _c(
                 "div",
@@ -73958,7 +74031,23 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _vm._m(1)
+              _c(
+                "div",
+                { staticClass: "vote-down d-flex justify-content-center" },
+                [
+                  _c("span", {
+                    staticClass: "oi oi-caret-bottom",
+                    class: _vm.isVoted("down"),
+                    staticStyle: { display: "block" },
+                    attrs: { id: "down" },
+                    on: {
+                      click: function($event) {
+                        _vm.vote("answer", _vm.answer.id, "down")
+                      }
+                    }
+                  })
+                ]
+              )
             ]),
             _vm._v(" "),
             _c(
@@ -74164,36 +74253,7 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "vote-up d-flex justify-content-center" }, [
-      _c("span", {
-        staticClass: "oi oi-caret-top",
-        staticStyle: { display: "block" },
-        attrs: { id: "up" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "vote-down d-flex justify-content-center" },
-      [
-        _c("span", {
-          staticClass: "oi oi-caret-bottom",
-          staticStyle: { display: "block" },
-          attrs: { id: "down" }
-        })
-      ]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -74781,7 +74841,30 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c("div", { staticClass: "vote-widget" }, [
-                              _vm._m(0),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "vote-up d-flex justify-content-center"
+                                },
+                                [
+                                  _c("span", {
+                                    staticClass: "oi oi-caret-top",
+                                    class: _vm.isVoted("up"),
+                                    staticStyle: { display: "block" },
+                                    attrs: { id: "up" },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.vote(
+                                          "question",
+                                          _vm.question.id,
+                                          "up"
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]
+                              ),
                               _vm._v(" "),
                               _c(
                                 "div",
@@ -74799,7 +74882,30 @@ var render = function() {
                                 ]
                               ),
                               _vm._v(" "),
-                              _vm._m(1)
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "vote-down d-flex justify-content-center"
+                                },
+                                [
+                                  _c("span", {
+                                    staticClass: "oi oi-caret-bottom",
+                                    class: _vm.isVoted("down"),
+                                    staticStyle: { display: "block" },
+                                    attrs: { id: "down" },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.vote(
+                                          "question",
+                                          _vm.question.id,
+                                          "down"
+                                        )
+                                      }
+                                    }
+                                  })
+                                ]
+                              )
                             ])
                           ])
                         ]),
@@ -74944,14 +75050,14 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "content-card" }, [
                       _c("div", { staticClass: "question-info" }, [
-                        _vm._m(2),
+                        _vm._m(0),
                         _vm._v(" "),
                         _c("hr"),
                         _vm._v(" "),
                         _c("div", { staticClass: "info-content" }, [
                           _c("div", { staticClass: "info-content-asked" }, [
                             _c("div", { staticClass: "row" }, [
-                              _vm._m(3),
+                              _vm._m(1),
                               _vm._v(" "),
                               _c(
                                 "div",
@@ -74967,7 +75073,7 @@ var render = function() {
                           _vm._v(" "),
                           _c("div", { staticClass: "info-content-viewed" }, [
                             _c("div", { staticClass: "row" }, [
-                              _vm._m(4),
+                              _vm._m(2),
                               _vm._v(" "),
                               _c(
                                 "div",
@@ -74979,7 +75085,7 @@ var render = function() {
                           _vm._v(" "),
                           _c("div", { staticClass: "info-content-activity" }, [
                             _c("div", { staticClass: "row" }, [
-                              _vm._m(5),
+                              _vm._m(3),
                               _vm._v(" "),
                               _c(
                                 "div",
@@ -75001,7 +75107,7 @@ var render = function() {
                             { staticClass: "info-content-bestanswer" },
                             [
                               _c("div", { staticClass: "row" }, [
-                                _vm._m(6),
+                                _vm._m(4),
                                 _vm._v(" "),
                                 _c(
                                   "div",
@@ -75083,34 +75189,6 @@ var render = function() {
     : _vm._e()
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "vote-up d-flex justify-content-center" }, [
-      _c("span", {
-        staticClass: "oi oi-caret-top",
-        staticStyle: { display: "block" },
-        attrs: { id: "up" }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "vote-down d-flex justify-content-center" },
-      [
-        _c("span", {
-          staticClass: "oi oi-caret-bottom",
-          staticStyle: { display: "block" },
-          attrs: { id: "down" }
-        })
-      ]
-    )
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -82682,9 +82760,11 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_asset__ = __webpack_require__(339);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_answer__ = __webpack_require__(340);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__modules_comment__ = __webpack_require__(341);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__modules_documentation__ = __webpack_require__(342);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modules_tag__ = __webpack_require__(343);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__modules_listuser__ = __webpack_require__(344);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__modules_vote__ = __webpack_require__(352);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modules_documentation__ = __webpack_require__(342);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__modules_tag__ = __webpack_require__(343);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__modules_listuser__ = __webpack_require__(344);
+
 
 
 
@@ -82706,9 +82786,10 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 		asset: __WEBPACK_IMPORTED_MODULE_4__modules_asset__["a" /* default */],
 		answer: __WEBPACK_IMPORTED_MODULE_5__modules_answer__["a" /* default */],
 		comment: __WEBPACK_IMPORTED_MODULE_6__modules_comment__["a" /* default */],
-		documentation: __WEBPACK_IMPORTED_MODULE_7__modules_documentation__["a" /* default */],
-		tag: __WEBPACK_IMPORTED_MODULE_8__modules_tag__["a" /* default */],
-		listuser: __WEBPACK_IMPORTED_MODULE_9__modules_listuser__["a" /* default */]
+		vote: __WEBPACK_IMPORTED_MODULE_7__modules_vote__["a" /* default */],
+		documentation: __WEBPACK_IMPORTED_MODULE_8__modules_documentation__["a" /* default */],
+		tag: __WEBPACK_IMPORTED_MODULE_9__modules_tag__["a" /* default */],
+		listuser: __WEBPACK_IMPORTED_MODULE_10__modules_listuser__["a" /* default */]
 	},
 	strict: true
 }));
@@ -84201,31 +84282,53 @@ var actions = {
 			});
 		});
 	},
-	addComment: function addComment(_ref2, payload) {
+	fetchVoteAnswer: function fetchVoteAnswer(_ref2, payload) {
 		var commit = _ref2.commit;
+
+		return new Promise(function (resolve, reject) {
+			axios.get('/api/answers/' + payload.id + '/show').then(function (response) {
+				// console.log(response);
+				if (response.data.hasOwnProperty('errors')) {
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["n" /* EDIT_ANSWER */], []);
+				} else {
+					var answer = {
+						data: response.data.data,
+						index: payload.index
+					};
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["n" /* EDIT_ANSWER */], answer);
+				}
+				resolve(response);
+			}).catch(function (error) {
+				// console.log(error);
+				reject(error);
+			});
+		});
+	},
+	addComment: function addComment(_ref3, payload) {
+		var commit = _ref3.commit;
 
 		return new Promise(function (resolve, reject) {
 			commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["b" /* ADD_COMMENT */], payload);
 		});
 	},
-	editComment: function editComment(_ref3, payload) {
-		var commit = _ref3.commit;
+	editComment: function editComment(_ref4, payload) {
+		var commit = _ref4.commit;
 
 		return new Promise(function (resolve, reject) {
 			commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["o" /* EDIT_COMMENT */], payload);
 			resolve();
 		});
 	},
-	deleteComment: function deleteComment(_ref4, payload) {
-		var commit = _ref4.commit;
+	deleteComment: function deleteComment(_ref5, payload) {
+		var commit = _ref5.commit;
 
 		return new Promise(function (resolve, reject) {
 			commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["i" /* DELETE_COMMENT */], payload);
 			resolve();
 		});
 	},
-	fetchStoreAnswer: function fetchStoreAnswer(_ref5, payload) {
-		var commit = _ref5.commit;
+	fetchStoreAnswer: function fetchStoreAnswer(_ref6, payload) {
+		var commit = _ref6.commit;
 
 		return new Promise(function (resolve, reject) {
 			axios.post('/api/answers/' + payload.id, payload.data).then(function (response) {
@@ -84242,8 +84345,8 @@ var actions = {
 			});
 		});
 	},
-	fetchUpdateAnswer: function fetchUpdateAnswer(_ref6, payload) {
-		var commit = _ref6.commit;
+	fetchUpdateAnswer: function fetchUpdateAnswer(_ref7, payload) {
+		var commit = _ref7.commit;
 
 		return new Promise(function (resolve, reject) {
 			axios.put('/api/answers/' + payload.id, payload.data).then(function (response) {
@@ -84264,8 +84367,8 @@ var actions = {
 			});
 		});
 	},
-	fetchDeleteAnswer: function fetchDeleteAnswer(_ref7, payload) {
-		var commit = _ref7.commit;
+	fetchDeleteAnswer: function fetchDeleteAnswer(_ref8, payload) {
+		var commit = _ref8.commit;
 
 		return new Promise(function (resolve, reject) {
 			axios.delete('/api/answers/' + payload.id).then(function (response) {
@@ -85298,6 +85401,48 @@ webpackContext.id = 347;
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 349 */,
+/* 350 */,
+/* 351 */,
+/* 352 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__mutation_types__ = __webpack_require__(5);
+
+
+// State
+var state = {};
+// Getters
+var getters = {};
+// Mutations
+var mutations = {};
+// Actions
+var actions = {
+	fetchVoteAction: function fetchVoteAction(_ref, payload) {
+		var commit = _ref.commit;
+
+		return new Promise(function (resolve, reject) {
+			axios.post('/api/votes/' + payload.type + '/' + payload.id, payload.data).then(function (response) {
+				// console.log(response);
+				resolve(response);
+			}).catch(function (error) {
+				// console.log(error);
+				reject(error);
+			});
+		});
+	}
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+	namespaced: true,
+	state: state,
+	getters: getters,
+	mutations: mutations,
+	actions: actions
+});
 
 /***/ })
 /******/ ]);

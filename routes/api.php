@@ -44,6 +44,7 @@ Route::group(['prefix' => 'questions'], function() {
 // Answer
 Route::group(['prefix' => 'answers'], function() {
     Route::get('{question_id}', 'AnswerController@index');
+    Route::get('{answer_id}/show', 'AnswerController@show');
     Route::post('{question_id}', 'AnswerController@store');
     Route::put('{answer_id}', 'AnswerController@update');
     Route::delete('{answer_id}', 'AnswerController@destroy');

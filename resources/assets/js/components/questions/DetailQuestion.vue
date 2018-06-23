@@ -14,13 +14,15 @@
                                         </div>
                                         <div class="vote-widget">
                                             <div class="vote-up d-flex justify-content-center">
-                                                <span id="up" class="oi oi-caret-top" style="display: block;"></span>
+                                                <span id="up" class="oi oi-caret-top" style="display: block;" :class="isVoted('up')"
+                                                @click="vote('question', question.id, 'up')"></span>
                                             </div>
                                             <div id="point-question" class="vote-count d-flex justify-content-center">
                                                 {{ question.voted }}
                                             </div>
                                             <div class="vote-down d-flex justify-content-center">
-                                                <span id="down" class="oi oi-caret-bottom" style="display: block;"></span>
+                                                <span id="down" class="oi oi-caret-bottom" style="display: block;" :class="isVoted('down')"
+                                                @click="vote('question', question.id, 'down')"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -187,6 +189,28 @@
                         this.$refs.modal.open()
                     }
                 });
+            },
+            isVoted(action) {
+                if (this.question.current_user_voted && this.question.current_user_voted.action === action) {
+                    return 'active-vote'
+                }
+                return ''
+            },
+            vote(type, id, action) {
+                this.fetchVoteAction(type, id, action)
+            },
+            fetchVoteAction(type, id, action) {
+                let payload = {
+                    type: type,
+                    id: id,
+                    data: {
+                        action: action
+                    }
+                }
+                this.$store.dispatch('vote/fetchVoteAction', payload)
+                .then(response => {
+                    this.fetchDetailQuestion(id)
+                })
             }
         },
         watch: {

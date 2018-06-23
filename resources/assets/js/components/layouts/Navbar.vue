@@ -103,7 +103,13 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch("user/fetchCurrentUser");
+    this.$store.dispatch("user/fetchCurrentUser")
+    .then(response => {
+
+    })
+    .catch(error => {
+
+    });
   },
   mounted() {
     // console.log('Component mounted.')

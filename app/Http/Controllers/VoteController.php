@@ -54,7 +54,18 @@ class VoteController extends Controller
     		default:
     			# code...
     			break;
-    	}
+		}
+		if ($vote->vote_action == $request->action) {
+			if ($vote->delete()) {
+				return [
+					'success' => 'Vote successfully'
+				];
+			}
+			return [
+				'errors' => 'Vote errors'
+			];
+
+		}
     	$vote->user_id = Auth::id();
     	$vote->vote_action = $request->action;
     	$vote->votable_id = $id;

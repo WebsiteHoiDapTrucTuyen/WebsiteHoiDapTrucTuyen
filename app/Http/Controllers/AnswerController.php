@@ -33,6 +33,10 @@ class AnswerController extends Controller
 		return AnswerList::collection($answers);
 	}
 
+	public function show($answer_id) {
+		return new AnswerList(Answer::find($answer_id));
+	}
+
 	public function store(AnswerRequest $request, $question_id)
 	{
 		$question = Question::find($question_id);

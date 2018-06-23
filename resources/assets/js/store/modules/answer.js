@@ -62,6 +62,30 @@ const actions = {
 		});
 
 	},
+	fetchVoteAnswer: ({ commit }, payload ) => {
+		return new Promise((resolve, reject) => {
+			axios.get('/api/answers/' + payload.id + '/show')
+			.then(response => {
+	            // console.log(response);
+	            if (response.data.hasOwnProperty('errors')) {
+	            	commit(types.EDIT_ANSWER, [])
+	            }
+	            else {
+					let answer = {
+						data: response.data.data,
+						index: payload.index,
+					}
+	            	commit(types.EDIT_ANSWER, answer);
+	            }
+	            resolve(response);
+	        })
+			.catch(error => {
+	            // console.log(error);
+	            reject(error);
+	        });
+		});
+
+	},
 	addComment: ({ commit }, payload ) => {
 		return new Promise((resolve, reject) => {
 			commit(types.ADD_COMMENT, payload);

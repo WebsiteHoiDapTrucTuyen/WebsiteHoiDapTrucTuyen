@@ -8,13 +8,15 @@
                     </div>
                     <div class="vote-widget">
                         <div class="vote-up d-flex justify-content-center">
-                            <span id="up" class="oi oi-caret-top" style="display: block;"></span>
+                            <span id="up" class="oi oi-caret-top" style="display: block;" :class="isVoted('up')"
+                            @click="vote('answer', answer.id, 'up')"></span>
                         </div>
                         <div id="point-answer" class="vote-count d-flex justify-content-center">
                             {{ answer.voted }}
                         </div>
                         <div class="vote-down d-flex justify-content-center">
-                            <span id="down" class="oi oi-caret-bottom" style="display: block;"></span>
+                            <span id="down" class="oi oi-caret-bottom" style="display: block;" :class="isVoted('down')"
+                            @click="vote('answer', answer.id, 'down')"></span>
                         </div>
                     </div>
                     <div class="best-answer-widget d-flex justify-content-center">
@@ -174,6 +176,35 @@
             },
             cancelEditAnswer() {
                 this.isEdit = false
+            },
+            isVoted(action) {
+                if (this.answer.current_user_voted && this.answer.current_user_voted.action === action) {
+                    return 'active-vote'
+                }
+                return ''
+            },
+            vote(type, id, action) {
+                this.fetchVoteAction(type, id, action)
+            },
+            fetchVoteAction(type, id, action) {
+                let payload = {
+                    type: type,
+                    id: id,
+                    data: {
+                        action: action
+                    }
+                }
+                this.$store.dispatch('vote/fetchVoteAction', payload)
+                .then(response => {
+                    this.fetchVoteAnswer(id, this.index)
+                })
+            },
+            fetchVoteAnswer(id, index) {
+                let payload = {
+                    id: id,
+                    index: index
+                }
+                this.$store.dispatch('answer/fetchVoteAnswer', payload)
             }
         },
         mounted() {
