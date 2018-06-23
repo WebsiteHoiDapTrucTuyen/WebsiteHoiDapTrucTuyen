@@ -28,16 +28,12 @@
 										</div>
 										<br>
 										<br>
-										<!-- <div v-if="checkOwner"> -->
-											<router-link :to="{ name: 'edit-document', params: { id: documentation.id } }">
+										<div v-if="checkOwner">
+											<router-link :to="{ name: 'edit-document', params: { id: documentation.id } }" style="text-decoration: none;">
 											<a style="border-left: solid 1px black; padding-left: 10px; border-right: solid 1px black; padding-right: 10px;"> Chỉnh sửa</a>
 										</router-link>
-											<a @click="deleteEntry()" style=" padding-left: 5px; border-right: solid 1px black; padding-right: 10px;">Xóa</a>
-										<!-- </div> -->
-											
-											<!-- @if (!$documentation->active)
-												<a href="{{ route('restore-documentation', ['documentation_id' => $documentation->id]) }}" style=" padding-left: 5px; border-left: solid 1px black; padding-left: 10px; border-right: solid 1px black; padding-right: 10px;" onclick="return confirm('Bạn có chắc là muốn khôi phục không?')">Khôi phục</a>
-											@endif -->
+											<a @click="deleteEntry()" style=" padding-left: 5px; border-right: solid 1px black; padding-right: 10px; color:red;cursor: pointer;">Xóa</a>
+										</div>
 										
 									</div>
 								</div>
@@ -70,8 +66,8 @@
 				<div class="col-lg-3">
 					<div class="sub-content" >
 						<div class="btn-documentation">
-							<router-link :to="{ name: 'create-document' }">
-								<button type="button" class="btn btn-success btn-block btn-lg">Chia sẽ tài liệu ngay !!!</button>
+							<router-link :to="{ name: 'create-document' }" style="text-decoration: none;">
+								<button type="button" class="btn btn-success btn-block btn-lg">Chia sẻ tài liệu ngay !!!</button>
 							</router-link>
 						</div>
 						<div class="content-card">
