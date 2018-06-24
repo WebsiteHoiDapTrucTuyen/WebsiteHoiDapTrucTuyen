@@ -6,7 +6,8 @@ const state = {
 	documentation: [],
 	related_documentation: [],
 	related_subject: [],
-	subject: []
+	subject: [],
+	documentation_search:[]
 }
 // Getters
 const getters = {
@@ -24,6 +25,9 @@ const getters = {
 	},
 	getRelatedSubject: state => {
 		return state.related_subject;
+	},
+	getDocumentationSearch: state => {
+		return state.documentation_search;
 	}
 }
 // Mutations
@@ -58,6 +62,9 @@ const mutations = {
 	},
 	[types.DELETE_COMMENT]: (state, payload) => {
 		state.documentation.data.comments.splice(payload.indexComment, 1);
+	},
+	[types.SEARCH_DOCUMENTATION]: (state, documentation_search) => {
+		state.documentation_search = documentation_search;
 	},
 }
 // Actions
@@ -237,6 +244,26 @@ const actions = {
 			resolve();
 		});
 
+	},
+	fetchSearchDocumentation: ({ commit }, payload ) => {
+		return new Promise((resolve, reject) => {
+			axios.get('/api/search/documentations', { params: { keyword: payload.data.keyword, subject: payload.data.subject, tags: payload.data.tags, page: payload.page } })
+			.then(response => {
+				//console.log(response);
+	            if (response.data.hasOwnProperty('errors')) {
+	            	
+	            	commit(types.SEARCH_DOCUMENTATION, [])
+	            }
+	            else {
+	            	commit(types.SEARCH_DOCUMENTATION, response.data);
+	            }
+	            resolve(response);
+	        })
+			.catch(error => {
+	            // console.log(error);
+	            reject(error);
+	        });
+		});
 	},
 }
 

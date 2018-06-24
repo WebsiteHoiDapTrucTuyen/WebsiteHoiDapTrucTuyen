@@ -20,6 +20,7 @@ import ListDocument from '../components/documents/ListDocument.vue';
 import DetailDocument from '../components/documents/DetailDocument.vue';
 import EditDocument from '../components/documents/EditDocument.vue';
 import CreateDocument from '../components/documents/CreateDocument.vue';
+import ResultSearchDocument from '../components/documents/ResultSearchDocument.vue';
 //
 import Tag from '../components/tags/Tag.vue';
 import ListTag from '../components/tags/ListTag.vue';
@@ -104,6 +105,11 @@ const router = new VueRouter({
                             path: '/document-create',
                             component: CreateDocument,
                             name: 'create-document'
+                        },
+                        {
+                            path: '/documen-search',
+                            component: ResultSearchDocument,
+                            name: 'search-document'
                         },
                     ]
                 },
