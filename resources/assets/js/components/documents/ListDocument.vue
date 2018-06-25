@@ -13,7 +13,7 @@
                                 <form id="form-search" @submit.prevent="searchDocumentation">
                                     <div class="row">
                                         <div class="col-lg-12">
-                                            <div v-if="message.errorskeyword" class="alert alert-warning">
+                                            <div :style="styleObject" class="alert alert-warning">
                                                 {{ message.errorskeyword }}
                                             </div>
                                             <div class="input-group">
@@ -118,6 +118,9 @@
                 tags:'',
                 selectedTags: [],
                 message:{},
+                styleObject: {
+                    display: 'none',
+                  } 
             }
         },
         computed: {
@@ -173,6 +176,7 @@
 
                 if(this.keyword.length == 0){
                     this.message['errorskeyword'] = 'Bạn chưa nhập key search!';
+                    this.styleObject.display= 'block';
                 }
                 else{
                     this.$router.push({ name: 'search-document', params: { payload }});    

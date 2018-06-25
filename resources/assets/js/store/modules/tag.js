@@ -3,7 +3,8 @@ import * as types from '../mutation-types';
 // State
 const state = {
 	tags: [],
-	tagsPure: []
+	tagsPure: [],
+	tags_search: []
 }
 // Getters
 const getters = {
@@ -12,6 +13,9 @@ const getters = {
 	},
 	getListTagPure: state => {
 		return state.tagsPure;
+	},
+	getTagSearch: state => {
+		return state.tags_search;
 	}
 }
 // Mutations
@@ -26,6 +30,9 @@ const mutations = {
 		if (tag.data) {
 			state.tagsPure.data.push(tag.data);
 		}
+	},
+	[types.SEARCH_TAG]: (state, tags_search) => {
+		state.tags_search = tags_search;
 	},
 }
 // Actions
@@ -76,6 +83,26 @@ const actions = {
 	            }
 	            else {
 	            	commit(types.ADD_TAG, response.data);
+	            }
+	            resolve(response);
+	        })
+			.catch(error => {
+	            // console.log(error);
+	            reject(error);
+	        });
+		});
+	},
+	fetchSearchTag: ({ commit }, payload ) => {
+		return new Promise((resolve, reject) => {
+			axios.get('/api/tags', { params: { keyword: payload.data.keyword, page: payload.page} })
+			.then(response => {
+				//console.log(response);
+	            if (response.data.hasOwnProperty('errors')) {
+	            	
+	            	commit(types.SEARCH_TAG, [])
+	            }
+	            else {
+	            	commit(types.SEARCH_TAG, response.data);
 	            }
 	            resolve(response);
 	        })
