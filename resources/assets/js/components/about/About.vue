@@ -7,7 +7,7 @@
 				
 				<div id="want-join">
 					<span>Want to join us?</span>
-					<span><router-link :to="{ name: 'login' }" style="color: red;">Longin</router-link></span>
+					<span><router-link :to="{ name: 'login' }" style="color: red;">Login</router-link></span>
 				</div>
 				
 			</div>

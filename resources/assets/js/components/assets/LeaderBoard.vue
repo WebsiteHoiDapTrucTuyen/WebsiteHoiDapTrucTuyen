@@ -6,17 +6,18 @@
         <hr>
         <div class="rank-items">
             <a href="" style="color: black;text-decoration: none;" v-for="user, index in leaderboard">
-                <div class="item">
-                    <div class="d-inline" style="">
-                        <span class="oi oi-star" style="color: #DFDF39;"></span>{{ index + 1 }}
+                <div class="row item">
+                    <div class=" col-lg-4">
+                        <span class="oi oi-star" style="color: #DFDF39;"></span>
+                        <span>{{ index + 1 }}</span>
                     </div>
-                    <div class="d-inline">
+                    <div class="col-lg-2 ava">
                         <img :src="sourceImage(user.avatar)" class="rounded-circle" width="30" height="30">
                     </div>
-                    <div class="d-inline">
+                    <div class=" col-lg-6 hide-text">
                         {{ user.name }}
                     </div>
-                    <div class="d-inline float-right">
+                    <div class=" float-right col-lg-1 point">
                         <strong>{{ user.point }}</strong>
                     </div>
                 </div>

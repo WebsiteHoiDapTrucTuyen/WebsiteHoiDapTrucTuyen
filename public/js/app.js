@@ -70945,6 +70945,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     computed: {
@@ -70987,16 +70988,17 @@ var render = function() {
                 attrs: { href: "" }
               },
               [
-                _c("div", { staticClass: "item" }, [
-                  _c("div", { staticClass: "d-inline" }, [
+                _c("div", { staticClass: "row item" }, [
+                  _c("div", { staticClass: " col-lg-4" }, [
                     _c("span", {
                       staticClass: "oi oi-star",
                       staticStyle: { color: "#DFDF39" }
                     }),
-                    _vm._v(_vm._s(index + 1) + "\n                ")
+                    _vm._v(" "),
+                    _c("span", [_vm._v(_vm._s(index + 1))])
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "d-inline" }, [
+                  _c("div", { staticClass: "col-lg-2 ava" }, [
                     _c("img", {
                       staticClass: "rounded-circle",
                       attrs: {
@@ -71007,7 +71009,7 @@ var render = function() {
                     })
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "d-inline" }, [
+                  _c("div", { staticClass: " col-lg-6 hide-text" }, [
                     _vm._v(
                       "\n                    " +
                         _vm._s(user.name) +
@@ -71015,7 +71017,7 @@ var render = function() {
                     )
                   ]),
                   _vm._v(" "),
-                  _c("div", { staticClass: "d-inline float-right" }, [
+                  _c("div", { staticClass: " float-right col-lg-1 point" }, [
                     _c("strong", [_vm._v(_vm._s(user.point))])
                   ])
                 ])
@@ -71090,30 +71092,37 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "tag-common" }, [
-    _vm._m(0),
-    _vm._v(" "),
-    _c("hr"),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "tag-common-list" },
-      _vm._l(_vm.common, function(tag) {
-        return _c("div", { staticClass: "tag-item" }, [
-          _c("a", { attrs: { href: "" } }, [
-            _c("button", { staticClass: "btn btn-tag" }, [
-              _vm._v("\n                 " + _vm._s(tag.name) + " "),
-              _c("span", { staticClass: "badge badge-pill badge-primary" }, [
-                _vm._v(_vm._s(tag.count))
+  return _c(
+    "div",
+    { staticClass: "tag-common" },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "tag-common-list" },
+        _vm._l(_vm.common, function(tag) {
+          return _c("div", { staticClass: "tag-item" }, [
+            _c("a", { attrs: { href: "" } }, [
+              _c("button", { staticClass: "btn btn-tag" }, [
+                _vm._v("\n                 " + _vm._s(tag.name) + " "),
+                _c("span", { staticClass: "badge badge-pill badge-primary" }, [
+                  _vm._v(_vm._s(tag.count))
+                ])
               ])
             ])
           ])
-        ])
-      })
-    ),
-    _vm._v(" "),
-    _c("a", { attrs: { href: "" } }, [_vm._v("Xem thêm ...")])
-  ])
+        })
+      ),
+      _vm._v(" "),
+      _c("router-link", { attrs: { to: { name: "list-tag" } } }, [
+        _vm._v("Xem thêm ...")
+      ])
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -71121,7 +71130,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "tag-common-header" }, [
-      _c("p", [_vm._v("Tag phổ biến")])
+      _c("p", [_vm._v("Tag Phổ Biến")])
     ])
   }
 ]
@@ -83915,7 +83924,7 @@ var render = function() {
                   staticStyle: { color: "red" },
                   attrs: { to: { name: "login" } }
                 },
-                [_vm._v("Longin")]
+                [_vm._v("Login")]
               )
             ],
             1

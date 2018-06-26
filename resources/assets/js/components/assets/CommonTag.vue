@@ -1,7 +1,7 @@
 <template>
     <div class="tag-common">
         <div class="tag-common-header">
-            <p>Tag phổ biến</p>
+            <p>Tag Phổ Biến</p>
         </div>
         <hr>
         <div class="tag-common-list">
@@ -13,7 +13,7 @@
                 </a>
             </div>
         </div>
-        <a href="">Xem thêm ...</a>
+        <router-link :to="{ name: 'list-tag' }">Xem thêm ...</router-link>
     </div>
 </template>
 
