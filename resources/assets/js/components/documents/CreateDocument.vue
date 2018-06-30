@@ -11,7 +11,7 @@
 	                                <div v-if="message.errors" class="alert alert-warning">
 	                                	{{ message.errors }}
 	                               	</div>
-								<form @submit.prevent="editDocumentation">
+								<form @submit.prevent="creatDocumentation">
 									<div class="form-group">
 										<label>Chủ Đề</label>
                                         <select class="form-control" v-model="subject">
@@ -111,7 +111,7 @@
             },
         },
         methods: {
-            editDocumentation() {
+            creatDocumentation() {
                 let payload = {
                     'id': this.$route.params.id,
                     'data': {

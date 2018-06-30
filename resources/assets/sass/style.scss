@@ -252,15 +252,19 @@ button {
 }
 
 .rank-items .item {
-    padding: 5px;
-    margin: 0 -10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     transition: .2s ease-out;
     cursor: pointer;
     border-radius: 5px;
 }
 
-.rank-items .item div {
-    margin-right: 5px;
+.rank-items .item .ava {
+   margin-left: -40px;
+}
+
+.rank-items .item .point {
+   margin-left: -20px;
 }
 
 .rank-items .item:hover {

@@ -29,7 +29,7 @@
                         <router-link :to="{ name: 'list-user' }" class="nav-link"><strong>Người Dùng</strong></router-link>
                     </li>
                     <li class="nav-item mr-sm-3">
-                        <router-link :to="{ name: 'list-user' }" class="nav-link"><strong>Giới Thiệu</strong></router-link>
+                        <router-link :to="{ name: 'about' }" class="nav-link"><strong>Giới Thiệu</strong></router-link>
                     </li>
                 </ul>
                 <!--/danh mục-->

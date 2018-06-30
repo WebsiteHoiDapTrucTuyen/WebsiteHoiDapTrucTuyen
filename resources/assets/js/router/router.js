@@ -20,11 +20,15 @@ import ListDocument from '../components/documents/ListDocument.vue';
 import DetailDocument from '../components/documents/DetailDocument.vue';
 import EditDocument from '../components/documents/EditDocument.vue';
 import CreateDocument from '../components/documents/CreateDocument.vue';
+import ResultSearchDocument from '../components/documents/ResultSearchDocument.vue';
 //
 import Tag from '../components/tags/Tag.vue';
 import ListTag from '../components/tags/ListTag.vue';
 import User from '../components/users/User.vue';
 import ListUser from '../components/users/ListUser.vue';
+import ResultSearchTag from '../components/tags/ResultSearchTag.vue';
+import ResultSearchUser from '../components/users/ResultSearchUser.vue';
+import About from '../components/about/About.vue';
 
 
 const router = new VueRouter({
@@ -105,6 +109,11 @@ const router = new VueRouter({
                             component: CreateDocument,
                             name: 'create-document'
                         },
+                        {
+                            path: '/document-search',
+                            component: ResultSearchDocument,
+                            name: 'search-document'
+                        },
                     ]
                 },
                 {
@@ -115,6 +124,11 @@ const router = new VueRouter({
                             path:'',
                             component: ListTag,
                             name: 'list-tag'
+                        },
+                        {
+                            path:'tag-search',
+                            component: ResultSearchTag,
+                            name: 'search-tag'
                         }
                     ]
                 },
@@ -137,7 +151,17 @@ const router = new VueRouter({
                             component: EditInformationUser,
                             name: 'edit-information-user'
                         },
+                        {
+                            path: ':user-search',
+                            component: ResultSearchUser,
+                            name: 'search-user'
+                        },
                     ]
+                },
+                {
+                    path: 'about',
+                    component: About,
+                    name: 'about'
                 },
             ]
         }

@@ -30,3 +30,6 @@ export const RELATED_SUBJECT = 'RELATED_SUBJECT';
 export const LIST_SUBJECT = 'LIST_SUBJECT';
 export const LIST_TAG = 'LIST_TAG';
 export const LIST_USER = 'LIST_USER';
+export const SEARCH_DOCUMENTATION = 'SEARCH_DOCUMENTATION';
+export const SEARCH_TAG = 'SEARCH_TAG';
+export const SEARCH_USER = 'SEARCH_USER';
