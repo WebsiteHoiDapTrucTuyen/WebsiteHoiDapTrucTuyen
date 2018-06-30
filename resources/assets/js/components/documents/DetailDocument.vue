@@ -1,5 +1,5 @@
 <template>
-	<div class="content">
+	<div class="content" v-if="documentation">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-9">

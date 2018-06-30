@@ -52,7 +52,131 @@
                         <router-link :to="{ name: 'login' }"><button type="button" class="btn mr-3">Đăng Nhập</button></router-link>
                         <router-link :to="{ name: 'register' }"><button type="button" class="btn colr">Đăng Ký</button></router-link>
                     </div>
-                    <div v-else>
+                    <div v-else class="auth">
+                        <!-- notification -->
+                        <div class="notification dropdown">
+                            <div class="bell-notification" id="dropdownNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-bell" aria-hidden="true"></i>
+                                <span class="badge badge-danger">69</span>
+                            </div>
+                            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownNotification">
+                                <div class="more">
+                                    <a href="">Đánh đấu tất cả là đã đọc</a>
+                                </div>
+                                <a class="item is-new">
+                                    <div class="avatar">
+                                        <img :src="sourceImage(currentUser.avatar)" class="rounded-circle" width="60" height="60">
+                                    </div>
+                                    <div class="content">
+                                        <div class="title">
+                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
+                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
+                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
+                                        </div>
+                                        <div class="time">
+                                            8 phút trước
+                                        </div>
+                                    </div>
+                                    <div class="dismiss">
+                                        <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                    </div>
+                                </a>
+                                <a class="item">
+                                    <div class="avatar">
+                                        <img :src="sourceImage(currentUser.avatar)" class="rounded-circle" width="60" height="60">
+                                    </div>
+                                    <div class="content">
+                                        <div class="title">
+                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
+                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
+                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
+                                        </div>
+                                        <div class="time">
+                                            8 phút trước
+                                        </div>
+                                    </div>
+                                    <div class="dismiss">
+                                        <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                    </div>
+                                </a>
+                                <a class="item">
+                                    <div class="avatar">
+                                        <img :src="sourceImage(currentUser.avatar)" class="rounded-circle" width="60" height="60">
+                                    </div>
+                                    <div class="content">
+                                        <div class="title">
+                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
+                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
+                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
+                                        </div>
+                                        <div class="time">
+                                            8 phút trước
+                                        </div>
+                                    </div>
+                                    <div class="dismiss">
+                                        <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                    </div>
+                                </a>
+                                <a class="item is-new">
+                                    <div class="avatar">
+                                        <img :src="sourceImage(currentUser.avatar)" class="rounded-circle" width="60" height="60">
+                                    </div>
+                                    <div class="content">
+                                        <div class="title">
+                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
+                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
+                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
+                                        </div>
+                                        <div class="time">
+                                            8 phút trước
+                                        </div>
+                                    </div>
+                                    <div class="dismiss">
+                                        <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                    </div>
+                                </a>
+                                <a class="item">
+                                    <div class="avatar">
+                                        <img :src="sourceImage(currentUser.avatar)" class="rounded-circle" width="60" height="60">
+                                    </div>
+                                    <div class="content">
+                                        <div class="title">
+                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
+                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
+                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
+                                        </div>
+                                        <div class="time">
+                                            8 phút trước
+                                        </div>
+                                    </div>
+                                    <div class="dismiss">
+                                        <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                    </div>
+                                </a>
+                                <a class="item">
+                                    <div class="avatar">
+                                        <img :src="sourceImage(currentUser.avatar)" class="rounded-circle" width="60" height="60">
+                                    </div>
+                                    <div class="content">
+                                        <div class="title">
+                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
+                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
+                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
+                                        </div>
+                                        <div class="time">
+                                            8 phút trước
+                                        </div>
+                                    </div>
+                                    <div class="dismiss">
+                                        <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                    </div>
+                                </a>
+                                <div class="more">
+                                    <a href="">Xem thêm thông báo ...</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /notification -->
                         <div class="dropdown" v-if="currentUser">
                             <div class="avatar_login" id="dropdownMenuButton" data-toggle="dropdown">
                                 <img :src="sourceImage(currentUser.avatar)" class="rounded-circle" >
