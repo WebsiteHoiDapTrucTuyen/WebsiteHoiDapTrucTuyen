@@ -35,9 +35,9 @@
                 <!--/danh mục-->
                 <!--search box-->
                 <div class="col-lg-4">
-                    <form action="" method="GET">
+                    <form @submit.prevent="searchQuestion">
                         <div class="input-group stylish-input-group mr-sm-5">
-                            <input type="text" class="form-control" placeholder="Nhập từ khóa cần tìm" name="keyword">
+                            <input :style="styleObject" type="text" class="form-control" :placeholder="placeholder" v-model="keyword">
                             <span class="input-group-addon">
                                 <button type="submit">
                                     <span class="oi oi-magnifying-glass"></span>
@@ -211,6 +211,16 @@
 
 <script>
 export default {
+    data() {
+        return {
+            keyword: '',
+            tags:'',
+            placeholder:'Nhập từ khóa cần tìm',
+            styleObject: {
+                 'border-color': '',
+              },
+        }
+    },
   computed: {
     currentUser() {
       return this.$store.getters["user/getCurrentUser"].data;
@@ -224,7 +234,25 @@ export default {
       this.$auth.destroyToken();
       this.$store.dispatch("user/logout");
       this.$router.push({ name: "home" });
-    }
+    },
+    searchQuestion() {
+        let payload = {
+           
+            'keyword': this.keyword,
+            'tags': this.tags,
+        }
+
+        if(this.keyword.length == 0){
+            this.placeholder = 'Bạn chưa nhập key search!';
+            this.styleObject = 'border-color:red';
+        }
+        else{
+            this.styleObject = 'border-color:#CCCBCB';
+            this.$router.push({ name: 'search-question', params: { payload }}); 
+            this.placeholder = 'Nhập từ khóa cần tìm';
+            this.keyword = '';   
+        }
+    },
   },
   created() {
     this.$store.dispatch("user/fetchCurrentUser")

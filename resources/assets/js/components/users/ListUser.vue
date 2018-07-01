@@ -94,7 +94,7 @@
                 let payload = { 'sort': sort, 'page': page }
                 this.$store.dispatch('listuser/fetchListUser', payload);
             },
-             searchUser() {
+            searchUser() {
                 let payload = {
                    
                     'keyword': this.keyword,

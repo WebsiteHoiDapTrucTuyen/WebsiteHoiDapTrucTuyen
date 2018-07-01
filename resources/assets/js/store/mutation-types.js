@@ -33,3 +33,4 @@ export const LIST_USER = 'LIST_USER';
 export const SEARCH_DOCUMENTATION = 'SEARCH_DOCUMENTATION';
 export const SEARCH_TAG = 'SEARCH_TAG';
 export const SEARCH_USER = 'SEARCH_USER';
+export const SEARCH_QUESTION = 'SEARCH_QUESTION';
