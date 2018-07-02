@@ -72667,9 +72667,263 @@ module.exports = Component.exports
 
 /***/ }),
 /* 186 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed: SyntaxError: C:/xampp/htdocs/WebsiteHoiDapTrucTuyen/resources/assets/js/components/layouts/Navbar.vue: Unexpected token (120:0)\n\n\u001b[0m \u001b[90m 118 | \u001b[39m    data() {\n \u001b[90m 119 | \u001b[39m        \u001b[36mreturn\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 120 | \u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\n \u001b[90m     | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 121 | \u001b[39m            page\u001b[33m:\u001b[39m \u001b[35m1\u001b[39m\n \u001b[90m 122 | \u001b[39m        }\n \u001b[90m 123 | \u001b[39m    }\u001b[33m,\u001b[39m\u001b[0m\n");
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            page: 1,
+            keyword: '',
+            tags: '',
+            placeholder: 'Nhập từ khóa cần tìm',
+            styleObject: {
+                'border-color': ''
+            }
+        };
+    },
+
+    computed: {
+        currentUser: function currentUser() {
+            return this.$store.getters["user/getCurrentUser"].data;
+        },
+        activities: function activities() {
+            return this.$store.getters["activity/getListActivity"].data;
+        },
+        pagination: function pagination() {
+            return this.$store.getters["activity/getListActivity"].meta;
+        },
+        countNew: function countNew() {
+            return this.$store.getters["activity/getCountNewActiviy"];
+        }
+    },
+    methods: {
+        sourceImage: function sourceImage(url) {
+            return "/images/avatar_users/" + url;
+        },
+        logout: function logout() {
+            this.$auth.destroyToken();
+            this.$store.dispatch("user/logout");
+            this.$router.push({ name: "home" });
+        },
+        fetchCurrentUser: function fetchCurrentUser() {
+            var _this = this;
+
+            this.$store.dispatch("user/fetchCurrentUser").then(function (response) {
+                _this.fetchListActivity();
+                _this.receiveActivityBroadcast(_this.currentUser.id);
+            }).catch(function (error) {});
+        },
+        fetchListActivity: function fetchListActivity() {
+            var _this2 = this;
+
+            var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+            var payload = {
+                page: page
+            };
+            this.$store.dispatch('activity/fetchListActivity', payload).then(function (response) {
+                _this2.fetchCountNewActivity();
+            }).catch(function (error) {});
+        },
+        fetchCountNewActivity: function fetchCountNewActivity() {
+            this.$store.dispatch('activity/fetchCountNewActivity').then(function (response) {}).catch(function (error) {});
+        },
+        generateContent: function generateContent(activity) {
+            return '<strong>' + activity.user_related.name + '</strong> ' + activity.content + ' <strong>' + activity.object.title;
+        },
+        dismiss: function dismiss(id) {
+            this.fetchDismissActivity(id);
+        },
+        fetchDismissActivity: function fetchDismissActivity(id) {
+            var payload = {
+                id: id
+            };
+            this.$store.dispatch('activity/fetchDismissActivity', payload).then(function (response) {}).catch(function (error) {});
+        },
+        dismissAll: function dismissAll() {
+            this.fetchDismissAllActivity();
+        },
+        fetchDismissAllActivity: function fetchDismissAllActivity() {
+            this.$store.dispatch('activity/fetchDismissAllActivity').then(function (response) {}).catch(function (error) {});
+        },
+        showMore: function showMore() {
+            this.fetchListActivity(++this.page);
+            console.log(this.page);
+        },
+        receiveActivityBroadcast: function receiveActivityBroadcast(user_id) {
+            var _this3 = this;
+
+            Echo.channel('activities.' + user_id).listen('ActivityBroadcast', function (e) {
+                _this3.addActivity(e);
+            });
+        },
+        addActivity: function addActivity(data) {
+            var payload = {
+                data: data.activity
+            };
+            this.$store.dispatch('activity/addActivity', payload);
+        },
+        generateLink: function generateLink(type) {
+            switch (type) {
+                case 1:
+                    return 'detail-question';
+                    break;
+                case 2:
+                    return 'detail-document';
+                    break;
+
+                default:
+                    break;
+            }
+        },
+        selectActivity: function selectActivity(activity) {
+            // event.target.click();
+            this.fetchDismissActivity(activity.id);
+            this.$router.push({ name: this.generateLink(activity.object_type), params: { id: activity.object.id } });
+        },
+        searchQuestion: function searchQuestion() {
+            var payload = {
+
+                'keyword': this.keyword,
+                'tags': this.tags
+            };
+
+            if (this.keyword.length == 0) {
+                this.placeholder = 'Bạn chưa nhập key search!';
+                this.styleObject = 'border-color:red';
+            } else {
+                this.styleObject = 'border-color:#CCCBCB';
+                this.$router.push({ name: 'search-question', params: { payload: payload } });
+                this.placeholder = 'Nhập từ khóa cần tìm';
+                this.keyword = '';
+            }
+        }
+    },
+    created: function created() {
+        this.fetchCurrentUser();
+    },
+    mounted: function mounted() {
+        // console.log('Component mounted.')
+    }
+});
 
 /***/ }),
 /* 187 */

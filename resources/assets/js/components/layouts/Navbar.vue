@@ -117,8 +117,13 @@
 export default {
     data() {
         return {
-<<<<<<< HEAD
-            page: 1
+            page: 1,
+            keyword: '',
+            tags:'',
+            placeholder:'Nhập từ khóa cần tìm',
+            styleObject: {
+                 'border-color': '',
+            },
         }
     },
     computed: {
@@ -170,52 +175,6 @@ export default {
         fetchCountNewActivity() {
             this.$store.dispatch('activity/fetchCountNewActivity')
             .then(response => {
-=======
-            keyword: '',
-            tags:'',
-            placeholder:'Nhập từ khóa cần tìm',
-            styleObject: {
-                 'border-color': '',
-              },
-        }
-    },
-  computed: {
-    currentUser() {
-      return this.$store.getters["user/getCurrentUser"].data;
-    }
-  },
-  methods: {
-    sourceImage(url) {
-      return "/images/avatar_users/" + url;
-    },
-    logout() {
-      this.$auth.destroyToken();
-      this.$store.dispatch("user/logout");
-      this.$router.push({ name: "home" });
-    },
-    searchQuestion() {
-        let payload = {
-           
-            'keyword': this.keyword,
-            'tags': this.tags,
-        }
-
-        if(this.keyword.length == 0){
-            this.placeholder = 'Bạn chưa nhập key search!';
-            this.styleObject = 'border-color:red';
-        }
-        else{
-            this.styleObject = 'border-color:#CCCBCB';
-            this.$router.push({ name: 'search-question', params: { payload }}); 
-            this.placeholder = 'Nhập từ khóa cần tìm';
-            this.keyword = '';   
-        }
-    },
-  },
-  created() {
-    this.$store.dispatch("user/fetchCurrentUser")
-    .then(response => {
->>>>>>> 41d8ed90e33c58120546676b312cecb08aae49d2
 
             })
             .catch(error => {
@@ -289,7 +248,25 @@ export default {
             // event.target.click();
             this.fetchDismissActivity(activity.id);
             this.$router.push({ name: this.generateLink(activity.object_type), params: { id: activity.object.id } });
-        }
+        },
+        searchQuestion() {
+            let payload = {
+            
+                'keyword': this.keyword,
+                'tags': this.tags,
+            }
+
+            if(this.keyword.length == 0){
+                this.placeholder = 'Bạn chưa nhập key search!';
+                this.styleObject = 'border-color:red';
+            }
+            else{
+                this.styleObject = 'border-color:#CCCBCB';
+                this.$router.push({ name: 'search-question', params: { payload }}); 
+                this.placeholder = 'Nhập từ khóa cần tìm';
+                this.keyword = '';   
+            }
+        },
     },
     created() {
         this.fetchCurrentUser();
