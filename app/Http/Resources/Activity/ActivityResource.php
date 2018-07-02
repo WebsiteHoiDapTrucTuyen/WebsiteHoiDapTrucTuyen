@@ -20,10 +20,12 @@ class ActivityResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'user_related' => new ActivityUser($this->user_related),
+            'user_related' => new ActivityUser($this->user),
             'content' => $this->generateContent($this->activitable_type, $this->content),
             'object' => $this->generateObject($this->activitable_type, $this->activitable),
+            'object_type' => $this->generateObjectType($this->activitable_type),
             'date' => $this->created_at,
+            'is_new' => $this->is_new,
         ];
     }
 
@@ -67,4 +69,25 @@ class ActivityResource extends JsonResource
                 break;
         }
     }
+
+    public function generateObjectType($activitable_type)
+    {
+        switch ($activitable_type) {
+            case 'App\Question':
+                return 1;
+                break;
+
+            case 'App\Documentation':
+                return 2;
+                break;
+
+            case 'App\Answer':
+                return 1;
+                break;
+            
+            default:
+                break;
+        }
+    }
+    
 }

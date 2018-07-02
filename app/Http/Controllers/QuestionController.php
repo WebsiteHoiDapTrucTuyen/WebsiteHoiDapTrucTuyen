@@ -106,7 +106,7 @@ class QuestionController extends Controller
         $question->updated_at = Carbon::now();
         $question->save();
 
-        event(new ActivityEvent($question, 'đã hỏi'));
+        event(new ActivityEvent($question, 'đã đăng'));
         event(new TagEvent($question, $request->tags));
         event((new PointReputationEvent(1, 10)));
 

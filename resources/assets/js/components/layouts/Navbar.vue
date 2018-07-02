@@ -54,125 +54,36 @@
                     </div>
                     <div v-else class="auth">
                         <!-- notification -->
-                        <div class="notification dropdown">
+                        <div class="notification dropdown" v-if="activities && pagination">
                             <div class="bell-notification" id="dropdownNotification" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-bell" aria-hidden="true"></i>
-                                <span class="badge badge-danger">69</span>
+                                <span v-if="countNew" class="badge badge-danger">{{ countNew }}</span>
                             </div>
                             <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownNotification">
-                                <div class="more">
-                                    <a href="">Đánh đấu tất cả là đã đọc</a>
+                                <div class="more" @click.stop="dismissAll()">
+                                    <a>Đánh đấu tất cả là đã đọc</a>
                                 </div>
-                                <a class="item is-new">
-                                    <div class="avatar">
-                                        <img :src="sourceImage(currentUser.avatar)" class="rounded-circle" width="60" height="60">
-                                    </div>
-                                    <div class="content">
-                                        <div class="title">
-                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
-                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
-                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
+                                <div class="list-item">
+                                    <a v-for="activity in activities" :key="activity.id" class="item" :class="{'is-new': activity.is_new}"
+                                    @click="selectActivity(activity)">
+                                        <div class="avatar">
+                                            <img :src="sourceImage(activity.user_related.avatar)" class="rounded-circle" width="60" height="60">
                                         </div>
-                                        <div class="time">
-                                            8 phút trước
+                                        <div class="content">
+                                            <div class="title" v-html="generateContent(activity)">
+                                                
+                                            </div>
+                                            <div class="time">
+                                                {{ activity.date.date | moment("from", "now") }}
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="dismiss">
-                                        <i class="fa fa-eye-slash" aria-hidden="true"></i>
-                                    </div>
-                                </a>
-                                <a class="item">
-                                    <div class="avatar">
-                                        <img :src="sourceImage(currentUser.avatar)" class="rounded-circle" width="60" height="60">
-                                    </div>
-                                    <div class="content">
-                                        <div class="title">
-                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
-                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
-                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
+                                        <div class="dismiss">
+                                            <i class="fa fa-eye-slash" aria-hidden="true" @click.stop="dismiss(activity.id)"></i>
                                         </div>
-                                        <div class="time">
-                                            8 phút trước
-                                        </div>
-                                    </div>
-                                    <div class="dismiss">
-                                        <i class="fa fa-eye-slash" aria-hidden="true"></i>
-                                    </div>
-                                </a>
-                                <a class="item">
-                                    <div class="avatar">
-                                        <img :src="sourceImage(currentUser.avatar)" class="rounded-circle" width="60" height="60">
-                                    </div>
-                                    <div class="content">
-                                        <div class="title">
-                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
-                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
-                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
-                                        </div>
-                                        <div class="time">
-                                            8 phút trước
-                                        </div>
-                                    </div>
-                                    <div class="dismiss">
-                                        <i class="fa fa-eye-slash" aria-hidden="true"></i>
-                                    </div>
-                                </a>
-                                <a class="item is-new">
-                                    <div class="avatar">
-                                        <img :src="sourceImage(currentUser.avatar)" class="rounded-circle" width="60" height="60">
-                                    </div>
-                                    <div class="content">
-                                        <div class="title">
-                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
-                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
-                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
-                                        </div>
-                                        <div class="time">
-                                            8 phút trước
-                                        </div>
-                                    </div>
-                                    <div class="dismiss">
-                                        <i class="fa fa-eye-slash" aria-hidden="true"></i>
-                                    </div>
-                                </a>
-                                <a class="item">
-                                    <div class="avatar">
-                                        <img :src="sourceImage(currentUser.avatar)" class="rounded-circle" width="60" height="60">
-                                    </div>
-                                    <div class="content">
-                                        <div class="title">
-                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
-                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
-                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
-                                        </div>
-                                        <div class="time">
-                                            8 phút trước
-                                        </div>
-                                    </div>
-                                    <div class="dismiss">
-                                        <i class="fa fa-eye-slash" aria-hidden="true"></i>
-                                    </div>
-                                </a>
-                                <a class="item">
-                                    <div class="avatar">
-                                        <img :src="sourceImage(currentUser.avatar)" class="rounded-circle" width="60" height="60">
-                                    </div>
-                                    <div class="content">
-                                        <div class="title">
-                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
-                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
-                                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolores, quis?
-                                        </div>
-                                        <div class="time">
-                                            8 phút trước
-                                        </div>
-                                    </div>
-                                    <div class="dismiss">
-                                        <i class="fa fa-eye-slash" aria-hidden="true"></i>
-                                    </div>
-                                </a>
-                                <div class="more">
-                                    <a href="">Xem thêm thông báo ...</a>
+                                    </a>
+                                </div>
+                                <div v-if="page < pagination.last_page" class="more" @click.stop="showMore()">
+                                    <a>Xem thêm thông báo ...</a>
                                 </div>
                             </div>
                         </div>
@@ -182,13 +93,6 @@
                                 <img :src="sourceImage(currentUser.avatar)" class="rounded-circle" >
                             </div>
                             <div class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item">
-                                    <span class="oi oi-globe"></span>
-                                    <span>Thông Báo</span>
-                                    <span class="badge badge-primary">
-                                        69 
-                                    </span>
-                                </a>
                                 <router-link class="dropdown-item" :to="{ name: 'information-user', params: { id: currentUser.id }}">
                                     <span class="oi oi-person"></span>
                                     <span>Thông Tin Cá Nhân</span>
@@ -211,32 +115,140 @@
 
 <script>
 export default {
-  computed: {
-    currentUser() {
-      return this.$store.getters["user/getCurrentUser"].data;
-    }
-  },
-  methods: {
-    sourceImage(url) {
-      return "/images/avatar_users/" + url;
+    data() {
+        return {
+            page: 1
+        }
     },
-    logout() {
-      this.$auth.destroyToken();
-      this.$store.dispatch("user/logout");
-      this.$router.push({ name: "home" });
+    computed: {
+        currentUser() {
+        return this.$store.getters["user/getCurrentUser"].data;
+        },
+        activities() {
+            return this.$store.getters["activity/getListActivity"].data;
+        },
+        pagination() {
+            return this.$store.getters["activity/getListActivity"].meta;
+        },
+        countNew() {
+            return this.$store.getters["activity/getCountNewActiviy"];
+        }
+    },
+    methods: {
+        sourceImage(url) {
+        return "/images/avatar_users/" + url;
+        },
+        logout() {
+        this.$auth.destroyToken();
+        this.$store.dispatch("user/logout");
+        this.$router.push({ name: "home" });
+        },
+        fetchCurrentUser() {
+            this.$store.dispatch("user/fetchCurrentUser")
+            .then(response => {
+                this.fetchListActivity();
+                this.receiveActivityBroadcast(this.currentUser.id);
+            })
+            .catch(error => {
+
+            });
+        },
+        fetchListActivity(page = 1) {
+            let payload = {
+                page: page
+            }
+            this.$store.dispatch('activity/fetchListActivity', payload)
+            .then(response => {
+                this.fetchCountNewActivity();
+            })
+            .catch(error => {
+                
+
+            });
+        },
+        fetchCountNewActivity() {
+            this.$store.dispatch('activity/fetchCountNewActivity')
+            .then(response => {
+
+            })
+            .catch(error => {
+                
+
+            });
+        },
+        generateContent(activity) {
+            return `<strong>${activity.user_related.name}</strong> ${activity.content} <strong>${activity.object.title}`;
+        },
+        dismiss(id) {
+            this.fetchDismissActivity(id);
+        },
+        fetchDismissActivity(id) {
+            let payload = {
+                id: id
+            }
+            this.$store.dispatch('activity/fetchDismissActivity', payload)
+            .then(response => {
+
+            })
+            .catch(error => {
+                
+
+            });
+        },
+        dismissAll() {
+            this.fetchDismissAllActivity();
+        },
+        fetchDismissAllActivity() {
+            this.$store.dispatch('activity/fetchDismissAllActivity')
+            .then(response => {
+
+            })
+            .catch(error => {
+                
+
+            });
+        },
+        showMore() {
+            this.fetchListActivity(++this.page);
+            console.log(this.page);
+            
+        },
+        receiveActivityBroadcast(user_id) {
+            Echo.channel(`activities.${user_id}`)
+            .listen('ActivityBroadcast', e => {
+                this.addActivity(e);
+            });
+        },
+        addActivity(data) {
+            let payload = {
+                data: data.activity
+            }
+            this.$store.dispatch('activity/addActivity', payload)
+        },
+        generateLink(type) {
+            switch (type) {
+                case 1:
+                    return 'detail-question';
+                    break;
+                case 2:
+                    return 'detail-document';
+                    break;
+            
+                default:
+                    break;
+            }
+        },
+        selectActivity(activity) {
+            // event.target.click();
+            this.fetchDismissActivity(activity.id);
+            this.$router.push({ name: this.generateLink(activity.object_type), params: { id: activity.object.id } });
+        }
+    },
+    created() {
+        this.fetchCurrentUser();
+    },
+    mounted() {
+        // console.log('Component mounted.')
     }
-  },
-  created() {
-    this.$store.dispatch("user/fetchCurrentUser")
-    .then(response => {
-
-    })
-    .catch(error => {
-
-    });
-  },
-  mounted() {
-    // console.log('Component mounted.')
-  }
 };
 </script>

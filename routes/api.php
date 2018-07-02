@@ -110,6 +110,7 @@ Route::group(['prefix' => 'search'], function() {
 // Search
 Route::group(['prefix' => 'activities'], function() {
     Route::get('', 'ActivityController@index');
+    Route::get('countNew', 'ActivityController@countNew');
     Route::put('dismissAll', 'ActivityController@dismissAll');
     Route::put('{id}/dismiss', 'ActivityController@dismiss');
 });

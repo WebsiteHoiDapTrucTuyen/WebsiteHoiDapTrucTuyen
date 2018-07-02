@@ -1389,9 +1389,12 @@ button {
 .notification .dropdown-menu {
     min-width: 30rem;
     width: 30rem;
+    padding: 0;
+} 
+
+.notification .dropdown-menu .list-item {
     height: 500px;
     overflow-y: scroll;
-    padding: 0;
 } 
 
 .notification .dropdown-menu .item {
@@ -1399,6 +1402,8 @@ button {
     display: flex;  
     padding: 10px;
     border-top: 1px #6a737c solid;
+    color: inherit;
+    text-decoration: inherit;
 } 
 .notification .dropdown-menu .item.is-new {
     background-color: #E2E2E2;
@@ -1444,8 +1449,15 @@ button {
 
 .notification .dropdown-menu .more {
     display: flex;
+    cursor: pointer;
+    height: 30px;
+}
+
+.notification .dropdown-menu .more:hover {
+    background-color: #d2d2d2;
 }
 
 .notification .dropdown-menu .more a {
     margin: auto;
+    color: #007bff;
 }

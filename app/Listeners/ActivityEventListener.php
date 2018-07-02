@@ -7,6 +7,8 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Auth;
 use App\Activity;
+use App\Events\ActivityBroadcast;
+use App\Http\Resources\Activity\ActivityResource;
 
 class ActivityEventListener
 {
@@ -35,5 +37,7 @@ class ActivityEventListener
         $activity->activitable_id = $event->object->id;
         $activity->activitable_type = get_class($event->object);
         $activity->save();
+
+        broadcast(new ActivityBroadcast(new ActivityResource(Activity::find($activity->id))));
     }
 }

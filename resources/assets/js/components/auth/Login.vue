@@ -66,13 +66,47 @@
                 .then(response => {
                     // console.log(response);
                     this.$auth.setToken(response.data.token_type + ' ' + response.data.access_token, response.data.expires_in + Date.now());
-                    this.$store.dispatch('user/fetchCurrentUser');
+                    this.fetchCurrentUser();
                     this.$router.push({ name: 'home' });
                 })
                 .catch(error => {
                     // console.log(error);
                 });
-            }
+            },
+            fetchCurrentUser() {
+                this.$store.dispatch("user/fetchCurrentUser")
+                .then(response => {
+                    this.fetchListActivity();
+                })
+                .catch(error => {
+
+                });
+            },
+            fetchListActivity(page = 1) {
+                let payload = {
+                    page: page
+                }
+                this.$store.dispatch('activity/fetchListActivity', payload)
+                .then(response => {
+                    this.fetchCountNewActivity();
+                })
+                .catch(error => {
+                    
+
+                });
+            },
+            fetchCountNewActivity() {
+                this.$store.dispatch('activity/fetchCountNewActivity')
+                .then(response => {
+                    if (!response.data.hasOwnProperty('errors')) {
+                        this.countNew = response.data.data.countNew;
+                    }
+                })
+                .catch(error => {
+                    
+
+                });
+            },
         },
         mounted() {
             // console.log('Component mounted.')

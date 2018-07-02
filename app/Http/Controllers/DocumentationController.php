@@ -94,7 +94,7 @@ class DocumentationController extends Controller
         $documentation->updated_at = Carbon::now();
         $documentation->save();
 
-        event(new ActivityEvent($documentation, 'đã chia sẽ'));
+        event(new ActivityEvent($documentation, 'đã đăng'));
         event(new TagEvent($documentation, $request->tags));
         event((new PointReputationEvent(1, 100)));
 

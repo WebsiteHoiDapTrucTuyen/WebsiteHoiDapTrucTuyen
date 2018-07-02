@@ -6,6 +6,7 @@ import asset from './modules/asset'
 import answer from './modules/answer'
 import comment from './modules/comment'
 import vote from './modules/vote'
+import activity from './modules/activity'
 //
 import documentation from './modules/documentation'
 import tag from './modules/tag'
@@ -24,6 +25,7 @@ export default new Vuex.Store ({
 		documentation,
 		tag,
 		listuser,
+		activity
 	},
 	strict: true,
 })

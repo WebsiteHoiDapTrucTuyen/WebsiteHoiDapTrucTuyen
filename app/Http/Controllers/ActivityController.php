@@ -24,13 +24,13 @@ class ActivityController extends Controller
         })->sortByDesc('created_at');
 
         $activities = $this->paginate($activities, 10, $request->page,['path' => LengthAwarePaginator::resolveCurrentPath()]);
-
+        
         return ActivityResource::collection($activities);
     }
 
     public function dismissAll(Request $request)
     {
-        $activities = Activity::where('user_id', Auth::id())->update([ 'is_new' => false ]);
+        $activities = Activity::where('user_related_id', Auth::id())->update([ 'is_new' => false ]);
 
         if ($activities) {
             return [
@@ -45,7 +45,7 @@ class ActivityController extends Controller
 
     public function dismiss(Request $request, $id)
     {
-        $activities = Activity::where(['user_id' => Auth::id(), 'id' => $id])->update([ 'is_new' => false ]);
+        $activities = Activity::where(['user_related_id' => Auth::id(), 'id' => $id])->update([ 'is_new' => false ]);
 
         if ($activities) {
             return [
@@ -55,6 +55,19 @@ class ActivityController extends Controller
 
         return [
             'errors' => 'Dismiss errors'
+        ];
+    }
+
+    public function countNew() {
+        $activities = Auth::user()->activities;
+        $activities = $activities->filter(function($activity) {
+            return $activity->user_id != $activity->user_related_id && $activity->is_new == 1;
+        });
+
+        return [
+            'data' => [
+                'countNew' => $activities->count()
+            ]
         ];
     }
 }
