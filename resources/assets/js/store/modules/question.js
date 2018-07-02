@@ -4,7 +4,8 @@ import * as types from '../mutation-types';
 const state = {
 	questions: [],
 	question: [],
-	related_question: []
+	related_question: [],
+	question_search: [],
 }
 // Getters
 const getters = {
@@ -16,6 +17,9 @@ const getters = {
 	},
 	getRelatedQuestion: state => {
 		return state.related_question;
+	},
+	getQuestionSearch: state => {
+		return state.question_search;
 	}
 }
 // Mutations
@@ -56,6 +60,9 @@ const mutations = {
 				return item.id !== payload.id
 			})
 		}
+	},
+	[types.SEARCH_QUESTION]: (state, question_search) => {
+		state.question_search = question_search;
 	},
 }
 // Actions
@@ -191,6 +198,27 @@ const actions = {
 	            		'id': payload.id
 	            	}
 	            	commit(types.DELETE_QUESTION, data);
+	            }
+	            resolve(response);
+	        })
+			.catch(error => {
+	            // console.log(error);
+	            reject(error);
+	        });
+		});
+	},
+	fetchSearchQuestion: ({ commit }, payload ) => {
+		return new Promise((resolve, reject) => {
+			//console.log(payload);
+			axios.get('/api/search/questions', { params: { keyword: payload.data.keyword, tags: payload.data.tags, page: payload.page } })
+			.then(response => {
+				//console.log(response);
+	            if (response.data.hasOwnProperty('errors')) {
+	            	
+	            	commit(types.SEARCH_QUESTION, [])
+	            }
+	            else {
+	            	commit(types.SEARCH_QUESTION, response.data);
 	            }
 	            resolve(response);
 	        })

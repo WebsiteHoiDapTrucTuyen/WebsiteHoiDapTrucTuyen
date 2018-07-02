@@ -29,6 +29,8 @@ import ListUser from '../components/users/ListUser.vue';
 import ResultSearchTag from '../components/tags/ResultSearchTag.vue';
 import ResultSearchUser from '../components/users/ResultSearchUser.vue';
 import About from '../components/about/About.vue';
+import ResultSearchQuestion from '../components/questions/ResultSearchQuestion.vue';
+
 
 
 const router = new VueRouter({
@@ -82,6 +84,11 @@ const router = new VueRouter({
                             path: ':id/edit',
                             component: EditQuestion,
                             name: 'edit-question'
+                        },
+                        {
+                            path: '/question-search',
+                            component: ResultSearchQuestion,
+                            name: 'search-question'
                         },
                     ]
                 },

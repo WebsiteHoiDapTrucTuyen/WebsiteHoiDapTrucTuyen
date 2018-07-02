@@ -247,6 +247,7 @@ const actions = {
 	},
 	fetchSearchDocumentation: ({ commit }, payload ) => {
 		return new Promise((resolve, reject) => {
+			//console.log(payload);
 			axios.get('/api/search/documentations', { params: { keyword: payload.data.keyword, subject: payload.data.subject, tags: payload.data.tags, page: payload.page } })
 			.then(response => {
 				//console.log(response);

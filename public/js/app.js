@@ -5327,7 +5327,7 @@ function applyToTag (styleElement, obj) {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "C", function() { return LIST_TAG_PURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return ADD_TAG; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return ADD_QUESTION; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "K", function() { return UPDATE_QUESTION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "L", function() { return UPDATE_QUESTION; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return DELETE_QUESTION; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return INFORMATION_USER; });
 /* unused harmony export UPDATE_AVATAR */
@@ -5347,8 +5347,9 @@ function applyToTag (styleElement, obj) {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "B", function() { return LIST_TAG; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "D", function() { return LIST_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "H", function() { return SEARCH_DOCUMENTATION; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "I", function() { return SEARCH_TAG; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "J", function() { return SEARCH_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "J", function() { return SEARCH_TAG; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "K", function() { return SEARCH_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "I", function() { return SEARCH_QUESTION; });
 var CURRENT_USER = 'CURRENT_USER';
 var LIST_QUESTION = 'LIST_QUESTION';
 var INFORMATION_QUESTION = 'INFORMATION_QUESTION';
@@ -5390,6 +5391,7 @@ var LIST_USER = 'LIST_USER';
 var SEARCH_DOCUMENTATION = 'SEARCH_DOCUMENTATION';
 var SEARCH_TAG = 'SEARCH_TAG';
 var SEARCH_USER = 'SEARCH_USER';
+var SEARCH_QUESTION = 'SEARCH_QUESTION';
 
 /***/ }),
 /* 6 */
@@ -72380,6 +72382,8 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24__components_users_ResultSearchUser_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_24__components_users_ResultSearchUser_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_about_About_vue__ = __webpack_require__(350);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_about_About_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_25__components_about_About_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_questions_ResultSearchQuestion_vue__ = __webpack_require__(371);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_26__components_questions_ResultSearchQuestion_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_26__components_questions_ResultSearchQuestion_vue__);
 
 
 
@@ -72404,6 +72408,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vue_
 
 
 //
+
 
 
 
@@ -72454,6 +72459,10 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
                 path: ':id/edit',
                 component: __WEBPACK_IMPORTED_MODULE_10__components_questions_EditQuestion_vue___default.a,
                 name: 'edit-question'
+            }, {
+                path: '/question-search',
+                component: __WEBPACK_IMPORTED_MODULE_26__components_questions_ResultSearchQuestion_vue___default.a,
+                name: 'search-question'
             }]
         }, {
             path: 'documents',
@@ -72658,240 +72667,9 @@ module.exports = Component.exports
 
 /***/ }),
 /* 186 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            page: 1
-        };
-    },
-
-    computed: {
-        currentUser: function currentUser() {
-            return this.$store.getters["user/getCurrentUser"].data;
-        },
-        activities: function activities() {
-            return this.$store.getters["activity/getListActivity"].data;
-        },
-        pagination: function pagination() {
-            return this.$store.getters["activity/getListActivity"].meta;
-        },
-        countNew: function countNew() {
-            return this.$store.getters["activity/getCountNewActiviy"];
-        }
-    },
-    methods: {
-        sourceImage: function sourceImage(url) {
-            return "/images/avatar_users/" + url;
-        },
-        logout: function logout() {
-            this.$auth.destroyToken();
-            this.$store.dispatch("user/logout");
-            this.$router.push({ name: "home" });
-        },
-        fetchCurrentUser: function fetchCurrentUser() {
-            var _this = this;
-
-            this.$store.dispatch("user/fetchCurrentUser").then(function (response) {
-                _this.fetchListActivity();
-                _this.receiveActivityBroadcast(_this.currentUser.id);
-            }).catch(function (error) {});
-        },
-        fetchListActivity: function fetchListActivity() {
-            var _this2 = this;
-
-            var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-
-            var payload = {
-                page: page
-            };
-            this.$store.dispatch('activity/fetchListActivity', payload).then(function (response) {
-                _this2.fetchCountNewActivity();
-            }).catch(function (error) {});
-        },
-        fetchCountNewActivity: function fetchCountNewActivity() {
-            this.$store.dispatch('activity/fetchCountNewActivity').then(function (response) {}).catch(function (error) {});
-        },
-        generateContent: function generateContent(activity) {
-            return "<strong>" + activity.user_related.name + "</strong> " + activity.content + " <strong>" + activity.object.title;
-        },
-        dismiss: function dismiss(id) {
-            this.fetchDismissActivity(id);
-        },
-        fetchDismissActivity: function fetchDismissActivity(id) {
-            var payload = {
-                id: id
-            };
-            this.$store.dispatch('activity/fetchDismissActivity', payload).then(function (response) {}).catch(function (error) {});
-        },
-        dismissAll: function dismissAll() {
-            this.fetchDismissAllActivity();
-        },
-        fetchDismissAllActivity: function fetchDismissAllActivity() {
-            this.$store.dispatch('activity/fetchDismissAllActivity').then(function (response) {}).catch(function (error) {});
-        },
-        showMore: function showMore() {
-            this.fetchListActivity(++this.page);
-            console.log(this.page);
-        },
-        receiveActivityBroadcast: function receiveActivityBroadcast(user_id) {
-            var _this3 = this;
-
-            Echo.channel("activities." + user_id).listen('ActivityBroadcast', function (e) {
-                _this3.addActivity(e);
-            });
-        },
-        addActivity: function addActivity(data) {
-            var payload = {
-                data: data.activity
-            };
-            this.$store.dispatch('activity/addActivity', payload);
-        },
-        generateLink: function generateLink(type) {
-            switch (type) {
-                case 1:
-                    return 'detail-question';
-                    break;
-                case 2:
-                    return 'detail-document';
-                    break;
-
-                default:
-                    break;
-            }
-        },
-        selectActivity: function selectActivity(activity) {
-            // event.target.click();
-            this.fetchDismissActivity(activity.id);
-            this.$router.push({ name: this.generateLink(activity.object_type), params: { id: activity.object.id } });
-        }
-    },
-    created: function created() {
-        this.fetchCurrentUser();
-    },
-    mounted: function mounted() {
-        // console.log('Component mounted.')
-    }
-});
+throw new Error("Module build failed: SyntaxError: C:/xampp/htdocs/WebsiteHoiDapTrucTuyen/resources/assets/js/components/layouts/Navbar.vue: Unexpected token (120:0)\n\n\u001b[0m \u001b[90m 118 | \u001b[39m    data() {\n \u001b[90m 119 | \u001b[39m        \u001b[36mreturn\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 120 | \u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\n \u001b[90m     | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 121 | \u001b[39m            page\u001b[33m:\u001b[39m \u001b[35m1\u001b[39m\n \u001b[90m 122 | \u001b[39m        }\n \u001b[90m 123 | \u001b[39m    }\u001b[33m,\u001b[39m\u001b[0m\n");
 
 /***/ }),
 /* 187 */
@@ -73016,7 +72794,51 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _vm._m(1),
+            _c("div", { staticClass: "col-lg-4" }, [
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.searchQuestion($event)
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "input-group stylish-input-group mr-sm-5" },
+                    [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.keyword,
+                            expression: "keyword"
+                          }
+                        ],
+                        staticClass: "form-control",
+                        style: _vm.styleObject,
+                        attrs: { type: "text", placeholder: _vm.placeholder },
+                        domProps: { value: _vm.keyword },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.keyword = $event.target.value
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm._m(1)
+                    ]
+                  )
+                ]
+              )
+            ]),
             _vm._v(" "),
             _c(
               "div",
@@ -73318,24 +73140,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-lg-4" }, [
-      _c("form", { attrs: { action: "", method: "GET" } }, [
-        _c("div", { staticClass: "input-group stylish-input-group mr-sm-5" }, [
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              type: "text",
-              placeholder: "Nhập từ khóa cần tìm",
-              name: "keyword"
-            }
-          }),
-          _vm._v(" "),
-          _c("span", { staticClass: "input-group-addon" }, [
-            _c("button", { attrs: { type: "submit" } }, [
-              _c("span", { staticClass: "oi oi-magnifying-glass" })
-            ])
-          ])
-        ])
+    return _c("span", { staticClass: "input-group-addon" }, [
+      _c("button", { attrs: { type: "submit" } }, [
+        _c("span", { staticClass: "oi oi-magnifying-glass" })
       ])
     ])
   }
@@ -87417,6 +87224,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__assets_LeaderBoard_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__assets_LeaderBoard_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__assets_CommonTag_vue__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__assets_CommonTag_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__assets_CommonTag_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vue_multiselect__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vue_multiselect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_vue_multiselect__);
 //
 //
 //
@@ -87498,7 +87307,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
-// import Multiselect from 'vue-multiselect'
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -87506,18 +87314,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         ItemDocument: __WEBPACK_IMPORTED_MODULE_0__ItemDocument_vue___default.a,
         Pagination: __WEBPACK_IMPORTED_MODULE_1__assets_Pagination_vue___default.a,
         LeaderBoard: __WEBPACK_IMPORTED_MODULE_2__assets_LeaderBoard_vue___default.a,
-        CommonTag: __WEBPACK_IMPORTED_MODULE_3__assets_CommonTag_vue___default.a
-        // Multiselect: Multiselect,
+        CommonTag: __WEBPACK_IMPORTED_MODULE_3__assets_CommonTag_vue___default.a,
+        Multiselect: __WEBPACK_IMPORTED_MODULE_4_vue_multiselect___default.a
     },
 
     data: function data() {
         return {
-            // subject: 0,
+            subject: 0,
             keyword: '',
             result: '',
-            // tags: '',
-            // selectedTags: [],
-            message: {}
+            tags: '',
+            selectedTags: [],
+            message: {},
+            styleObject: {
+                display: 'none'
+            },
+            curentPage: 0
         };
     },
 
@@ -87525,36 +87337,64 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         documentations: function documentations() {
             return this.$store.getters['documentation/getDocumentationSearch'].data;
         },
-
-        // subjects(){
-        //     return this.$store.getters['documentation/getSubject'].data;
-        // },
+        subjects: function subjects() {
+            return this.$store.getters['documentation/getSubject'].data;
+        },
         pagination: function pagination() {
             return this.$store.getters['documentation/getDocumentationSearch'].meta;
+        },
+        optionTags: function optionTags() {
+            return this.$store.getters['tag/getListTagPure'].data;
         }
     },
     methods: {
         paginate: function paginate(page) {
-            this.fetchListSearchDocumentation(page);
+            //console.log(this.curentPage);
+            if (this.curentPage == 0) {
+                this.fetchListSearchDocumentation(page);
+            } else {
+                this.searchDocumentation(page);
+            }
         },
+        fetchListSubject: function fetchListSubject() {
+            this.$store.dispatch('documentation/fetchListSubject');
+        },
+        fetchListTagPure: function fetchListTagPure() {
+            this.$store.dispatch('tag/fetchListTagPure');
+        },
+        getStringIdSelectedTags: function getStringIdSelectedTags(tags) {
+            var result = '';
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
 
-        // fetchListSubject() {
-        //     this.$store.dispatch('documentation/fetchListSubject');
-        // },
-        // fetchListTagPure() {
-        //     this.$store.dispatch('tag/fetchListTagPure');
-        // },
-        // getStringIdSelectedTags(tags) {
-        //     let result = '';
-        //     for(let tag of tags) {
-        //         result += ',' + tag.id;
-        //     }
-        //     result = result.substring(1)
-        //     return result
-        // },
-        // updateTags(value) {
-        //     this.tags = this.getStringIdSelectedTags(value)
-        // },
+            try {
+                for (var _iterator = tags[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var tag = _step.value;
+
+                    result += ',' + tag.id;
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            result = result.substring(1);
+            return result;
+        },
+        updateTags: function updateTags(value) {
+            this.tags = this.getStringIdSelectedTags(value);
+        },
         fetchListSearchDocumentation: function fetchListSearchDocumentation() {
             var _this = this;
 
@@ -87581,12 +87421,48 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (error) {
                 console.log(error);
             });
+        },
+        searchDocumentation: function searchDocumentation(page) {
+            var _this2 = this;
+
+            var payload = {
+                'page': page,
+                'data': {
+                    'keyword': this.keyword,
+                    'tags': this.tags,
+                    'subject': this.subject
+                }
+
+            };
+
+            if (this.keyword.length == 0) {
+                this.message['errorskeyword'] = 'Bạn chưa nhập key search!';
+                this.styleObject.display = 'block';
+            } else {
+                this.styleObject.display = 'none';
+                this.$store.dispatch('documentation/fetchSearchDocumentation', payload).then(function (response) {
+                    if (response.data.hasOwnProperty('errors')) {
+                        //this.message['errors'] = 'Không thể tìm kiếm';
+                    } else {
+                        _this2.curentPage = 1;
+                        if (response.data.data.length > 0) {
+                            _this2.keyword = payload.data.keyword;
+                            _this2.result = 'Kết quả tìm kiếm cho từ khóa: ' + '"' + _this2.keyword + '"';
+                        } else {
+                            _this2.keyword = payload.data.keyword;
+                            _this2.result = 'Không tìm thấy kết quả cho từ khóa: ' + '"' + _this2.keyword + '"';
+                        }
+                    }
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }
         }
     },
     created: function created() {
         this.fetchListSearchDocumentation();
-        // this.fetchListSubject();
-        // this.fetchListTagPure();
+        this.fetchListSubject();
+        this.fetchListTagPure();
     }
 });
 
@@ -87612,6 +87488,151 @@ var render = function() {
                 _c("br"),
                 _vm._v(" "),
                 _c("br"),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    attrs: { id: "form-search" },
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        _vm.searchDocumentation(1)
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-lg-12" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "alert alert-warning",
+                            style: _vm.styleObject
+                          },
+                          [
+                            _vm._v(
+                              "\n                                            " +
+                                _vm._s(_vm.message.errorskeyword) +
+                                "\n                                        "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "input-group" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.keyword,
+                                expression: "keyword"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              placeholder: "Nhập từ khóa cần tìm"
+                            },
+                            domProps: { value: _vm.keyword },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.keyword = $event.target.value
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _vm._m(0)
+                        ])
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-lg-3" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.subject,
+                                expression: "subject"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.subject = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: "0" } }, [
+                              _vm._v("--- Chủ đề ---")
+                            ]),
+                            _vm._v(" "),
+                            _vm._l(_vm.subjects, function(subject) {
+                              return _c(
+                                "option",
+                                { domProps: { value: subject.id } },
+                                [_vm._v(_vm._s(subject.name))]
+                              )
+                            })
+                          ],
+                          2
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-lg-9" }, [
+                        _vm.optionTags
+                          ? _c(
+                              "div",
+                              { staticClass: "form-group" },
+                              [
+                                _c("multiselect", {
+                                  attrs: {
+                                    options: _vm.optionTags,
+                                    placeholder: "Thẻ của tài liệu",
+                                    label: "name",
+                                    "track-by": "name",
+                                    multiple: true,
+                                    taggable: true,
+                                    "tag-placeholder": "",
+                                    "close-on-select": false,
+                                    required: ""
+                                  },
+                                  on: { input: _vm.updateTags },
+                                  model: {
+                                    value: _vm.selectedTags,
+                                    callback: function($$v) {
+                                      _vm.selectedTags = $$v
+                                    },
+                                    expression: "selectedTags"
+                                  }
+                                })
+                              ],
+                              1
+                            )
+                          : _vm._e()
+                      ])
+                    ])
+                  ]
+                ),
                 _vm._v(" "),
                 _c("br"),
                 _vm._v(" "),
@@ -87693,7 +87714,23 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-btn" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success",
+          attrs: { id: "btn-search", type: "submit" }
+        },
+        [_vm._v("Tìm kiếm")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -89009,6 +89046,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -89022,7 +89074,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             result: '',
-            keyword: ''
+            keyword: this.$route.params.payload.keyword,
+            message: {},
+            styleObject: {
+                display: 'none'
+            }
         };
     },
 
@@ -89045,25 +89101,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             var payload = {
                 'page': page,
-                'data': this.$route.params.payload
+                'data': {
+                    'keyword': this.keyword
+                }
             };
 
-            this.$store.dispatch('tag/fetchSearchTag', payload).then(function (response) {
-                if (response.data.hasOwnProperty('errors')) {
-                    //this.message['errors'] = 'Không thể tìm kiếm';
-                } else {
-                    //console.log(response.data.data.length);
-                    if (response.data.data.length > 0) {
-                        _this.keyword = payload.data.keyword;
-                        _this.result = 'Kết quả tìm kiếm cho từ khóa: ' + '"' + _this.keyword + '"';
+            if (this.keyword.length == 0) {
+                this.message['errorskeyword'] = 'Bạn chưa nhập key search!';
+                this.styleObject.display = 'block';
+            } else {
+                this.styleObject.display = 'none';
+                this.$store.dispatch('tag/fetchSearchTag', payload).then(function (response) {
+                    if (response.data.hasOwnProperty('errors')) {
+                        //this.message['errors'] = 'Không thể tìm kiếm';
                     } else {
-                        _this.keyword = payload.data.keyword;
-                        _this.result = 'Không tìm thấy kết quả cho từ khóa: ' + '"' + _this.keyword + '"';
+                        //console.log(response.data.data.length);
+                        if (response.data.data.length > 0) {
+                            _this.keyword = payload.data.keyword;
+                            _this.result = 'Kết quả tìm kiếm cho từ khóa: ' + '"' + _this.keyword + '"';
+                        } else {
+                            _this.keyword = payload.data.keyword;
+                            _this.result = 'Không tìm thấy kết quả cho từ khóa: ' + '"' + _this.keyword + '"';
+                        }
                     }
-                }
-            }).catch(function (error) {
-                console.log(error);
-            });
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }
         }
     },
     created: function created() {
@@ -89096,6 +89160,69 @@ var render = function() {
                   _c("br"),
                   _vm._v(" "),
                   _c("br"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-lg-6" }, [
+                      _c(
+                        "form",
+                        {
+                          attrs: { id: "form-search" },
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              _vm.fetchListSearchTag(1)
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "alert alert-warning",
+                              style: _vm.styleObject
+                            },
+                            [
+                              _vm._v(
+                                "\n                                                " +
+                                  _vm._s(_vm.message.errorskeyword) +
+                                  "\n                                            "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "input-group" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.keyword,
+                                  expression: "keyword"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                id: "key_search",
+                                type: "text",
+                                placeholder: "Nhập từ khóa cần tìm"
+                              },
+                              domProps: { value: _vm.keyword },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.keyword = $event.target.value
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _vm._m(0)
+                          ])
+                        ]
+                      )
+                    ])
+                  ]),
                   _vm._v(" "),
                   _c("br"),
                   _vm._v(" "),
@@ -89136,7 +89263,23 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-btn" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success",
+          attrs: { id: "btn-search", type: "submit" }
+        },
+        [_vm._v("Tìm kiếm")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -89233,6 +89376,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -89246,7 +89403,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             result: '',
-            keyword: ''
+            keyword: '',
+            message: {},
+            styleObject: {
+                display: 'none'
+            },
+            curentPage: 0
         };
     },
 
@@ -89260,7 +89422,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         paginate: function paginate(page) {
-            this.fetchListSearchUser(page);
+            if (this.curentPage == 0) {
+
+                this.fetchListSearchUser(page);
+            } else {
+                this.searchUser(page);
+            }
         },
         fetchListSearchUser: function fetchListSearchUser() {
             var _this = this;
@@ -89288,6 +89455,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function (error) {
                 console.log(error);
             });
+        },
+        searchUser: function searchUser(page) {
+            var _this2 = this;
+
+            var payload = {
+                'page': page,
+                'data': {
+                    'keyword': this.keyword
+                }
+            };
+
+            if (this.keyword.length == 0) {
+                this.message['errorskeyword'] = 'Bạn chưa nhập key search!';
+                this.styleObject.display = 'block';
+            } else {
+                this.styleObject.display = 'none';
+                this.$store.dispatch('listuser/fetchSearchUser', payload).then(function (response) {
+                    if (response.data.hasOwnProperty('errors')) {
+                        //this.message['errors'] = 'Không thể tìm kiếm';
+                    } else {
+                        _this2.curentPage = 1;
+                        if (response.data.data.length > 0) {
+                            _this2.keyword = payload.data.keyword;
+                            _this2.result = 'Kết quả tìm kiếm cho từ khóa: ' + '"' + _this2.keyword + '"';
+                        } else {
+                            _this2.keyword = payload.data.keyword;
+                            _this2.result = 'Không tìm thấy kết quả cho từ khóa: ' + '"' + _this2.keyword + '"';
+                        }
+                    }
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }
         }
     },
     created: function created() {
@@ -89320,6 +89520,69 @@ var render = function() {
                   _c("br"),
                   _vm._v(" "),
                   _c("br"),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-lg-6" }, [
+                      _c(
+                        "form",
+                        {
+                          attrs: { id: "form-search" },
+                          on: {
+                            submit: function($event) {
+                              $event.preventDefault()
+                              _vm.searchUser(1)
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "div",
+                            {
+                              staticClass: "alert alert-warning",
+                              style: _vm.styleObject
+                            },
+                            [
+                              _vm._v(
+                                "\n                                                " +
+                                  _vm._s(_vm.message.errorskeyword) +
+                                  "\n                                            "
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "input-group" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.keyword,
+                                  expression: "keyword"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                id: "key_search",
+                                type: "text",
+                                placeholder: "Nhập từ khóa cần tìm"
+                              },
+                              domProps: { value: _vm.keyword },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.keyword = $event.target.value
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _vm._m(0)
+                          ])
+                        ]
+                      )
+                    ])
+                  ]),
                   _vm._v(" "),
                   _c("br"),
                   _vm._v(" "),
@@ -89360,7 +89623,23 @@ var render = function() {
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("span", { staticClass: "input-group-btn" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success",
+          attrs: { id: "btn-search", type: "submit" }
+        },
+        [_vm._v("Tìm kiếm")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -90743,7 +91022,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 var state = {
 	questions: [],
 	question: [],
-	related_question: []
+	related_question: [],
+	question_search: []
 	// Getters
 };var getters = {
 	getListQuestion: function getListQuestion(state) {
@@ -90754,6 +91034,9 @@ var state = {
 	},
 	getRelatedQuestion: function getRelatedQuestion(state) {
 		return state.related_question;
+	},
+	getQuestionSearch: function getQuestionSearch(state) {
+		return state.question_search;
 	}
 	// Mutations
 };var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["z" /* LIST_QUESTION */], function (state, questions) {
@@ -90772,7 +91055,7 @@ var state = {
 	if (question.data && state.questions.data) {
 		state.questions.data.unshift(question.data);
 	}
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["K" /* UPDATE_QUESTION */], function (state, question) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["L" /* UPDATE_QUESTION */], function (state, question) {
 	if (question.data && state.questions.data) {
 		state.questions.data = state.questions.data.filter(function (item) {
 			return item.id === question.data.id ? question.data : item;
@@ -90784,6 +91067,8 @@ var state = {
 			return item.id !== payload.id;
 		});
 	}
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["I" /* SEARCH_QUESTION */], function (state, question_search) {
+	state.question_search = question_search;
 }), _mutations);
 // Actions
 var actions = {
@@ -90889,9 +91174,9 @@ var actions = {
 		return new Promise(function (resolve, reject) {
 			axios.put('/api/questions/' + payload.id, payload.data).then(function (response) {
 				if (response.data.hasOwnProperty('errors')) {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["K" /* UPDATE_QUESTION */], []);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["L" /* UPDATE_QUESTION */], []);
 				} else {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["K" /* UPDATE_QUESTION */], response.data);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["L" /* UPDATE_QUESTION */], response.data);
 				}
 				resolve(response);
 			}).catch(function (error) {
@@ -90911,6 +91196,26 @@ var actions = {
 						'id': payload.id
 					};
 					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["m" /* DELETE_QUESTION */], data);
+				}
+				resolve(response);
+			}).catch(function (error) {
+				// console.log(error);
+				reject(error);
+			});
+		});
+	},
+	fetchSearchQuestion: function fetchSearchQuestion(_ref10, payload) {
+		var commit = _ref10.commit;
+
+		return new Promise(function (resolve, reject) {
+			//console.log(payload);
+			axios.get('/api/search/questions', { params: { keyword: payload.data.keyword, tags: payload.data.tags, page: payload.page } }).then(function (response) {
+				//console.log(response);
+				if (response.data.hasOwnProperty('errors')) {
+
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["I" /* SEARCH_QUESTION */], []);
+				} else {
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["I" /* SEARCH_QUESTION */], response.data);
 				}
 				resolve(response);
 			}).catch(function (error) {
@@ -91701,6 +92006,7 @@ var actions = {
 		var commit = _ref12.commit;
 
 		return new Promise(function (resolve, reject) {
+			//console.log(payload);
 			axios.get('/api/search/documentations', { params: { keyword: payload.data.keyword, subject: payload.data.subject, tags: payload.data.tags, page: payload.page } }).then(function (response) {
 				//console.log(response);
 				if (response.data.hasOwnProperty('errors')) {
@@ -91763,7 +92069,7 @@ var state = {
 	if (tag.data) {
 		state.tagsPure.data.push(tag.data);
 	}
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["I" /* SEARCH_TAG */], function (state, tags_search) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["J" /* SEARCH_TAG */], function (state, tags_search) {
 	state.tags_search = tags_search;
 }), _mutations);
 // Actions
@@ -91826,9 +92132,9 @@ var actions = {
 				//console.log(response);
 				if (response.data.hasOwnProperty('errors')) {
 
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["I" /* SEARCH_TAG */], []);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["J" /* SEARCH_TAG */], []);
 				} else {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["I" /* SEARCH_TAG */], response.data);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["J" /* SEARCH_TAG */], response.data);
 				}
 				resolve(response);
 			}).catch(function (error) {
@@ -91874,7 +92180,7 @@ var state = {
 	// Mutations
 };var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["D" /* LIST_USER */], function (state, users) {
 	state.users = users;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["J" /* SEARCH_USER */], function (state, users_search) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["K" /* SEARCH_USER */], function (state, users_search) {
 	state.users_search = users_search;
 }), _mutations);
 // Actions
@@ -91903,9 +92209,9 @@ var actions = {
 				//console.log(response);
 				if (response.data.hasOwnProperty('errors')) {
 
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["J" /* SEARCH_USER */], []);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["K" /* SEARCH_USER */], []);
 				} else {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["J" /* SEARCH_USER */], response.data);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["K" /* SEARCH_USER */], response.data);
 				}
 				resolve(response);
 			}).catch(function (error) {
@@ -92489,6 +92795,543 @@ webpackContext.id = 366;
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 368 */,
+/* 369 */,
+/* 370 */,
+/* 371 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(372)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(374)
+/* template */
+var __vue_template__ = __webpack_require__(375)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\questions\\ResultSearchQuestion.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4010f2de", Component.options)
+  } else {
+    hotAPI.reload("data-v-4010f2de", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 372 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(373);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(4)("0146d6e0", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../css-loader/index.js!../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4010f2de\",\"scoped\":false,\"hasInlineConfig\":true}!./vue-multiselect.min.css", function() {
+     var newContent = require("!!../../css-loader/index.js!../../vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-4010f2de\",\"scoped\":false,\"hasInlineConfig\":true}!./vue-multiselect.min.css");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 373 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\nfieldset[disabled] .multiselect{pointer-events:none\n}\n.multiselect__spinner{position:absolute;right:1px;top:1px;width:48px;height:35px;background:#fff;display:block\n}\n.multiselect__spinner:after,.multiselect__spinner:before{position:absolute;content:\"\";top:50%;left:50%;margin:-8px 0 0 -8px;width:16px;height:16px;border-radius:100%;border-color:#41b883 transparent transparent;border-style:solid;border-width:2px;-webkit-box-shadow:0 0 0 1px transparent;box-shadow:0 0 0 1px transparent\n}\n.multiselect__spinner:before{-webkit-animation:a 2.4s cubic-bezier(.41,.26,.2,.62);animation:a 2.4s cubic-bezier(.41,.26,.2,.62);-webkit-animation-iteration-count:infinite;animation-iteration-count:infinite\n}\n.multiselect__spinner:after{-webkit-animation:a 2.4s cubic-bezier(.51,.09,.21,.8);animation:a 2.4s cubic-bezier(.51,.09,.21,.8);-webkit-animation-iteration-count:infinite;animation-iteration-count:infinite\n}\n.multiselect__loading-enter-active,.multiselect__loading-leave-active{-webkit-transition:opacity .4s ease-in-out;transition:opacity .4s ease-in-out;opacity:1\n}\n.multiselect__loading-enter,.multiselect__loading-leave-active{opacity:0\n}\n.multiselect,.multiselect__input,.multiselect__single{font-family:inherit;font-size:16px;-ms-touch-action:manipulation;touch-action:manipulation\n}\n.multiselect{-webkit-box-sizing:content-box;box-sizing:content-box;display:block;position:relative;width:100%;min-height:40px;text-align:left;color:#35495e\n}\n.multiselect *{-webkit-box-sizing:border-box;box-sizing:border-box\n}\n.multiselect:focus{outline:none\n}\n.multiselect--disabled{opacity:.6\n}\n.multiselect--active{z-index:1\n}\n.multiselect--active:not(.multiselect--above) .multiselect__current,.multiselect--active:not(.multiselect--above) .multiselect__input,.multiselect--active:not(.multiselect--above) .multiselect__tags{border-bottom-left-radius:0;border-bottom-right-radius:0\n}\n.multiselect--active .multiselect__select{-webkit-transform:rotate(180deg);transform:rotate(180deg)\n}\n.multiselect--above.multiselect--active .multiselect__current,.multiselect--above.multiselect--active .multiselect__input,.multiselect--above.multiselect--active .multiselect__tags{border-top-left-radius:0;border-top-right-radius:0\n}\n.multiselect__input,.multiselect__single{position:relative;display:inline-block;min-height:20px;line-height:20px;border:none;border-radius:5px;background:#fff;padding:0 0 0 5px;width:100%;-webkit-transition:border .1s ease;transition:border .1s ease;-webkit-box-sizing:border-box;box-sizing:border-box;margin-bottom:8px;vertical-align:top\n}\n.multiselect__input::-webkit-input-placeholder{color:#35495e\n}\n.multiselect__input:-ms-input-placeholder{color:#35495e\n}\n.multiselect__input::-ms-input-placeholder{color:#35495e\n}\n.multiselect__input::placeholder{color:#35495e\n}\n.multiselect__tag~.multiselect__input,.multiselect__tag~.multiselect__single{width:auto\n}\n.multiselect__input:hover,.multiselect__single:hover{border-color:#cfcfcf\n}\n.multiselect__input:focus,.multiselect__single:focus{border-color:#a8a8a8;outline:none\n}\n.multiselect__single{padding-left:5px;margin-bottom:8px\n}\n.multiselect__tags-wrap{display:inline\n}\n.multiselect__tags{min-height:40px;display:block;padding:8px 40px 0 8px;border-radius:5px;border:1px solid #e8e8e8;background:#fff;font-size:14px\n}\n.multiselect__tag{position:relative;display:inline-block;padding:4px 26px 4px 10px;border-radius:5px;margin-right:10px;color:#fff;line-height:1;background:#41b883;margin-bottom:5px;white-space:nowrap;overflow:hidden;max-width:100%;text-overflow:ellipsis\n}\n.multiselect__tag-icon{cursor:pointer;margin-left:7px;position:absolute;right:0;top:0;bottom:0;font-weight:700;font-style:normal;width:22px;text-align:center;line-height:22px;-webkit-transition:all .2s ease;transition:all .2s ease;border-radius:5px\n}\n.multiselect__tag-icon:after{content:\"\\D7\";color:#266d4d;font-size:14px\n}\n.multiselect__tag-icon:focus,.multiselect__tag-icon:hover{background:#369a6e\n}\n.multiselect__tag-icon:focus:after,.multiselect__tag-icon:hover:after{color:#fff\n}\n.multiselect__current{min-height:40px;overflow:hidden;padding:8px 12px 0;padding-right:30px;white-space:nowrap;border-radius:5px;border:1px solid #e8e8e8\n}\n.multiselect__current,.multiselect__select{line-height:16px;-webkit-box-sizing:border-box;box-sizing:border-box;display:block;margin:0;text-decoration:none;cursor:pointer\n}\n.multiselect__select{position:absolute;width:40px;height:38px;right:1px;top:1px;padding:4px 8px;text-align:center;-webkit-transition:-webkit-transform .2s ease;transition:-webkit-transform .2s ease;transition:transform .2s ease;transition:transform .2s ease, -webkit-transform .2s ease\n}\n.multiselect__select:before{position:relative;right:0;top:65%;color:#999;margin-top:4px;border-style:solid;border-width:5px 5px 0;border-color:#999 transparent transparent;content:\"\"\n}\n.multiselect__placeholder{color:#adadad;display:inline-block;margin-bottom:10px;padding-top:2px\n}\n.multiselect--active .multiselect__placeholder{display:none\n}\n.multiselect__content-wrapper{position:absolute;display:block;background:#fff;width:100%;max-height:240px;overflow:auto;border:1px solid #e8e8e8;border-top:none;border-bottom-left-radius:5px;border-bottom-right-radius:5px;z-index:1;-webkit-overflow-scrolling:touch\n}\n.multiselect__content{list-style:none;display:inline-block;padding:0;margin:0;min-width:100%;vertical-align:top\n}\n.multiselect--above .multiselect__content-wrapper{bottom:100%;border-bottom-left-radius:0;border-bottom-right-radius:0;border-top-left-radius:5px;border-top-right-radius:5px;border-bottom:none;border-top:1px solid #e8e8e8\n}\n.multiselect__content::webkit-scrollbar{display:none\n}\n.multiselect__element{display:block\n}\n.multiselect__option{display:block;padding:12px;min-height:40px;line-height:16px;text-decoration:none;text-transform:none;vertical-align:middle;position:relative;cursor:pointer;white-space:nowrap\n}\n.multiselect__option:after{top:0;right:0;position:absolute;line-height:40px;padding-right:12px;padding-left:20px;font-size:13px\n}\n.multiselect__option--highlight{background:#41b883;outline:none;color:#fff\n}\n.multiselect__option--highlight:after{content:attr(data-select);background:#41b883;color:#fff\n}\n.multiselect__option--selected{background:#f3f3f3;color:#35495e;font-weight:700\n}\n.multiselect__option--selected:after{content:attr(data-selected);color:silver\n}\n.multiselect__option--selected.multiselect__option--highlight{background:#ff6a6a;color:#fff\n}\n.multiselect__option--selected.multiselect__option--highlight:after{background:#ff6a6a;content:attr(data-deselect);color:#fff\n}\n.multiselect--disabled{background:#ededed;pointer-events:none\n}\n.multiselect--disabled .multiselect__current,.multiselect--disabled .multiselect__select,.multiselect__option--disabled{background:#ededed;color:#a6a6a6\n}\n.multiselect__option--disabled{cursor:text;pointer-events:none\n}\n.multiselect__option--group{background:#ededed;color:#35495e\n}\n.multiselect__option--group.multiselect__option--highlight{background:#35495e;color:#fff\n}\n.multiselect__option--group.multiselect__option--highlight:after{background:#35495e\n}\n.multiselect__option--disabled.multiselect__option--highlight{background:#dedede\n}\n.multiselect__option--group-selected.multiselect__option--highlight{background:#ff6a6a;color:#fff\n}\n.multiselect__option--group-selected.multiselect__option--highlight:after{background:#ff6a6a;content:attr(data-deselect);color:#fff\n}\n.multiselect-enter-active,.multiselect-leave-active{-webkit-transition:all .15s ease;transition:all .15s ease\n}\n.multiselect-enter,.multiselect-leave-active{opacity:0\n}\n.multiselect__strong{margin-bottom:8px;line-height:20px;display:inline-block;vertical-align:top\n}\n[dir=rtl] .multiselect{text-align:right\n}\n[dir=rtl] .multiselect__select{right:auto;left:1px\n}\n[dir=rtl] .multiselect__tags{padding:8px 8px 0 40px\n}\n[dir=rtl] .multiselect__content{text-align:right\n}\n[dir=rtl] .multiselect__option:after{right:auto;left:0\n}\n[dir=rtl] .multiselect__clear{right:auto;left:12px\n}\n[dir=rtl] .multiselect__spinner{right:auto;left:1px\n}\n@-webkit-keyframes a{\n0%{-webkit-transform:rotate(0);transform:rotate(0)\n}\nto{-webkit-transform:rotate(2turn);transform:rotate(2turn)\n}\n}\n@keyframes a{\n0%{-webkit-transform:rotate(0);transform:rotate(0)\n}\nto{-webkit-transform:rotate(2turn);transform:rotate(2turn)\n}\n}", ""]);
+
+// exports
+
+
+/***/ }),
+/* 374 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ItemQuestion_vue__ = __webpack_require__(214);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__ItemQuestion_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__ItemQuestion_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__assets_Pagination_vue__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__assets_Pagination_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__assets_Pagination_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__assets_LeaderBoard_vue__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__assets_LeaderBoard_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__assets_LeaderBoard_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__assets_CommonTag_vue__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__assets_CommonTag_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__assets_CommonTag_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vue_multiselect__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_vue_multiselect___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_vue_multiselect__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: {
+        ItemQuestion: __WEBPACK_IMPORTED_MODULE_0__ItemQuestion_vue___default.a,
+        Pagination: __WEBPACK_IMPORTED_MODULE_1__assets_Pagination_vue___default.a,
+        LeaderBoard: __WEBPACK_IMPORTED_MODULE_2__assets_LeaderBoard_vue___default.a,
+        CommonTag: __WEBPACK_IMPORTED_MODULE_3__assets_CommonTag_vue___default.a,
+        Multiselect: __WEBPACK_IMPORTED_MODULE_4_vue_multiselect___default.a
+    },
+    data: function data() {
+        return {
+            keyword: '',
+            result: '',
+            tags: '',
+            selectedTags: [],
+            message: {},
+            styleObject: {
+                display: 'none'
+            },
+            curentPage: 0
+        };
+    },
+
+    computed: {
+        questions: function questions() {
+            return this.$store.getters['question/getQuestionSearch'].data;
+        },
+        pagination: function pagination() {
+            return this.$store.getters['question/getQuestionSearch'].meta;
+        },
+        optionTags: function optionTags() {
+            return this.$store.getters['tag/getListTagPure'].data;
+        }
+    },
+    methods: {
+        paginate: function paginate(page) {
+
+            if (this.curentPage == 0) {
+                this.fetchListQuestionSearch(page);
+            } else {
+                this.searchQuestion(page);
+            }
+        },
+        fetchListTagPure: function fetchListTagPure() {
+            this.$store.dispatch('tag/fetchListTagPure');
+        },
+        getStringIdSelectedTags: function getStringIdSelectedTags(tags) {
+            var result = '';
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = tags[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var tag = _step.value;
+
+                    result += ',' + tag.id;
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            result = result.substring(1);
+            return result;
+        },
+        updateTags: function updateTags(value) {
+            this.tags = this.getStringIdSelectedTags(value);
+        },
+        fetchListQuestionSearch: function fetchListQuestionSearch() {
+            var _this = this;
+
+            var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+
+            var payload = {
+                'page': page,
+                'data': this.$route.params.payload
+            };
+
+            this.$store.dispatch('question/fetchSearchQuestion', payload).then(function (response) {
+                if (response.data.hasOwnProperty('errors')) {
+                    //this.message['errors'] = 'Không thể tìm kiếm';
+                } else {
+                    //console.log(response.data.data.length);
+                    if (response.data.data.length > 0) {
+                        _this.keyword = payload.data.keyword;
+                        _this.result = 'Kết quả tìm kiếm cho từ khóa: ' + '"' + _this.keyword + '"';
+                    } else {
+                        _this.keyword = payload.data.keyword;
+                        _this.result = 'Không tìm thấy kết quả cho từ khóa: ' + '"' + _this.keyword + '"';
+                    }
+                }
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        searchQuestion: function searchQuestion(page) {
+            var _this2 = this;
+
+            var payload = {
+                'page': page,
+                'data': {
+                    'keyword': this.keyword,
+                    'tags': this.tags
+                }
+            };
+
+            if (this.keyword.length == 0) {
+                this.message['errorskeyword'] = 'Bạn chưa nhập key search!';
+                this.styleObject.display = 'block';
+            } else {
+                this.styleObject.display = 'none';
+                this.$store.dispatch('question/fetchSearchQuestion', payload).then(function (response) {
+                    if (response.data.hasOwnProperty('errors')) {
+                        //this.message['errors'] = 'Không thể tìm kiếm';
+                    } else {
+                        _this2.curentPage = 1;
+                        if (response.data.data.length > 0) {
+                            _this2.keyword = payload.data.keyword;
+                            _this2.result = 'Kết quả tìm kiếm cho từ khóa: ' + '"' + _this2.keyword + '"';
+                        } else {
+                            _this2.keyword = payload.data.keyword;
+                            _this2.result = 'Không tìm thấy kết quả cho từ khóa: ' + '"' + _this2.keyword + '"';
+                        }
+                    }
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            }
+        }
+    },
+    created: function created() {
+        this.fetchListQuestionSearch();
+        this.fetchListTagPure();
+    },
+    mounted: function mounted() {
+        // console.log('Component mounted.')
+    }
+});
+
+/***/ }),
+/* 375 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "content" }, [
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-lg-9" }, [
+          _c("div", { staticClass: "main-content" }, [
+            _c(
+              "div",
+              { staticClass: "content-card" },
+              [
+                _c(
+                  "div",
+                  { staticClass: "content-list" },
+                  [
+                    _c("h4", { staticClass: "topquestion d-inline-block" }, [
+                      _vm._v(_vm._s(_vm.result))
+                    ]),
+                    _vm._v(" "),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c(
+                      "form",
+                      {
+                        on: {
+                          submit: function($event) {
+                            $event.preventDefault()
+                            _vm.searchQuestion(1)
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "div",
+                          {
+                            staticClass: "alert alert-warning",
+                            style: _vm.styleObject
+                          },
+                          [
+                            _vm._v(
+                              "\n                                        " +
+                                _vm._s(_vm.message.errorskeyword) +
+                                "\n                                    "
+                            )
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "row" }, [
+                          _c("div", { staticClass: "col-lg-4" }, [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.keyword,
+                                  expression: "keyword"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                type: "text",
+                                placeholder: "Nhập từ khóa cần tìm"
+                              },
+                              domProps: { value: _vm.keyword },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.keyword = $event.target.value
+                                }
+                              }
+                            })
+                          ]),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-lg-6" }, [
+                            _vm.optionTags
+                              ? _c(
+                                  "div",
+                                  { staticClass: "form-group" },
+                                  [
+                                    _c("multiselect", {
+                                      attrs: {
+                                        options: _vm.optionTags,
+                                        placeholder: "Thẻ của tài liệu",
+                                        label: "name",
+                                        "track-by": "name",
+                                        multiple: true,
+                                        taggable: true,
+                                        "tag-placeholder": "",
+                                        "close-on-select": false,
+                                        required: ""
+                                      },
+                                      on: { input: _vm.updateTags },
+                                      model: {
+                                        value: _vm.selectedTags,
+                                        callback: function($$v) {
+                                          _vm.selectedTags = $$v
+                                        },
+                                        expression: "selectedTags"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              : _vm._e()
+                          ]),
+                          _vm._v(" "),
+                          _vm._m(0)
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("hr"),
+                    _vm._v(" "),
+                    _vm._l(_vm.questions, function(question) {
+                      return _c("ItemQuestion", {
+                        key: question.id,
+                        attrs: { question: question }
+                      })
+                    })
+                  ],
+                  2
+                ),
+                _vm._v(" "),
+                _vm.pagination
+                  ? _c("Pagination", {
+                      attrs: { pagination: _vm.pagination, offset: 4 },
+                      on: {
+                        paginate: function($event) {
+                          _vm.paginate($event)
+                        }
+                      }
+                    })
+                  : _vm._e()
+              ],
+              1
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-lg-3" }, [
+          _c(
+            "div",
+            { staticClass: "sub-content" },
+            [
+              _c(
+                "div",
+                { staticClass: "btn-question" },
+                [
+                  _c(
+                    "router-link",
+                    { attrs: { to: { name: "create-question" } } },
+                    [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-success btn-block btn-lg",
+                          attrs: { type: "button" }
+                        },
+                        [_vm._v("Đặt câu hỏi ngay !!!")]
+                      )
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("LeaderBoard"),
+              _vm._v(" "),
+              _c("CommonTag")
+            ],
+            1
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-lg-2" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary",
+          staticStyle: { "padding-left": "20px", "padding-right": "20px" },
+          attrs: { type: "submit", id: "filter" }
+        },
+        [_c("i", { staticClass: "fa fa-filter fa-fw" }), _vm._v("Lọc")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-4010f2de", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
