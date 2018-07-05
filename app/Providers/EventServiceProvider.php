@@ -28,6 +28,12 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\ActivityBroadcast' => [
             'App\Listeners\ActivityBroadcastListener',
         ],
+        'App\Events\CommentBroadcast' => [
+            'App\Listeners\CommentBroadcastListener',
+        ],
+        'App\Events\AnswerBroadcast' => [
+            'App\Listeners\AnswerBroadcastListener',
+        ],
     ];
 
     /**

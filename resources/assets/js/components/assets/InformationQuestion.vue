@@ -1,5 +1,5 @@
  <template>
-    <div class="count-questions">
+    <div class="count-questions" v-if="information">
         <div class="stats-container">
             <div class="row">
                 <div class="stats">

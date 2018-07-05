@@ -38,6 +38,6 @@ class ActivityEventListener
         $activity->activitable_type = get_class($event->object);
         $activity->save();
 
-        broadcast(new ActivityBroadcast(new ActivityResource(Activity::find($activity->id))));
+        broadcast(new ActivityBroadcast(new ActivityResource(Activity::find($activity->id))))->toOthers();
     }
 }

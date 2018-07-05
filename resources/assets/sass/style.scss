@@ -1461,3 +1461,7 @@ button {
     margin: auto;
     color: #007bff;
 }
+
+.nav-link.router-link-active {
+    color: black !important;
+}

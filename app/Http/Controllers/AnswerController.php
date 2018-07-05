@@ -13,6 +13,7 @@ use App\Events\PointReputationEvent;
 use App\Events\RemoveReferencesEvent;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Exceptions\UserAnswerExist;
+use App\Events\AnswerBroadcast;
 
 class AnswerController extends Controller
 {
@@ -48,9 +49,11 @@ class AnswerController extends Controller
 		$answer->question_id = $question->id;
 		$answer->content = $request->content;
 		$answer->save();
+		$channel = 'question.'.$question_id.'.answers';
 
 		event(new ActivityEvent($question, 'đã trả lời'));
 		event((new PointReputationEvent(1, 10)));
+		// broadcast(new AnswerBroadcast(new AnswerList(Answer::find($answer->id)), $channel))->toOthers();
 
 		return new AnswerList($answer);
 	}

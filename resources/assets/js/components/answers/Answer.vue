@@ -42,8 +42,20 @@
             },
             fetchListAnswer(id, page = 1) {
                 let payload = { 'id': id, 'page': page }
-                this.$store.dispatch('answer/fetchListAnswer', payload);
+                this.$store.dispatch('answer/fetchListAnswer', payload)
+                .then(response => {
+                    for (let index = 0; index < response.data.data.length; index++) {
+                        this.receiveCommentBroadcast('answer', response.data.data[index].id, index)
+                    }
+                });
             },
+            receiveCommentBroadcast(type, id, index) {
+                Echo.channel(`${type}.${id}.comments`)
+                .listen('CommentBroadcast', e => {
+                    e['index'] = index
+                    this.$store.dispatch(type + '/addComment', e)
+                });
+            }
         },
         watch: {
             '$route' (to, from) {

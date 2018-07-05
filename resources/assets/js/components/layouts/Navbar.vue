@@ -269,7 +269,9 @@ export default {
         },
     },
     created() {
-        this.fetchCurrentUser();
+        if (this.$auth.isAuthenticated()) {
+            this.fetchCurrentUser();
+        }
     },
     mounted() {
         // console.log('Component mounted.')

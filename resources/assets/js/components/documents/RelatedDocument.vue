@@ -12,7 +12,8 @@
 							{{ document.voted }}
 						</div>
 						<div class="col-lg-9 hide-text">
-							<a href="" @click=changeDocument(document.id)>{{ document.title }}</a>
+                            <router-link :to="{ name: 'detail-document', params: { id: document.id } }">{{ document.title }}</router-link>
+							<!-- <a href="" @click=changeDocument(document.id)>{{ document.title }}</a> -->
 						</div>
 					</div>
 				</div>
@@ -34,6 +35,11 @@
             fetchRelatedDocument(id) {
                 let payload = { 'id': id }
                 this.$store.dispatch('documentation/fetchRelatedDocumentation', payload)
+            }
+        },
+        watch: {
+            '$route' (to, from) {
+                this.fetchRelatedDocument(to.params.id)
             }
         },
         created() {

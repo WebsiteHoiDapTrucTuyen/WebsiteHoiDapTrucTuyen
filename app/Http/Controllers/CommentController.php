@@ -11,6 +11,7 @@ use App\Http\Requests\CommentRequest;
 use Auth;
 use App\Events\ActivityEvent;
 use App\Http\Resources\Comment\CommentList;
+use App\Events\CommentBroadcast;
 
 class CommentController extends Controller
 {
@@ -27,24 +28,29 @@ class CommentController extends Controller
     	switch ($type) {
     		case 'question':
     			$comment->commentable_type = 'App\Question';
-    			$object = Question::find($id);
+				$object = Question::find($id);
+				$channel = 'question';
     			break;
     		case 'documentation':
     			$comment->commentable_type = 'App\Documentation';
-    			$object = Documentation::find($id);
+				$object = Documentation::find($id);
+				$channel = 'documentation';
     			break;
     		case 'answer':
     			$comment->commentable_type = 'App\Answer';
-    			$object = Answer::find($id);
+				$object = Answer::find($id);
+				$channel = 'answer';
     			break;
     		default:
     			# code...
     			break;
-    	}
+		}
     	$comment->content = $request->content;
     	$comment->save();
+		$channel = $channel.'.'.$id.'.comments';
 
-    	event(new ActivityEvent($object, 'đã bình luận'));
+		event(new ActivityEvent($object, 'đã bình luận'));
+		broadcast(new CommentBroadcast(new CommentList(Comment::find($comment->id)), $channel))->toOthers();
 
     	return new CommentList($comment);
     }

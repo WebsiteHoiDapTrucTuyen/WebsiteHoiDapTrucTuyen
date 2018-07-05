@@ -22,7 +22,7 @@
             this.$store.dispatch('asset/fetchCommonTag')
         },
         mounted() {
-            console.log('Component mounted.')
+            // console.log('Component mounted.')
         }
     }
 </script>

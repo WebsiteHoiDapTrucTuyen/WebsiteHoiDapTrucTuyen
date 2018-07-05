@@ -10,7 +10,8 @@
 									<div class="detail-left">
 										<div class="documentation-favorite-point">
 											<p id="point-documentation">{{ documentation.voted }}</p>
-											<span id="favorite"  class="oi oi-heart" style="display: block;"></span>
+											<span id="favorite"  class="oi oi-heart" :class="isVoted('up')" style="display: block;"
+											@click="vote('documentation', documentation.id, 'up')"></span>
 										</div>
 									</div>
 								</div>
@@ -182,7 +183,10 @@
             },
             fetchDetailDocumentation(id) {
                 let payload = { 'id': id }
-                this.$store.dispatch('documentation/fetchDetailDocumentation', payload)
+				this.$store.dispatch('documentation/fetchDetailDocumentation', payload)
+				.then(response => {
+					this.receiveCommentBroadcast('documentation', response.data.data.id)
+				})
             },
             deleteEntry() {
                 this.$refs.modalDelete.open()
@@ -207,6 +211,41 @@
                         this.$refs.modal.open()
                     }
                 });
+			},
+			isVoted(action) {
+                if (this.documentation.current_user_voted && this.documentation.current_user_voted.action === action) {
+                    return 'active-vote'
+                }
+                return ''
+            },
+            vote(type, id, action) {
+                if (this.currentUser) {
+                    this.fetchVoteAction(type, id, action)
+                }
+            },
+            fetchVoteAction(type, id, action) {
+                let payload = {
+                    type: type,
+                    id: id,
+                    data: {
+                        action: action
+                    }
+                }
+                this.$store.dispatch('vote/fetchVoteAction', payload)
+                .then(response => {
+                    this.fetchDetailDocumentation(id)
+                })
+			},
+			receiveCommentBroadcast(type, id) {
+                Echo.channel(`${type}.${id}.comments`)
+                .listen('CommentBroadcast', e => {
+                    this.$store.dispatch(type + '/addComment', e)
+                });
+            }
+		},
+		watch: {
+            '$route' (to, from) {
+                this.fetchDetailDocumentation(to.params.id)
             }
         },
         created() {

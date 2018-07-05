@@ -165,6 +165,9 @@
             fetchDetailQuestion(id) {
                 let payload = { 'id': id }
                 this.$store.dispatch('question/fetchDetailQuestion', payload)
+                .then(response => {
+                    this.receiveCommentBroadcast('question', response.data.data.id)
+                })
             },
             deleteEntry() {
                 this.$refs.modalDelete.open()
@@ -197,7 +200,9 @@
                 return ''
             },
             vote(type, id, action) {
-                this.fetchVoteAction(type, id, action)
+                if (this.currentUser) {
+                    this.fetchVoteAction(type, id, action)
+                }
             },
             fetchVoteAction(type, id, action) {
                 let payload = {
@@ -211,6 +216,12 @@
                 .then(response => {
                     this.fetchDetailQuestion(id)
                 })
+            },
+            receiveCommentBroadcast(type, id) {
+                Echo.channel(`${type}.${id}.comments`)
+                .listen('CommentBroadcast', e => {
+                    this.$store.dispatch(type + '/addComment', e)
+                });
             }
         },
         watch: {

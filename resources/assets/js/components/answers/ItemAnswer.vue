@@ -184,7 +184,9 @@
                 return ''
             },
             vote(type, id, action) {
-                this.fetchVoteAction(type, id, action)
+                if (this.currentUser) {
+                    this.fetchVoteAction(type, id, action)
+                }
             },
             fetchVoteAction(type, id, action) {
                 let payload = {

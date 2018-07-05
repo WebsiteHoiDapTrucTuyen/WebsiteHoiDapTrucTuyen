@@ -1,5 +1,6 @@
 <template>
     <div v-if="comment">
+        <hr>
         <div class="media">
             <!--img media-->
             <div class="mr-3">
@@ -46,7 +47,6 @@
                 </div>
             </div>
         </div>
-        <hr>
         <sweet-modal icon="error" ref="modal">
             {{ message }}
         </sweet-modal>

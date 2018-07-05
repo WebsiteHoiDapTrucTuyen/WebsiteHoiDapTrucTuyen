@@ -1,8 +1,9 @@
 <template>
     <div class="comments-container">
-        <a href="" style="pointer-events: none;">({{ comments.length }}) bình luận <!-- cho câu hỏi này --></a><br><br>
+        <a v-if="unlimited > 0" href="" @click.prevent="showMore()">Xem thêm {{ unlimited }} bình luận <!-- cho câu hỏi này --></a>
+        <ListComment :comments="comments.slice(generateShowItem(multily))" :type="type" :indexAnswer="index"></ListComment>
+        <br><br>
         <CreateComment :id="id" :type="type" :index="index"></CreateComment>
-        <ListComment :comments="comments" :type="type" :indexAnswer="index"></ListComment>
     </div>
 </template>
 
@@ -30,6 +31,27 @@
             },
             index: {    //only answer
                 type: Number,
+            }
+        },
+        data() {
+            return {
+                multily: 1,
+                unlimited: this.comments.length - 10
+            }
+        },
+        methods: {
+            generateShowItem(multily) {
+                let total = this.comments.length;
+                let limited = total - 10 * multily;
+                if (limited < 0) {
+                    this.unlimited = 0;
+                    return 0;
+                }
+                return limited;
+            },
+            showMore() {
+                this.multily = this.multily + 1;
+                this.unlimited = this.unlimited - 10;
             }
         },
         mounted() {

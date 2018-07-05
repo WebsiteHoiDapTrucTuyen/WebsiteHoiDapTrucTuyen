@@ -18,3 +18,19 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
 Broadcast::channel('activities.{id}', function () {
     return true;
 });
+
+Broadcast::channel('question.{id}.comments', function () {
+    return true;
+});
+
+Broadcast::channel('documentation.{id}.comments', function () {
+    return true;
+});
+
+Broadcast::channel('answer.{id}.comments', function () {
+    return true;
+});
+
+Broadcast::channel('question.{id}.answers', function () {
+    return true;
+});

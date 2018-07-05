@@ -13,6 +13,7 @@
 
 						</div>
 						<div class="col-lg-9 hide-text">
+                            <router-link :to="{ name: 'detail-document', params: { id: document.id } }">{{ document.title }}</router-link>
 							<a href="" @click=changeDocument(document.id)>{{ document.title }}</a>
 						</div>
 					</div>
@@ -36,6 +37,11 @@
             fetchRelatedSubject(id) {
                 let payload = { 'id': id }
                 this.$store.dispatch('documentation/fetchRelatedSubject', payload)
+            }
+        },
+        watch: {
+            '$route' (to, from) {
+                this.fetchRelatedSubject(to.params.id)
             }
         },
         created() {
