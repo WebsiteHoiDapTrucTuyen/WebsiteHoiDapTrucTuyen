@@ -52,8 +52,12 @@
             receiveCommentBroadcast(type, id, index) {
                 Echo.channel(`${type}.${id}.comments`)
                 .listen('CommentBroadcast', e => {
-                    e['index'] = index
-                    this.$store.dispatch(type + '/addComment', e)
+                    let payload = {
+                        comment: e.comment,
+                        indexAnswer: index,
+                        indexComment: this.answers[index].comments.findIndex(el => el.id == e.comment.id)
+                    }
+                    this.$store.dispatch(type + '/' + e.action, payload)
                 });
             }
         },

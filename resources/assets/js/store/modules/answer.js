@@ -16,7 +16,7 @@ const mutations = {
 		state.answers = answers;
 	},
 	[types.ADD_COMMENT]: (state, payload) => {
-		state.answers.data[payload.index].comments.push(payload.comment);
+		state.answers.data[payload.indexAnswer].comments.push(payload.comment);
 	},
 	[types.EDIT_COMMENT]: (state, payload) => {
 		state.answers.data[payload.indexAnswer].comments.splice(payload.indexComment, 1, payload.comment);

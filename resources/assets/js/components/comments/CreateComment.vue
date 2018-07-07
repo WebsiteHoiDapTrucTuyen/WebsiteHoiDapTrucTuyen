@@ -62,8 +62,9 @@
                         if (!response.data.hasOwnProperty('errors')) {
                             let payload = { 
                                 'comment': response.data.data,
-                                'index': index
+                                'indexAnswer': index
                             }
+
                             this.$store.dispatch(type + '/addComment', payload)
                                 .then( this.content = '' )
                         }

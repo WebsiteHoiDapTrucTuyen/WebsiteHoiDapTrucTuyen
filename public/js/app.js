@@ -77079,7 +77079,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this4 = this;
 
             Echo.channel(type + '.' + id + '.comments').listen('CommentBroadcast', function (e) {
-                _this4.$store.dispatch(type + '/addComment', e);
+                var payload = {
+                    comment: e.comment,
+                    indexComment: _this4.question.comments.findIndex(function (el) {
+                        return el.id == e.comment.id;
+                    })
+                };
+                _this4.$store.dispatch(type + '/' + e.action, payload);
             });
         }
     },
@@ -77213,8 +77219,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this2 = this;
 
             Echo.channel(type + '.' + id + '.comments').listen('CommentBroadcast', function (e) {
-                e['index'] = index;
-                _this2.$store.dispatch(type + '/addComment', e);
+                var payload = {
+                    comment: e.comment,
+                    indexAnswer: index,
+                    indexComment: _this2.answers[index].comments.findIndex(function (el) {
+                        return el.id == e.comment.id;
+                    })
+                };
+                _this2.$store.dispatch(type + '/' + e.action, payload);
             });
         }
     },
@@ -79376,8 +79388,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     if (!response.data.hasOwnProperty('errors')) {
                         var _payload = {
                             'comment': response.data.data,
-                            'index': index
+                            'indexAnswer': index
                         };
+
                         _this.$store.dispatch(type + '/addComment', _payload).then(_this.content = '');
                     } else {
                         _this.message = 'Không thể thực hiện thao tác. Vui lòng thử lại sau';
@@ -85278,7 +85291,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this4 = this;
 
             Echo.channel(type + '.' + id + '.comments').listen('CommentBroadcast', function (e) {
-                _this4.$store.dispatch(type + '/addComment', e);
+                var payload = {
+                    comment: e.comment,
+                    indexComment: _this4.documentation.comments.findIndex(function (el) {
+                        return el.id == e.comment.id;
+                    })
+                };
+                _this4.$store.dispatch(type + '/' + e.action, payload);
             });
         }
     },
@@ -92306,7 +92325,7 @@ var state = {
 };var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["x" /* LIST_ANSWER */], function (state, answers) {
 	state.answers = answers;
 }), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["c" /* ADD_COMMENT */], function (state, payload) {
-	state.answers.data[payload.index].comments.push(payload.comment);
+	state.answers.data[payload.indexAnswer].comments.push(payload.comment);
 }), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["s" /* EDIT_COMMENT */], function (state, payload) {
 	state.answers.data[payload.indexAnswer].comments.splice(payload.indexComment, 1, payload.comment);
 }), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["k" /* DELETE_COMMENT */], function (state, payload) {

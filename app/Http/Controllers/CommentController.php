@@ -48,9 +48,10 @@ class CommentController extends Controller
     	$comment->content = $request->content;
     	$comment->save();
 		$channel = $channel.'.'.$id.'.comments';
+		$action = 'addComment';
 
 		event(new ActivityEvent($object, 'đã bình luận'));
-		broadcast(new CommentBroadcast(new CommentList(Comment::find($comment->id)), $channel))->toOthers();
+		broadcast(new CommentBroadcast(new CommentList(Comment::find($comment->id)), $channel, $action))->toOthers();
 
     	return new CommentList($comment);
     }
@@ -62,9 +63,12 @@ class CommentController extends Controller
     	$this->CheckOwner($comment);
 
     	$comment->content = $request->content;
-    	$comment->save();
+		$comment->save();
+		$channel = $this->generateChannel($comment->commentable_type).'.'.$comment->commentable->id.'.comments';
+		$action = 'editComment';
 
-    	event(new ActivityEvent($comment, 'đã chỉnh sửa'));
+		event(new ActivityEvent($comment, 'đã chỉnh sửa'));
+		broadcast(new CommentBroadcast(new CommentList($comment), $channel, $action))->toOthers();
 
     	return new CommentList($comment);
     }
@@ -77,8 +81,29 @@ class CommentController extends Controller
 
     	event(new ActivityEvent($comment, 'đã xóa'));
 
-    	$comment->delete();
+		$comment->delete();
+		$channel = $this->generateChannel($comment->commentable_type).'.'.$comment->commentable->id.'.comments';
+		$action = 'deleteComment';
+		
+		broadcast(new CommentBroadcast(new CommentList($comment), $channel, $action))->toOthers();
 
     	return null;
-    }
+	}
+	
+	public function generateChannel($type) {
+		switch ($type) {
+    		case 'App\Question':
+				return 'question';
+    			break;
+    		case 'App\Documentation':
+				return 'documentation';
+    			break;
+    		case 'App\Answer':
+				return 'answer';
+    			break;
+    		default:
+    			# code...
+    			break;
+		}
+	}
 }

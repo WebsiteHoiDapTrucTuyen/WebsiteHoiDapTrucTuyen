@@ -220,9 +220,13 @@
             receiveCommentBroadcast(type, id) {
                 Echo.channel(`${type}.${id}.comments`)
                 .listen('CommentBroadcast', e => {
-                    this.$store.dispatch(type + '/addComment', e)
+                    let payload = {
+                        comment: e.comment,
+                        indexComment: this.question.comments.findIndex(el => el.id == e.comment.id)
+                    }
+                    this.$store.dispatch(type + '/' + e.action, payload)
                 });
-            }
+            } 
         },
         watch: {
             '$route' (to, from) {

@@ -16,16 +16,18 @@ class CommentBroadcast implements ShouldBroadcast
 
     public $comment;
     public $channel;
+    public $action;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($comment, $channel)
+    public function __construct($comment, $channel, $action)
     {
         $this->comment = $comment;
         $this->channel = $channel;
+        $this->action = $action;
     }
 
     /**
@@ -45,6 +47,9 @@ class CommentBroadcast implements ShouldBroadcast
      */
     public function broadcastWith()
     {
-        return ['comment' => $this->comment];
+        return [
+            'comment' => $this->comment,
+            'action' => $this->action
+        ];
     }
 }
