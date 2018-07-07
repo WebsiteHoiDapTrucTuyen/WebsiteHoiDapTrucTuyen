@@ -110,7 +110,7 @@
 											<p>Đã đăng</p>
 										</div>
 										<div class="col-lg-7 .info-content-right" style="text-align: right;">
-											<p>{{ documentation.date.date | moment("DD-MM-YYYY") }}</p>
+											<p>{{ documentation.date.date | moment("DD/MM/YYYY") }}</p>
 										</div>
 									</div>
 								</div>

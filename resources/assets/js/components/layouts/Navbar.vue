@@ -39,7 +39,7 @@
                         <div class="input-group stylish-input-group mr-sm-5">
                             <input :style="styleObject" type="text" class="form-control" :placeholder="placeholder" v-model="keyword">
                             <span class="input-group-addon">
-                                <button type="submit">
+                                <button :style="styleObject" type="submit">
                                     <span class="oi oi-magnifying-glass"></span>
                                 </button>
                             </span>

@@ -5,7 +5,7 @@
         </div>
         <hr>
         <div class="rank-items">
-            <a href="" style="color: black;text-decoration: none;" v-for="user, index in leaderboard">
+            <router-link :to="{ name: 'information-user', params: { id: user.id } }" style="color: black;text-decoration: none;" v-for="user, index in leaderboard" :key="user.id">
                 <div class="row item">
                     <div class=" col-lg-4">
                         <span class="oi oi-star" style="color: #DFDF39;"></span>
@@ -21,7 +21,7 @@
                         <strong>{{ user.point }}</strong>
                     </div>
                 </div>
-            </a>
+            </router-link>
         </div>
     </div>
 </template>

@@ -31,9 +31,13 @@
                     </a>
                 </div>
                 <div class="started col-lg-5">
-                    <p class="user hide-text"><a href="">{{ question.user_last_interact.name }}</a></p>
-                    <p class="action">{{ question.user_last_interact.interact }}</p>
-                    <p class="time">{{ question.user_last_interact.date_interact.date | moment("DD-MM-YYYY") }}</p>
+                    <div class="row">
+                            <p class="user hide-text">
+                                <router-link :to="{ name: 'information-user', params: { id: question.user_last_interact.id } }">{{ question.user_last_interact.name }}</router-link>
+                            </p>
+                        <p class="action">{{ question.user_last_interact.interact }}</p>
+                        <p class="time">{{ question.user_last_interact.date_interact.date | moment("DD-MM-YYYY") }}</p>
+                    </div>
                 </div>
             </div>
         </div>

@@ -28,7 +28,7 @@
                 <div class="detail-right">
                     <div class="avatar-name">
                         <a href="">{{ answer.user.name }}</a> <span class="text-muted mr-3">
-                            đã trả lời vào {{ answer.date_answer.date }}
+                            đã trả lời vào {{ answer.date_answer.date | moment("DD/MM/YYYY HH:mm:ss") }}
                         </span>
                     </div>
                     <div id="answer" class="answer-detail-content">

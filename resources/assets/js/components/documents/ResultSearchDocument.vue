@@ -159,13 +159,23 @@
                     }
                     else {
                         //console.log(response.data.data.length);
+                        this.keyword= payload.data.keyword;
                         if (response.data.data.length > 0) {
-                            this.keyword =payload.data.keyword;
-                            this.result ='Kết quả tìm kiếm cho từ khóa: '+ '"' + this.keyword + '"';
+                            if(this.keyword != 0){
+                                this.result ='Kết quả tìm kiếm cho từ khóa: '+ '"' + this.keyword + '"';
+                            }
+                            else{
+                                this.result ='Kết quả tìm kiếm: ';
+                            }
+                            
                         }
                         else{
-                            this.keyword =payload.data.keyword;
-                            this.result ='Không tìm thấy kết quả cho từ khóa: '+ '"' + this.keyword + '"';
+                            if(this.keyword != 0){
+                                this.result ='Không tìm thấy kết quả cho từ khóa: '+ '"' + this.keyword + '"';
+                            }
+                            else{
+                                this.result ='Không có kết quả trùng khớp! ';
+                            }
                         }
                     }
                 })
@@ -184,7 +194,7 @@
                     
                 }
 
-                if(this.keyword.length == 0){
+                if(this.keyword.length == 0 && this.tags.length == 0 && this.subject == 0){
                     this.message['errorskeyword'] = 'Bạn chưa nhập key search!';
                     this.styleObject.display= 'block';
                 }
@@ -197,13 +207,22 @@
                         }
                         else {
                             this.curentPage = 1;
+                            this.keyword= payload.data.keyword;
                             if (response.data.data.length > 0) {
-                                this.keyword =payload.data.keyword;
-                                this.result ='Kết quả tìm kiếm cho từ khóa: '+ '"' + this.keyword + '"';
+                                if(this.keyword != 0){
+                                    this.result ='Kết quả tìm kiếm cho từ khóa: '+ '"' + this.keyword + '"';
+                                }
+                                else{
+                                    this.result ='Kết quả tìm kiếm: ';
+                                }
                             }
                             else{
-                                this.keyword =payload.data.keyword;
-                                this.result ='Không tìm thấy kết quả cho từ khóa: '+ '"' + this.keyword + '"';
+                               if(this.keyword != 0){
+                                    this.result ='Không tìm thấy kết quả cho từ khóa: '+ '"' + this.keyword + '"';
+                                }
+                                else{
+                                    this.result ='Không có kết quả trùng khớp! ';
+                                }
                             }
                         }
                     })

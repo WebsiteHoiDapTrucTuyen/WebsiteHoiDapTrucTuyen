@@ -174,7 +174,7 @@
                     'subject': this.subject,
                 }
 
-                if(this.keyword.length == 0){
+                if(this.keyword.length == 0 && this.tags.length == 0 && this.subject == 0){
                     this.message['errorskeyword'] = 'Bạn chưa nhập key search!';
                     this.styleObject.display= 'block';
                 }

@@ -11,7 +11,7 @@
                         <div class="col-lg-3 related-question-left non-answered-accepted" :class="{ 'answered-accepted': question.best_answer }">
                             {{ question.voted }}
                         </div>
-                        <div class="col-lg-9">
+                        <div class="col-lg-9 hide-text">
                             <router-link :to="{ name: 'detail-question', params: { id: question.id } }">{{ question.title }}</router-link>
                             <!-- <a href="" @click=changeQuestion(question.id)>{{ question.title }}</a> -->
                         </div>

@@ -45,8 +45,13 @@ button {
 }
 
 .stylish-input-group button {
-    border: 0;
-    background: transparent;
+    background-color: white;
+    border-right: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    border-left: 0;
+    padding: 0.8vh;
+    border-radius: 0px 5px 5px 0px;
 }
 
 .bgimg {

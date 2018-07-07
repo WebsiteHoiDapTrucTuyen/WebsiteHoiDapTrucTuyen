@@ -11,7 +11,7 @@
                 <div class="name-user-cmt">
                     <a href="">{{ comment.user.name }}</a>
                     <span class="text-muted">
-                        đã bình luận vào {{ comment.date_comment.date }}
+                        đã bình luận vào {{ comment.date_comment.date | moment("DD/MM/YYYY  HH:mm:ss") }}
                     </span>
                 </div>
                 <div class="row" v-if="!isEdit">

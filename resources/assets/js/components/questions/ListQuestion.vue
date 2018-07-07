@@ -10,16 +10,16 @@
                                 <h4 class="topquestion d-inline-block">Tất Cả Câu Hỏi</h4>
                                 <ul class="nav nav-tabs d-flex justify-content-end">
                                     <li class="nav-item">
-                                        <a class="nav-link" id="newest" :class="{ active: tab === 'newest' }" @click="changeTab">Mới Nhất</a>
+                                        <a style="cursor: pointer;" class="nav-link" id="newest" :class="{ active: tab === 'newest' }" @click="changeTab">Mới Nhất</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="view" :class="{ active: tab === 'view' }" @click="changeTab">Lượt Xem</a>
+                                        <a style="cursor: pointer;" class="nav-link" id="view" :class="{ active: tab === 'view' }" @click="changeTab">Lượt Xem</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="answer" :class="{ active: tab === 'answer' }" @click="changeTab">Trả Lời</a>
+                                        <a style="cursor: pointer;" class="nav-link" id="answer" :class="{ active: tab === 'answer' }" @click="changeTab">Trả Lời</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="vote" :class="{ active: tab === 'vote' }" @click="changeTab">Bình Chọn</a>
+                                        <a style="cursor: pointer;" class="nav-link" id="vote" :class="{ active: tab === 'vote' }" @click="changeTab">Bình Chọn</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content">

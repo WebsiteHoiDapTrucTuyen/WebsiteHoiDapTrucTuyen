@@ -73136,7 +73136,17 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _vm._m(1)
+                      _c("span", { staticClass: "input-group-addon" }, [
+                        _c(
+                          "button",
+                          { style: _vm.styleObject, attrs: { type: "submit" } },
+                          [
+                            _c("span", {
+                              staticClass: "oi oi-magnifying-glass"
+                            })
+                          ]
+                        )
+                      ])
                     ]
                   )
                 ]
@@ -73438,16 +73448,6 @@ var staticRenderFns = [
       },
       [_c("span", { staticClass: "navbar-toggler-icon" })]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "input-group-addon" }, [
-      _c("button", { attrs: { type: "submit" } }, [
-        _c("span", { staticClass: "oi oi-magnifying-glass" })
-      ])
-    ])
   }
 ]
 render._withStripped = true
@@ -74678,7 +74678,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var oauth = {
                 grant_type: 'password',
                 client_id: 2,
-                client_secret: 'cgf0Xd2Z3rVKBzvNBbevT1VfaMg9d0flrGkSPjs5',
+                client_secret: 'bCKEYqMr3pAyFutnbGn6FUZjNTl0AjUPGqIo2S3J',
                 username: this.email,
                 password: this.password
             };
@@ -75981,6 +75981,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
@@ -76060,25 +76064,41 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("div", { staticClass: "started col-lg-5" }, [
-            _c("p", { staticClass: "user hide-text" }, [
-              _c("a", { attrs: { href: "" } }, [
-                _vm._v(_vm._s(_vm.question.user_last_interact.name))
-              ])
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "action" }, [
-              _vm._v(_vm._s(_vm.question.user_last_interact.interact))
-            ]),
-            _vm._v(" "),
-            _c("p", { staticClass: "time" }, [
-              _vm._v(
-                _vm._s(
-                  _vm._f("moment")(
-                    _vm.question.user_last_interact.date_interact.date,
-                    "DD-MM-YYYY"
+            _c("div", { staticClass: "row" }, [
+              _c(
+                "p",
+                { staticClass: "user hide-text" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      attrs: {
+                        to: {
+                          name: "information-user",
+                          params: { id: _vm.question.user_last_interact.id }
+                        }
+                      }
+                    },
+                    [_vm._v(_vm._s(_vm.question.user_last_interact.name))]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("p", { staticClass: "action" }, [
+                _vm._v(_vm._s(_vm.question.user_last_interact.interact))
+              ]),
+              _vm._v(" "),
+              _c("p", { staticClass: "time" }, [
+                _vm._v(
+                  _vm._s(
+                    _vm._f("moment")(
+                      _vm.question.user_last_interact.date_interact.date,
+                      "DD-MM-YYYY"
+                    )
                   )
                 )
-              )
+              ])
             ])
           ])
         ])
@@ -76469,10 +76489,13 @@ var render = function() {
           { staticClass: "rank-items" },
           _vm._l(_vm.leaderboard, function(user, index) {
             return _c(
-              "a",
+              "router-link",
               {
+                key: user.id,
                 staticStyle: { color: "black", "text-decoration": "none" },
-                attrs: { href: "" }
+                attrs: {
+                  to: { name: "information-user", params: { id: user.id } }
+                }
               },
               [
                 _c("div", { staticClass: "row item" }, [
@@ -76665,6 +76688,7 @@ var render = function() {
                               {
                                 staticClass: "nav-link",
                                 class: { active: _vm.tab === "newest" },
+                                staticStyle: { cursor: "pointer" },
                                 attrs: { id: "newest" },
                                 on: { click: _vm.changeTab }
                               },
@@ -76678,6 +76702,7 @@ var render = function() {
                               {
                                 staticClass: "nav-link",
                                 class: { active: _vm.tab === "view" },
+                                staticStyle: { cursor: "pointer" },
                                 attrs: { id: "view" },
                                 on: { click: _vm.changeTab }
                               },
@@ -76691,6 +76716,7 @@ var render = function() {
                               {
                                 staticClass: "nav-link",
                                 class: { active: _vm.tab === "answer" },
+                                staticStyle: { cursor: "pointer" },
                                 attrs: { id: "answer" },
                                 on: { click: _vm.changeTab }
                               },
@@ -76704,6 +76730,7 @@ var render = function() {
                               {
                                 staticClass: "nav-link",
                                 class: { active: _vm.tab === "vote" },
+                                staticStyle: { cursor: "pointer" },
                                 attrs: { id: "vote" },
                                 on: { click: _vm.changeTab }
                               },
@@ -79008,7 +79035,12 @@ var render = function() {
                   _c("span", { staticClass: "text-muted" }, [
                     _vm._v(
                       "\n                    đã bình luận vào " +
-                        _vm._s(_vm.comment.date_comment.date) +
+                        _vm._s(
+                          _vm._f("moment")(
+                            _vm.comment.date_comment.date,
+                            "DD/MM/YYYY  HH:mm:ss"
+                          )
+                        ) +
                         "\n                "
                     )
                   ])
@@ -79826,7 +79858,12 @@ var render = function() {
                 _c("span", { staticClass: "text-muted mr-3" }, [
                   _vm._v(
                     "\n                        đã trả lời vào " +
-                      _vm._s(_vm.answer.date_answer.date) +
+                      _vm._s(
+                        _vm._f("moment")(
+                          _vm.answer.date_answer.date,
+                          "DD/MM/YYYY HH:mm:ss"
+                        )
+                      ) +
                       "\n                    "
                   )
                 ])
@@ -80499,7 +80536,7 @@ var render = function() {
                   _vm._v(" "),
                   _c(
                     "div",
-                    { staticClass: "col-lg-9" },
+                    { staticClass: "col-lg-9 hide-text" },
                     [
                       _c(
                         "router-link",
@@ -80811,7 +80848,14 @@ var render = function() {
                                 { staticClass: "col-lg-8 info-content-right" },
                                 [
                                   _c("p", [
-                                    _vm._v(_vm._s(_vm.question.date.date))
+                                    _vm._v(
+                                      _vm._s(
+                                        _vm._f("moment")(
+                                          _vm.question.date.date,
+                                          "DD/MM/YYYY"
+                                        )
+                                      )
+                                    )
                                   ])
                                 ]
                               )
@@ -84466,7 +84510,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 'subject': this.subject
             };
 
-            if (this.keyword.length == 0) {
+            if (this.keyword.length == 0 && this.tags.length == 0 && this.subject == 0) {
                 this.message['errorskeyword'] = 'Bạn chưa nhập key search!';
                 this.styleObject.display = 'block';
             } else {
@@ -84487,6 +84531,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
 //
 //
 //
@@ -84600,11 +84646,27 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "started col-lg-4" }, [
             _c("div", { staticClass: "row" }, [
-              _c("p", { staticClass: "user hide-text" }, [
-                _c("a", { attrs: { href: "" } }, [
-                  _vm._v(_vm._s(_vm.documentation.user_last_interact.name))
-                ])
-              ]),
+              _c(
+                "p",
+                { staticClass: "user hide-text" },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      attrs: {
+                        to: {
+                          name: "information-user",
+                          params: {
+                            id: _vm.documentation.user_last_interact.id
+                          }
+                        }
+                      }
+                    },
+                    [_vm._v(_vm._s(_vm.documentation.user_last_interact.name))]
+                  )
+                ],
+                1
+              ),
               _vm._v(" "),
               _c("p", { staticClass: "action" }, [
                 _vm._v(_vm._s(_vm.documentation.user_last_interact.interact))
@@ -85997,7 +86059,7 @@ var render = function() {
                                       _vm._s(
                                         _vm._f("moment")(
                                           _vm.documentation.date.date,
-                                          "DD-MM-YYYY"
+                                          "DD/MM/YYYY"
                                         )
                                       )
                                     )
@@ -87841,12 +87903,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     //this.message['errors'] = 'Không thể tìm kiếm';
                 } else {
                     //console.log(response.data.data.length);
+                    _this.keyword = payload.data.keyword;
                     if (response.data.data.length > 0) {
-                        _this.keyword = payload.data.keyword;
-                        _this.result = 'Kết quả tìm kiếm cho từ khóa: ' + '"' + _this.keyword + '"';
+                        if (_this.keyword != 0) {
+                            _this.result = 'Kết quả tìm kiếm cho từ khóa: ' + '"' + _this.keyword + '"';
+                        } else {
+                            _this.result = 'Kết quả tìm kiếm: ';
+                        }
                     } else {
-                        _this.keyword = payload.data.keyword;
-                        _this.result = 'Không tìm thấy kết quả cho từ khóa: ' + '"' + _this.keyword + '"';
+                        if (_this.keyword != 0) {
+                            _this.result = 'Không tìm thấy kết quả cho từ khóa: ' + '"' + _this.keyword + '"';
+                        } else {
+                            _this.result = 'Không có kết quả trùng khớp! ';
+                        }
                     }
                 }
             }).catch(function (error) {
@@ -87866,7 +87935,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             };
 
-            if (this.keyword.length == 0) {
+            if (this.keyword.length == 0 && this.tags.length == 0 && this.subject == 0) {
                 this.message['errorskeyword'] = 'Bạn chưa nhập key search!';
                 this.styleObject.display = 'block';
             } else {
@@ -87876,12 +87945,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         //this.message['errors'] = 'Không thể tìm kiếm';
                     } else {
                         _this2.curentPage = 1;
+                        _this2.keyword = payload.data.keyword;
                         if (response.data.data.length > 0) {
-                            _this2.keyword = payload.data.keyword;
-                            _this2.result = 'Kết quả tìm kiếm cho từ khóa: ' + '"' + _this2.keyword + '"';
+                            if (_this2.keyword != 0) {
+                                _this2.result = 'Kết quả tìm kiếm cho từ khóa: ' + '"' + _this2.keyword + '"';
+                            } else {
+                                _this2.result = 'Kết quả tìm kiếm: ';
+                            }
                         } else {
-                            _this2.keyword = payload.data.keyword;
-                            _this2.result = 'Không tìm thấy kết quả cho từ khóa: ' + '"' + _this2.keyword + '"';
+                            if (_this2.keyword != 0) {
+                                _this2.result = 'Không tìm thấy kết quả cho từ khóa: ' + '"' + _this2.keyword + '"';
+                            } else {
+                                _this2.result = 'Không có kết quả trùng khớp! ';
+                            }
                         }
                     }
                 }).catch(function (error) {

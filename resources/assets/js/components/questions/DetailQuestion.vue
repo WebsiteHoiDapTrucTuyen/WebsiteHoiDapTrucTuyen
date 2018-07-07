@@ -81,7 +81,7 @@
                                                 <p>Đã hỏi</p>
                                             </div>
                                             <div class="col-lg-8 info-content-right">
-                                                <p>{{ question.date.date }}</p>
+                                                <p>{{ question.date.date | moment("DD/MM/YYYY")}}</p>
                                             </div>
                                         </div>
                                     </div>
