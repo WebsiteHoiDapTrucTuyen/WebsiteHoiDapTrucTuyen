@@ -74678,7 +74678,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var oauth = {
                 grant_type: 'password',
                 client_id: 2,
-                client_secret: 'bCKEYqMr3pAyFutnbGn6FUZjNTl0AjUPGqIo2S3J',
+                client_secret: 'cgf0Xd2Z3rVKBzvNBbevT1VfaMg9d0flrGkSPjs5',
                 username: this.email,
                 password: this.password
             };
@@ -84514,7 +84514,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.message['errorskeyword'] = 'Bạn chưa nhập key search!';
                 this.styleObject.display = 'block';
             } else {
-                this.$router.push({ name: 'search-document', params: { payload: payload } });
+                this.$router.push({ name: 'search-document', query: payload });
             }
         }
     },
@@ -87895,7 +87895,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             var payload = {
                 'page': page,
-                'data': this.$route.params.payload
+                'data': this.$route.query
             };
 
             this.$store.dispatch('documentation/fetchSearchDocumentation', payload).then(function (response) {
@@ -87904,6 +87904,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 } else {
                     //console.log(response.data.data.length);
                     _this.keyword = payload.data.keyword;
+                    _this.subject = payload.data.subject;
                     if (response.data.data.length > 0) {
                         if (_this.keyword != 0) {
                             _this.result = 'Kết quả tìm kiếm cho từ khóa: ' + '"' + _this.keyword + '"';
@@ -87919,7 +87920,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     }
                 }
             }).catch(function (error) {
-                console.log(error);
+                // console.log(error);
             });
         },
         searchDocumentation: function searchDocumentation(page) {
@@ -87961,7 +87962,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         }
                     }
                 }).catch(function (error) {
-                    console.log(error);
+                    // console.log(error);
                 });
             }
         }
