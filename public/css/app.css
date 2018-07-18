@@ -11296,6 +11296,10 @@ button {
   cursor: pointer;
 }
 
+.best-answer:hover {
+  color: #43CE60;
+}
+
 .active-best {
   color: #43CE60;
 }

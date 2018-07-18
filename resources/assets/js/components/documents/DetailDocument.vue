@@ -147,7 +147,7 @@
 			</div>
 		</div>
 		<sweet-modal icon="warning" title="Cảnh báo" ref="modalDelete">
-            Bạn chắc chắn muốn xóa tài liệu này?
+            Bạn chắc chắn muốn xóa tài liệu này ?
             <button class="btn btn-success" style="margin: 20px 20px" @click="deleteDocumentation(documentation.id)">Đồng ý</button>
             <button class="btn btn-danger" style="margin: 20px 20px" @click="cancelDeleteDocumentation()">Hủy bỏ</button>
         </sweet-modal>

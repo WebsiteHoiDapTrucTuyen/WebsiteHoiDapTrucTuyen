@@ -120,6 +120,15 @@ class DocumentationController extends Controller
         return new DocumentationList(Documentation::find($documentation->id));
     }
 
+    public function increaseView($id) {
+        $documentation = Documentation::find($id);
+
+        $documentation->view = $documentation->view + 1;
+        $documentation->save();
+
+        return null;
+    }
+
     public function destroy($id)
     {
         $documentation = Documentation::find($id);

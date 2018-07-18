@@ -20,7 +20,8 @@
                         </div>
                     </div>
                     <div class="best-answer-widget d-flex justify-content-center">
-                        <span class="oi oi-check best-answer-normal" v-if="answer.best_answer"></span>
+                        <span v-if="answer.best_answer" @click="bestAnswer(answer.id, answer.best_answer)" class="oi oi-check best-answer active-best"></span>
+                        <span v-if="!answer.best_answer && currentUser && currentUser.id === question.user.id" @click="bestAnswer(answer.id, answer.best_answer)" class="oi oi-check best-answer"></span>
                     </div>
                 </div>
             </div>
@@ -112,6 +113,9 @@
             },
             checkOwner() {
                 return this.currentUser && this.answer.user.id === this.currentUser.id
+            },
+            question() {
+                return this.$store.getters['question/getDetailQuestion'].data;
             },
         },
         methods: {
@@ -207,6 +211,16 @@
                     index: index
                 }
                 this.$store.dispatch('answer/fetchVoteAnswer', payload)
+            },
+            bestAnswer(id, isBestAnswer) {
+                this.fetchBestAnswer(id, isBestAnswer)
+            },
+            fetchBestAnswer(id, isBestAnswer) {
+                let payload = {
+                    id: id,
+                    isBestAnswer: isBestAnswer
+                }
+                this.$store.dispatch('answer/fetchBestAnswer', payload)
             }
         },
         mounted() {

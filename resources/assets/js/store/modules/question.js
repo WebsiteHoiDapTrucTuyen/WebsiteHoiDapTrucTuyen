@@ -150,7 +150,7 @@ const actions = {
 	},
 	fetchStoreQuestion: ({ commit }, payload ) => {
 		return new Promise((resolve, reject) => {
-			axios.post('/api/questions/', payload.data)
+			axios.post('/api/questions', payload.data)
 			.then(response => {
 	            // console.log(response);
 	            if (response.data.hasOwnProperty('errors')) {
@@ -228,6 +228,19 @@ const actions = {
 	        });
 		});
 	},
+	fetchIncreaseView: ({ commit }, payload) => {
+		return new Promise((resolve, reject) => {
+			axios.put('/api/questions/' + payload.id + '/increaseView')
+			.then(response => {
+				//console.log(response);
+	            resolve(response);
+	        })
+			.catch(error => {
+	            // console.log(error);
+	            reject(error);
+	        });
+		}); 
+	}
 }
 
 export default {

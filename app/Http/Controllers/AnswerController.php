@@ -19,17 +19,17 @@ class AnswerController extends Controller
 {
 	public function __construct()
 	{
-		$this->middleware('auth:api')->only('store', 'update', 'destroy');
+		$this->middleware('auth:api')->only('store', 'update', 'destroy', 'bestAnswer');
 	}
 
 	public function index(Request $request, $question_id)
 	{
-		$answers = Question::find($question_id)->answers->sortByDesc('best_answer')
+		$answers = Question::find($question_id)->answers
 			->sortByDesc(function($answer) {
 				$countvotes_up = $answer->votes->where('vote_action', 'up')->count();
 				$countvotes_down = $answer->votes->where('vote_action', 'down')->count();
 				return $countvotes_up - $countvotes_down;
-			});
+			})->sortByDesc('best_answer');
 		$answers = $this->paginate($answers, 5, $request->page,['path' => LengthAwarePaginator::resolveCurrentPath()]);
 		return AnswerList::collection($answers);
 	}
@@ -70,6 +70,33 @@ class AnswerController extends Controller
 		event(new ActivityEvent($answer, 'đã chỉnh sửa'));
 
 		return new AnswerList($answer);
+	}
+
+	public function bestAnswer($id) {
+		$answer = Answer::find($id);
+		$question = $answer->question;
+		$this->CheckOwner($question);
+
+		$old_best_answer = $question->answers->where('best_answer', true)->first();
+		if (is_null($old_best_answer)) {
+			$answer->best_answer = true;
+		}
+		else {
+			$old_best_answer->best_answer = false;
+			$old_best_answer->save();
+			if ($old_best_answer->id != $answer->id) {
+				$answer->best_answer = true;
+			}
+		}
+		if ($answer->save()) {
+			return [
+				'success' => 'Vote best answer successfully'
+			];
+		}
+		return response([
+            'errors' => 'Vote best answer errors'
+        ], 400);
+
 	}
 
 	public function destroy($id)

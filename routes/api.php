@@ -39,6 +39,7 @@ Route::group(['prefix' => 'questions'], function() {
     Route::put('{question_id}', 'QuestionController@update');
     Route::delete('{question_id}', 'QuestionController@destroy');
     Route::get('{question_id}/related', 'QuestionController@related'); 
+    Route::put('{question_id}/increaseView', 'QuestionController@increaseView');
 });
 
 // Answer
@@ -48,6 +49,7 @@ Route::group(['prefix' => 'answers'], function() {
     Route::post('{question_id}', 'AnswerController@store');
     Route::put('{answer_id}', 'AnswerController@update');
     Route::delete('{answer_id}', 'AnswerController@destroy');
+    Route::put('{answer_id}/bestAnswer', 'AnswerController@bestAnswer');
 });
 
 // Documentation
@@ -59,6 +61,7 @@ Route::group(['prefix' => 'documentations'], function() {
     Route::delete('{documentation_id}', 'DocumentationController@destroy');
     Route::get('{documentation_id}/related', 'DocumentationController@related'); 
     Route::get('{documentation_id}/related-subject', 'DocumentationController@relatedSubject'); 
+    Route::put('{documentation_id}/increaseView', 'DocumentationController@increaseView');
 });
 
 // Comment

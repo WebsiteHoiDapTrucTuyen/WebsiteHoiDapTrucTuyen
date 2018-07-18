@@ -39,6 +39,19 @@ const mutations = {
 			state.answers.data.splice(payload.index, 1);			
 		}
 	},
+	[types.BEST_ANSWER]: (state, payload) => {
+		if (payload) {
+			for (let index = 0; index < state.answers.data.length; index++) {
+				const element = state.answers.data[index];
+				if (element['id'] === payload.id && !payload.isBestAnswer) {
+					element['best_answer'] = true
+				}
+				else {
+					element['best_answer'] = false
+				}
+			}		
+		}
+	},
 }
 // Actions
 const actions = {
@@ -170,6 +183,25 @@ const actions = {
 	        });
 		});
 	},
+	fetchBestAnswer: ({ commit }, payload) => {
+		return new Promise((resolve, reject) => {
+			axios.put('/api/answers/' + payload.id + '/bestAnswer')
+			.then(response => {
+	            // console.log(response);
+	            if (response.data.hasOwnProperty('errors')) {
+	            	
+	            }
+	            else {
+	            	commit(types.BEST_ANSWER, payload);
+	            }
+	            resolve(response);
+	        })
+			.catch(error => {
+	            // console.log(error);
+	            reject(error);
+	        });
+		});
+	}
 }
 
 export default {

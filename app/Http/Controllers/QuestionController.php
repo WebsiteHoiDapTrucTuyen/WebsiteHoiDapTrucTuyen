@@ -130,6 +130,15 @@ class QuestionController extends Controller
         return new QuestionList(Question::find($question->id));
     }
 
+    public function increaseView($id) {
+        $question = Question::find($id);
+
+        $question->view = $question->view + 1;
+        $question->save();
+
+        return null;
+    }
+
     public function destroy($id)
     {
         $question = Question::find($id);

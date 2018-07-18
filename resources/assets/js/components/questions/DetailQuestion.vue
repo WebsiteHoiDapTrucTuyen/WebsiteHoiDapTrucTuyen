@@ -126,7 +126,7 @@
             </div>
         </div>
         <sweet-modal icon="warning" title="Cảnh báo" ref="modalDelete">
-            Bạn chắc chắn muốn xóa bình luận này
+            Bạn chắc chắn muốn xóa câu hỏi này ?
             <button class="btn btn-success" style="margin: 20px 20px" @click="deleteQuestion(question.id)">Đồng ý</button>
             <button class="btn btn-danger" style="margin: 20px 20px" @click="cancelDeleteQuestion()">Hủy bỏ</button>
         </sweet-modal>
@@ -167,7 +167,14 @@
                 this.$store.dispatch('question/fetchDetailQuestion', payload)
                 .then(response => {
                     this.receiveCommentBroadcast('question', response.data.data.id)
+                    setTimeout(() => {
+                        this.fetchIncreaseView(id)
+                    }, 10000)
                 })
+            },
+            fetchIncreaseView(id) {
+                let payload = { 'id': id }
+                this.$store.dispatch('question/fetchIncreaseView', payload)
             },
             deleteEntry() {
                 this.$refs.modalDelete.open()

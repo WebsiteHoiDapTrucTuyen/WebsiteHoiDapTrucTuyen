@@ -5357,46 +5357,47 @@ module.exports = Component.exports
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return CURRENT_USER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "z", function() { return LIST_QUESTION; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return INFORMATION_QUESTION; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "v", function() { return LEADERBOARD; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return COMMON_TAG; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return DETAIL_QUESTION; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "x", function() { return LIST_ANSWER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "F", function() { return RELATED_QUESTION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return CURRENT_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "A", function() { return LIST_QUESTION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return INFORMATION_QUESTION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "w", function() { return LEADERBOARD; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return COMMON_TAG; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return DETAIL_QUESTION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "y", function() { return LIST_ANSWER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "G", function() { return RELATED_QUESTION; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return ADD_COMMENT; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return EDIT_COMMENT; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return DELETE_COMMENT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "t", function() { return EDIT_COMMENT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return DELETE_COMMENT; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return ADD_ANSWER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return EDIT_ANSWER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return DELETE_ANSWER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "C", function() { return LIST_TAG_PURE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "s", function() { return EDIT_ANSWER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "k", function() { return DELETE_ANSWER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "D", function() { return LIST_TAG_PURE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return ADD_TAG; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return ADD_QUESTION; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "L", function() { return UPDATE_QUESTION; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return DELETE_QUESTION; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "u", function() { return INFORMATION_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "M", function() { return UPDATE_QUESTION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return DELETE_QUESTION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "v", function() { return INFORMATION_USER; });
 /* unused harmony export UPDATE_AVATAR */
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return ALL_ACTIVITY; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "w", function() { return LIST_ACTIVITY; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return DISMISS_ALL_ACTIVITY; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "p", function() { return DISMISS_ACTIVITY; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return COUNT_NEW_ACTIVITY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "x", function() { return LIST_ACTIVITY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "r", function() { return DISMISS_ALL_ACTIVITY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "q", function() { return DISMISS_ACTIVITY; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return COUNT_NEW_ACTIVITY; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ADD_ACTIVITY; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "y", function() { return LIST_DOCUMENTATION; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "n", function() { return DETAIL_DOCUMENTATION; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "E", function() { return RELATED_DOCUMENTATION; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "l", function() { return DELETE_DOCUMENTATION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return BEST_ANSWER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "z", function() { return LIST_DOCUMENTATION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "o", function() { return DETAIL_DOCUMENTATION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "F", function() { return RELATED_DOCUMENTATION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "m", function() { return DELETE_DOCUMENTATION; });
 /* unused harmony export UPDATE_DOCUMENTATION */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "G", function() { return RELATED_SUBJECT; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "A", function() { return LIST_SUBJECT; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "B", function() { return LIST_TAG; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "D", function() { return LIST_USER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "H", function() { return SEARCH_DOCUMENTATION; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "J", function() { return SEARCH_TAG; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "K", function() { return SEARCH_USER; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "I", function() { return SEARCH_QUESTION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "H", function() { return RELATED_SUBJECT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "B", function() { return LIST_SUBJECT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "C", function() { return LIST_TAG; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "E", function() { return LIST_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "I", function() { return SEARCH_DOCUMENTATION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "K", function() { return SEARCH_TAG; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "L", function() { return SEARCH_USER; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "J", function() { return SEARCH_QUESTION; });
 var CURRENT_USER = 'CURRENT_USER';
 var LIST_QUESTION = 'LIST_QUESTION';
 var INFORMATION_QUESTION = 'INFORMATION_QUESTION';
@@ -5425,6 +5426,7 @@ var DISMISS_ALL_ACTIVITY = 'DISMISS_ALL_ACTIVITY';
 var DISMISS_ACTIVITY = 'DISMISS_ACTIVITY';
 var COUNT_NEW_ACTIVITY = 'COUNT_NEW_ACTIVITY';
 var ADD_ACTIVITY = 'ADD_ACTIVITY';
+var BEST_ANSWER = 'BEST_ANSWER';
 //
 var LIST_DOCUMENTATION = 'LIST_DOCUMENTATION';
 var DETAIL_DOCUMENTATION = 'DETAIL_DOCUMENTATION';
@@ -45025,9 +45027,9 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 	store: __WEBPACK_IMPORTED_MODULE_3__store_index__["a" /* default */]
 }).$mount('#app');
 
-// Vue.config.devtools = false
-// Vue.config.debug = false
-// Vue.config.silent = true
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.config.devtools = false;
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.config.debug = false;
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.config.silent = true;
 
 /***/ }),
 /* 157 */
@@ -74678,7 +74680,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var oauth = {
                 grant_type: 'password',
                 client_id: 2,
-                client_secret: 'cgf0Xd2Z3rVKBzvNBbevT1VfaMg9d0flrGkSPjs5',
+                client_secret: 'jIt1yPYFLmDOpzjRgku10TDzOC6jxSaT8KoR4Ujs',
                 username: this.email,
                 password: this.password
             };
@@ -77051,7 +77053,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var payload = { 'id': id };
             this.$store.dispatch('question/fetchDetailQuestion', payload).then(function (response) {
                 _this.receiveCommentBroadcast('question', response.data.data.id);
+                setTimeout(function () {
+                    _this.fetchIncreaseView(id);
+                }, 10000);
             });
+        },
+        fetchIncreaseView: function fetchIncreaseView(id) {
+            var payload = { 'id': id };
+            this.$store.dispatch('question/fetchIncreaseView', payload);
         },
         deleteEntry: function deleteEntry() {
             this.$refs.modalDelete.open();
@@ -77475,6 +77484,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -77517,6 +77527,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         checkOwner: function checkOwner() {
             return this.currentUser && this.answer.user.id === this.currentUser.id;
+        },
+        question: function question() {
+            return this.$store.getters['question/getDetailQuestion'].data;
         }
     },
     methods: {
@@ -77612,6 +77625,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 index: index
             };
             this.$store.dispatch('answer/fetchVoteAnswer', payload);
+        },
+        bestAnswer: function bestAnswer(id, isBestAnswer) {
+            this.fetchBestAnswer(id, isBestAnswer);
+        },
+        fetchBestAnswer: function fetchBestAnswer(id, isBestAnswer) {
+            var payload = {
+                id: id,
+                isBestAnswer: isBestAnswer
+            };
+            this.$store.dispatch('answer/fetchBestAnswer', payload);
         }
     },
     mounted: function mounted() {
@@ -79837,7 +79860,25 @@ var render = function() {
               [
                 _vm.answer.best_answer
                   ? _c("span", {
-                      staticClass: "oi oi-check best-answer-normal"
+                      staticClass: "oi oi-check best-answer active-best",
+                      on: {
+                        click: function($event) {
+                          _vm.bestAnswer(_vm.answer.id, _vm.answer.best_answer)
+                        }
+                      }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                !_vm.answer.best_answer &&
+                _vm.currentUser &&
+                _vm.currentUser.id === _vm.question.user.id
+                  ? _c("span", {
+                      staticClass: "oi oi-check best-answer",
+                      on: {
+                        click: function($event) {
+                          _vm.bestAnswer(_vm.answer.id, _vm.answer.best_answer)
+                        }
+                      }
                     })
                   : _vm._e()
               ]
@@ -80943,7 +80984,7 @@ var render = function() {
             },
             [
               _vm._v(
-                "\n        Bạn chắc chắn muốn xóa bình luận này\n        "
+                "\n        Bạn chắc chắn muốn xóa câu hỏi này ?\n        "
               ),
               _c(
                 "button",
@@ -84514,7 +84555,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.message['errorskeyword'] = 'Bạn chưa nhập key search!';
                 this.styleObject.display = 'block';
             } else {
-                this.$router.push({ name: 'search-document', query: payload });
+                this.$router.push({ name: 'search-document', params: { payload: payload } });
             }
         }
     },
@@ -86136,7 +86177,7 @@ var render = function() {
             },
             [
               _vm._v(
-                "\n            Bạn chắc chắn muốn xóa tài liệu này?\n            "
+                "\n            Bạn chắc chắn muốn xóa tài liệu này ?\n            "
               ),
               _c(
                 "button",
@@ -87895,7 +87936,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             var payload = {
                 'page': page,
-                'data': this.$route.query
+                'data': this.$route.params.payload
             };
 
             this.$store.dispatch('documentation/fetchSearchDocumentation', payload).then(function (response) {
@@ -87904,7 +87945,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 } else {
                     //console.log(response.data.data.length);
                     _this.keyword = payload.data.keyword;
-                    _this.subject = payload.data.subject;
                     if (response.data.data.length > 0) {
                         if (_this.keyword != 0) {
                             _this.result = 'Kết quả tìm kiếm cho từ khóa: ' + '"' + _this.keyword + '"';
@@ -87920,7 +87960,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     }
                 }
             }).catch(function (error) {
-                // console.log(error);
+                console.log(error);
             });
         },
         searchDocumentation: function searchDocumentation(page) {
@@ -87962,7 +88002,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         }
                     }
                 }).catch(function (error) {
-                    // console.log(error);
+                    console.log(error);
                 });
             }
         }
@@ -91903,11 +91943,11 @@ var state = {
 		return state.activity;
 	}
 	// Mutations
-};var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["i" /* CURRENT_USER */], function (state, user) {
+};var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["j" /* CURRENT_USER */], function (state, user) {
 	if (user) {
 		state.current_user = user;
 	}
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["u" /* INFORMATION_USER */], function (state, information_user) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["v" /* INFORMATION_USER */], function (state, information_user) {
 	if (information_user) {
 		state.information_user = information_user;
 	}
@@ -91925,9 +91965,9 @@ var actions = {
 			axios.get('/api/user').then(function (response) {
 				// console.log(response);
 				if (response.data.hasOwnProperty('errors')) {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["i" /* CURRENT_USER */], []);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["j" /* CURRENT_USER */], []);
 				} else {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["i" /* CURRENT_USER */], response.data);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["j" /* CURRENT_USER */], response.data);
 				}
 				resolve(response);
 			}).catch(function (error) {
@@ -91955,7 +91995,7 @@ var actions = {
 		return new Promise(function (resolve, reject) {
 			axios.post('/api/logout').then(function (response) {
 				// console.log(response);
-				commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["i" /* CURRENT_USER */], []);
+				commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["j" /* CURRENT_USER */], []);
 				resolve(response);
 			}).catch(function (error) {
 				// console.log(error);
@@ -91970,9 +92010,9 @@ var actions = {
 			axios.get('/api/users/' + payload.id).then(function (response) {
 				// console.log(response);
 				if (response.data.hasOwnProperty('errors')) {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["u" /* INFORMATION_USER */], []);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["v" /* INFORMATION_USER */], []);
 				} else {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["u" /* INFORMATION_USER */], response.data);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["v" /* INFORMATION_USER */], response.data);
 				}
 				resolve(response);
 			}).catch(function (error) {
@@ -92081,35 +92121,35 @@ var state = {
 		return state.question_search;
 	}
 	// Mutations
-};var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["z" /* LIST_QUESTION */], function (state, questions) {
+};var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["A" /* LIST_QUESTION */], function (state, questions) {
 	state.questions = questions;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["o" /* DETAIL_QUESTION */], function (state, question) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["p" /* DETAIL_QUESTION */], function (state, question) {
 	state.question = question;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["F" /* RELATED_QUESTION */], function (state, related_question) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["G" /* RELATED_QUESTION */], function (state, related_question) {
 	state.related_question = related_question;
 }), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["c" /* ADD_COMMENT */], function (state, payload) {
 	state.question.data.comments.push(payload.comment);
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["s" /* EDIT_COMMENT */], function (state, payload) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["t" /* EDIT_COMMENT */], function (state, payload) {
 	state.question.data.comments.splice(payload.indexComment, 1, payload.comment);
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["k" /* DELETE_COMMENT */], function (state, payload) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["l" /* DELETE_COMMENT */], function (state, payload) {
 	state.question.data.comments.splice(payload.indexComment, 1);
 }), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["d" /* ADD_QUESTION */], function (state, question) {
 	if (question.data && state.questions.data) {
 		state.questions.data.unshift(question.data);
 	}
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["L" /* UPDATE_QUESTION */], function (state, question) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["M" /* UPDATE_QUESTION */], function (state, question) {
 	if (question.data && state.questions.data) {
 		state.questions.data = state.questions.data.filter(function (item) {
 			return item.id === question.data.id ? question.data : item;
 		});
 	}
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["m" /* DELETE_QUESTION */], function (state, payload) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["n" /* DELETE_QUESTION */], function (state, payload) {
 	if (payload && state.questions.data) {
 		state.questions.data = state.questions.data.filter(function (item) {
 			return item.id !== payload.id;
 		});
 	}
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["I" /* SEARCH_QUESTION */], function (state, question_search) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["J" /* SEARCH_QUESTION */], function (state, question_search) {
 	state.question_search = question_search;
 }), _mutations);
 // Actions
@@ -92121,9 +92161,9 @@ var actions = {
 			axios.get('/api/questions', { params: { sort: payload.sort, page: payload.page } }).then(function (response) {
 				// console.log(response);
 				if (response.data.hasOwnProperty('errors')) {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["z" /* LIST_QUESTION */], []);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["A" /* LIST_QUESTION */], []);
 				} else {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["z" /* LIST_QUESTION */], response.data);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["A" /* LIST_QUESTION */], response.data);
 				}
 				resolve(response);
 			}).catch(function (error) {
@@ -92139,9 +92179,9 @@ var actions = {
 			axios.get('/api/questions/' + payload.id).then(function (response) {
 				// console.log(response);
 				if (response.data.hasOwnProperty('errors')) {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["o" /* DETAIL_QUESTION */], []);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["p" /* DETAIL_QUESTION */], []);
 				} else {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["o" /* DETAIL_QUESTION */], response.data);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["p" /* DETAIL_QUESTION */], response.data);
 				}
 				resolve(response);
 			}).catch(function (error) {
@@ -92157,9 +92197,9 @@ var actions = {
 			axios.get('/api/questions/' + payload.id + '/related').then(function (response) {
 				// console.log(response);
 				if (response.data.hasOwnProperty('errors')) {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["F" /* RELATED_QUESTION */], []);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["G" /* RELATED_QUESTION */], []);
 				} else {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["F" /* RELATED_QUESTION */], response.data);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["G" /* RELATED_QUESTION */], response.data);
 				}
 				resolve(response);
 			}).catch(function (error) {
@@ -92180,7 +92220,7 @@ var actions = {
 		var commit = _ref5.commit;
 
 		return new Promise(function (resolve, reject) {
-			commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["s" /* EDIT_COMMENT */], payload);
+			commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["t" /* EDIT_COMMENT */], payload);
 			resolve();
 		});
 	},
@@ -92188,7 +92228,7 @@ var actions = {
 		var commit = _ref6.commit;
 
 		return new Promise(function (resolve, reject) {
-			commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["k" /* DELETE_COMMENT */], payload);
+			commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["l" /* DELETE_COMMENT */], payload);
 			resolve();
 		});
 	},
@@ -92196,7 +92236,7 @@ var actions = {
 		var commit = _ref7.commit;
 
 		return new Promise(function (resolve, reject) {
-			axios.post('/api/questions/', payload.data).then(function (response) {
+			axios.post('/api/questions', payload.data).then(function (response) {
 				// console.log(response);
 				if (response.data.hasOwnProperty('errors')) {
 					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["d" /* ADD_QUESTION */], []);
@@ -92216,9 +92256,9 @@ var actions = {
 		return new Promise(function (resolve, reject) {
 			axios.put('/api/questions/' + payload.id, payload.data).then(function (response) {
 				if (response.data.hasOwnProperty('errors')) {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["L" /* UPDATE_QUESTION */], []);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["M" /* UPDATE_QUESTION */], []);
 				} else {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["L" /* UPDATE_QUESTION */], response.data);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["M" /* UPDATE_QUESTION */], response.data);
 				}
 				resolve(response);
 			}).catch(function (error) {
@@ -92237,7 +92277,7 @@ var actions = {
 					var data = {
 						'id': payload.id
 					};
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["m" /* DELETE_QUESTION */], data);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["n" /* DELETE_QUESTION */], data);
 				}
 				resolve(response);
 			}).catch(function (error) {
@@ -92255,10 +92295,23 @@ var actions = {
 				//console.log(response);
 				if (response.data.hasOwnProperty('errors')) {
 
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["I" /* SEARCH_QUESTION */], []);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["J" /* SEARCH_QUESTION */], []);
 				} else {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["I" /* SEARCH_QUESTION */], response.data);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["J" /* SEARCH_QUESTION */], response.data);
 				}
+				resolve(response);
+			}).catch(function (error) {
+				// console.log(error);
+				reject(error);
+			});
+		});
+	},
+	fetchIncreaseView: function fetchIncreaseView(_ref11, payload) {
+		var commit = _ref11.commit;
+
+		return new Promise(function (resolve, reject) {
+			axios.put('/api/questions/' + payload.id + '/increaseView').then(function (response) {
+				//console.log(response);
 				resolve(response);
 			}).catch(function (error) {
 				// console.log(error);
@@ -92305,11 +92358,11 @@ var state = {
         return state.commonTag;
     }
     // Mutations
-};var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["t" /* INFORMATION_QUESTION */], function (state, informationQuestion) {
+};var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["u" /* INFORMATION_QUESTION */], function (state, informationQuestion) {
     state.informationQuestion = informationQuestion;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["v" /* LEADERBOARD */], function (state, leaderboard) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["w" /* LEADERBOARD */], function (state, leaderboard) {
     state.leaderboard = leaderboard;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["g" /* COMMON_TAG */], function (state, commonTag) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["h" /* COMMON_TAG */], function (state, commonTag) {
     state.commonTag = commonTag;
 }), _mutations);
 // Actions
@@ -92321,9 +92374,9 @@ var actions = {
             axios.get('/api/statistics/information-question').then(function (response) {
                 // console.log(response);
                 if (response.data.hasOwnProperty('errors')) {
-                    commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["t" /* INFORMATION_QUESTION */], []);
+                    commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["u" /* INFORMATION_QUESTION */], []);
                 } else {
-                    commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["t" /* INFORMATION_QUESTION */], response.data);
+                    commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["u" /* INFORMATION_QUESTION */], response.data);
                 }
                 resolve(response);
             }).catch(function (error) {
@@ -92339,9 +92392,9 @@ var actions = {
             axios.get('/api/statistics/leaderboard').then(function (response) {
                 // console.log(response);
                 if (response.data.hasOwnProperty('errors')) {
-                    commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["v" /* LEADERBOARD */], []);
+                    commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["w" /* LEADERBOARD */], []);
                 } else {
-                    commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["v" /* LEADERBOARD */], response.data);
+                    commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["w" /* LEADERBOARD */], response.data);
                 }
                 resolve(response);
             }).catch(function (error) {
@@ -92357,9 +92410,9 @@ var actions = {
             axios.get('/api/statistics/common-tag').then(function (response) {
                 // console.log(response);
                 if (response.data.hasOwnProperty('errors')) {
-                    commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["g" /* COMMON_TAG */], []);
+                    commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["h" /* COMMON_TAG */], []);
                 } else {
-                    commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["g" /* COMMON_TAG */], response.data);
+                    commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["h" /* COMMON_TAG */], response.data);
                 }
                 resolve(response);
             }).catch(function (error) {
@@ -92399,25 +92452,36 @@ var state = {
 		return state.answers;
 	}
 	// Mutations
-};var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["x" /* LIST_ANSWER */], function (state, answers) {
+};var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["y" /* LIST_ANSWER */], function (state, answers) {
 	state.answers = answers;
 }), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["c" /* ADD_COMMENT */], function (state, payload) {
 	state.answers.data[payload.indexAnswer].comments.push(payload.comment);
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["s" /* EDIT_COMMENT */], function (state, payload) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["t" /* EDIT_COMMENT */], function (state, payload) {
 	state.answers.data[payload.indexAnswer].comments.splice(payload.indexComment, 1, payload.comment);
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["k" /* DELETE_COMMENT */], function (state, payload) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["l" /* DELETE_COMMENT */], function (state, payload) {
 	state.answers.data[payload.indexAnswer].comments.splice(payload.indexComment, 1);
 }), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["b" /* ADD_ANSWER */], function (state, payload) {
 	if (payload.data) {
 		state.answers.data.push(payload.data);
 	}
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["r" /* EDIT_ANSWER */], function (state, payload) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["s" /* EDIT_ANSWER */], function (state, payload) {
 	if (payload.data) {
 		state.answers.data.splice(payload.index, 1, payload.data);
 	}
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["j" /* DELETE_ANSWER */], function (state, payload) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["k" /* DELETE_ANSWER */], function (state, payload) {
 	if (payload) {
 		state.answers.data.splice(payload.index, 1);
+	}
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["g" /* BEST_ANSWER */], function (state, payload) {
+	if (payload) {
+		for (var index = 0; index < state.answers.data.length; index++) {
+			var element = state.answers.data[index];
+			if (element['id'] === payload.id && !payload.isBestAnswer) {
+				element['best_answer'] = true;
+			} else {
+				element['best_answer'] = false;
+			}
+		}
 	}
 }), _mutations);
 // Actions
@@ -92429,9 +92493,9 @@ var actions = {
 			axios.get('/api/answers/' + payload.id, { params: { page: payload.page } }).then(function (response) {
 				// console.log(response);
 				if (response.data.hasOwnProperty('errors')) {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["x" /* LIST_ANSWER */], []);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["y" /* LIST_ANSWER */], []);
 				} else {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["x" /* LIST_ANSWER */], response.data);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["y" /* LIST_ANSWER */], response.data);
 				}
 				resolve(response);
 			}).catch(function (error) {
@@ -92447,13 +92511,13 @@ var actions = {
 			axios.get('/api/answers/' + payload.id + '/show').then(function (response) {
 				// console.log(response);
 				if (response.data.hasOwnProperty('errors')) {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["r" /* EDIT_ANSWER */], []);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["s" /* EDIT_ANSWER */], []);
 				} else {
 					var answer = {
 						data: response.data.data,
 						index: payload.index
 					};
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["r" /* EDIT_ANSWER */], answer);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["s" /* EDIT_ANSWER */], answer);
 				}
 				resolve(response);
 			}).catch(function (error) {
@@ -92473,7 +92537,7 @@ var actions = {
 		var commit = _ref4.commit;
 
 		return new Promise(function (resolve, reject) {
-			commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["s" /* EDIT_COMMENT */], payload);
+			commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["t" /* EDIT_COMMENT */], payload);
 			resolve();
 		});
 	},
@@ -92481,7 +92545,7 @@ var actions = {
 		var commit = _ref5.commit;
 
 		return new Promise(function (resolve, reject) {
-			commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["k" /* DELETE_COMMENT */], payload);
+			commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["l" /* DELETE_COMMENT */], payload);
 			resolve();
 		});
 	},
@@ -92510,13 +92574,13 @@ var actions = {
 			axios.put('/api/answers/' + payload.id, payload.data).then(function (response) {
 				// console.log(response);
 				if (response.data.hasOwnProperty('errors')) {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["r" /* EDIT_ANSWER */], []);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["s" /* EDIT_ANSWER */], []);
 				} else {
 					var data = {
 						'data': response.data.data,
 						'index': payload.index
 					};
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["r" /* EDIT_ANSWER */], data);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["s" /* EDIT_ANSWER */], data);
 				}
 				resolve(response);
 			}).catch(function (error) {
@@ -92535,7 +92599,23 @@ var actions = {
 					var data = {
 						'index': payload.index
 					};
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["j" /* DELETE_ANSWER */], data);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["k" /* DELETE_ANSWER */], data);
+				}
+				resolve(response);
+			}).catch(function (error) {
+				// console.log(error);
+				reject(error);
+			});
+		});
+	},
+	fetchBestAnswer: function fetchBestAnswer(_ref9, payload) {
+		var commit = _ref9.commit;
+
+		return new Promise(function (resolve, reject) {
+			axios.put('/api/answers/' + payload.id + '/bestAnswer').then(function (response) {
+				// console.log(response);
+				if (response.data.hasOwnProperty('errors')) {} else {
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["g" /* BEST_ANSWER */], payload);
 				}
 				resolve(response);
 			}).catch(function (error) {
@@ -92683,14 +92763,14 @@ var state = {
 		return state.countNewActivity;
 	}
 	// Mutations
-};var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["w" /* LIST_ACTIVITY */], function (state, activities) {
+};var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["x" /* LIST_ACTIVITY */], function (state, activities) {
 	if (state.activities.data) {
 		state.activities.data = state.activities.data.concat(activities.data);
 		state.activities.meta = activities.meta;
 	} else {
 		state.activities = activities;
 	}
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["q" /* DISMISS_ALL_ACTIVITY */], function (state, isSuccess) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["r" /* DISMISS_ALL_ACTIVITY */], function (state, isSuccess) {
 	if (isSuccess) {
 		state.activities.data.map(function (activity) {
 			activity.is_new = false;
@@ -92698,7 +92778,7 @@ var state = {
 		});
 		state.countNewActivity = 0;
 	}
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["p" /* DISMISS_ACTIVITY */], function (state, id) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["q" /* DISMISS_ACTIVITY */], function (state, id) {
 	if (id) {
 		state.activities.data.map(function (activity) {
 			if (activity.id === id) {
@@ -92710,7 +92790,7 @@ var state = {
 		});
 		state.countNewActivity = state.countNewActivity - 1;
 	}
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["h" /* COUNT_NEW_ACTIVITY */], function (state, data) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["i" /* COUNT_NEW_ACTIVITY */], function (state, data) {
 	state.countNewActivity = data.data.countNew;
 }), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["a" /* ADD_ACTIVITY */], function (state, activity) {
 	state.activities.data.pop();
@@ -92727,9 +92807,9 @@ var actions = {
 			axios.get('/api/activities', { params: { page: payload.page } }).then(function (response) {
 				// console.log(response);
 				if (response.data.hasOwnProperty('errors')) {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["w" /* LIST_ACTIVITY */], []);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["x" /* LIST_ACTIVITY */], []);
 				} else {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["w" /* LIST_ACTIVITY */], response.data);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["x" /* LIST_ACTIVITY */], response.data);
 				}
 				resolve(response);
 			}).catch(function (error) {
@@ -92745,9 +92825,9 @@ var actions = {
 			axios.get('/api/activities/countNew').then(function (response) {
 				// console.log(response);
 				if (response.data.hasOwnProperty('errors')) {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["h" /* COUNT_NEW_ACTIVITY */], []);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["i" /* COUNT_NEW_ACTIVITY */], []);
 				} else {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["h" /* COUNT_NEW_ACTIVITY */], response.data);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["i" /* COUNT_NEW_ACTIVITY */], response.data);
 				}
 				resolve(response);
 			}).catch(function (error) {
@@ -92763,9 +92843,9 @@ var actions = {
 			axios.put('/api/activities/dismissAll').then(function (response) {
 				// console.log(response);
 				if (response.data.hasOwnProperty('errors')) {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["q" /* DISMISS_ALL_ACTIVITY */], []);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["r" /* DISMISS_ALL_ACTIVITY */], []);
 				} else {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["q" /* DISMISS_ALL_ACTIVITY */], true);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["r" /* DISMISS_ALL_ACTIVITY */], true);
 				}
 				resolve(response);
 			}).catch(function (error) {
@@ -92781,9 +92861,9 @@ var actions = {
 			axios.put('/api/activities/' + payload.id + '/dismiss').then(function (response) {
 				// console.log(response);
 				if (response.data.hasOwnProperty('errors')) {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["p" /* DISMISS_ACTIVITY */], []);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["q" /* DISMISS_ACTIVITY */], []);
 				} else {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["p" /* DISMISS_ACTIVITY */], payload.id);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["q" /* DISMISS_ACTIVITY */], payload.id);
 				}
 				resolve(response);
 			}).catch(function (error) {
@@ -92851,17 +92931,17 @@ var state = {
 		return state.documentation_search;
 	}
 	// Mutations
-};var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["y" /* LIST_DOCUMENTATION */], function (state, documentations) {
+};var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["z" /* LIST_DOCUMENTATION */], function (state, documentations) {
 	state.documentations = documentations;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["n" /* DETAIL_DOCUMENTATION */], function (state, documentation) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["o" /* DETAIL_DOCUMENTATION */], function (state, documentation) {
 	state.documentation = documentation;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["E" /* RELATED_DOCUMENTATION */], function (state, related_documentation) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["F" /* RELATED_DOCUMENTATION */], function (state, related_documentation) {
 	state.related_documentation = related_documentation;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["G" /* RELATED_SUBJECT */], function (state, related_subject) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["H" /* RELATED_SUBJECT */], function (state, related_subject) {
 	state.related_subject = related_subject;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["A" /* LIST_SUBJECT */], function (state, subject) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["B" /* LIST_SUBJECT */], function (state, subject) {
 	state.subject = subject;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["l" /* DELETE_DOCUMENTATION */], function (state, payload) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["m" /* DELETE_DOCUMENTATION */], function (state, payload) {
 	if (payload) {
 		state.documentations.data = state.documentations.data.filter(function (item) {
 			return item.id !== payload.id;
@@ -92869,11 +92949,11 @@ var state = {
 	}
 }), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["c" /* ADD_COMMENT */], function (state, payload) {
 	state.documentation.data.comments.push(payload.comment);
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["s" /* EDIT_COMMENT */], function (state, payload) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["t" /* EDIT_COMMENT */], function (state, payload) {
 	state.documentation.data.comments.splice(payload.indexComment, 1, payload.comment);
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["k" /* DELETE_COMMENT */], function (state, payload) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["l" /* DELETE_COMMENT */], function (state, payload) {
 	state.documentation.data.comments.splice(payload.indexComment, 1);
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["H" /* SEARCH_DOCUMENTATION */], function (state, documentation_search) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["I" /* SEARCH_DOCUMENTATION */], function (state, documentation_search) {
 	state.documentation_search = documentation_search;
 }), _mutations);
 // Actions
@@ -92884,9 +92964,9 @@ var actions = {
 		return new Promise(function (resolve, reject) {
 			axios.get('/api/documentations', { params: { sort: payload.sort, page: payload.page } }).then(function (response) {
 				if (response.data.hasOwnProperty('errors')) {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["y" /* LIST_DOCUMENTATION */], []);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["z" /* LIST_DOCUMENTATION */], []);
 				} else {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["y" /* LIST_DOCUMENTATION */], response.data);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["z" /* LIST_DOCUMENTATION */], response.data);
 				}
 				resolve(response);
 			}).catch(function (error) {
@@ -92900,9 +92980,9 @@ var actions = {
 		return new Promise(function (resolve, reject) {
 			axios.get('/api/subjects').then(function (response) {
 				if (response.data.hasOwnProperty('errors')) {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["A" /* LIST_SUBJECT */], []);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["B" /* LIST_SUBJECT */], []);
 				} else {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["A" /* LIST_SUBJECT */], response.data);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["B" /* LIST_SUBJECT */], response.data);
 				}
 				resolve(response);
 			}).catch(function (error) {
@@ -92917,9 +92997,9 @@ var actions = {
 			axios.get('/api/documentations/' + payload.id + '/related').then(function (response) {
 				// console.log(response);
 				if (response.data.hasOwnProperty('errors')) {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["E" /* RELATED_DOCUMENTATION */], []);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["F" /* RELATED_DOCUMENTATION */], []);
 				} else {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["E" /* RELATED_DOCUMENTATION */], response.data);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["F" /* RELATED_DOCUMENTATION */], response.data);
 				}
 				resolve(response);
 			}).catch(function (error) {
@@ -92935,9 +93015,9 @@ var actions = {
 			axios.get('/api/documentations/' + payload.id + '/related-subject').then(function (response) {
 				// console.log(response);
 				if (response.data.hasOwnProperty('errors')) {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["G" /* RELATED_SUBJECT */], []);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["H" /* RELATED_SUBJECT */], []);
 				} else {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["G" /* RELATED_SUBJECT */], response.data);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["H" /* RELATED_SUBJECT */], response.data);
 				}
 				resolve(response);
 			}).catch(function (error) {
@@ -92953,9 +93033,9 @@ var actions = {
 			axios.get('/api/documentations/' + payload.id).then(function (response) {
 				// console.log(response);
 				if (response.data.hasOwnProperty('errors')) {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["n" /* DETAIL_DOCUMENTATION */], []);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["o" /* DETAIL_DOCUMENTATION */], []);
 				} else {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["n" /* DETAIL_DOCUMENTATION */], response.data);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["o" /* DETAIL_DOCUMENTATION */], response.data);
 				}
 				resolve(response);
 			}).catch(function (error) {
@@ -92973,7 +93053,7 @@ var actions = {
 					var data = {
 						'id': payload.id
 					};
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["l" /* DELETE_DOCUMENTATION */], data);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["m" /* DELETE_DOCUMENTATION */], data);
 				}
 				resolve(response);
 			}).catch(function (error) {
@@ -93005,7 +93085,7 @@ var actions = {
 		var commit = _ref8.commit;
 
 		return new Promise(function (resolve, reject) {
-			axios.post('/api/documentations/', payload.data).then(function (response) {
+			axios.post('/api/documentations', payload.data).then(function (response) {
 				//console.log(response);
 				if (response.data.hasOwnProperty('errors')) {
 
@@ -93032,7 +93112,7 @@ var actions = {
 		var commit = _ref10.commit;
 
 		return new Promise(function (resolve, reject) {
-			commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["s" /* EDIT_COMMENT */], payload);
+			commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["t" /* EDIT_COMMENT */], payload);
 			resolve();
 		});
 	},
@@ -93040,7 +93120,7 @@ var actions = {
 		var commit = _ref11.commit;
 
 		return new Promise(function (resolve, reject) {
-			commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["k" /* DELETE_COMMENT */], payload);
+			commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["l" /* DELETE_COMMENT */], payload);
 			resolve();
 		});
 	},
@@ -93053,9 +93133,9 @@ var actions = {
 				//console.log(response);
 				if (response.data.hasOwnProperty('errors')) {
 
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["H" /* SEARCH_DOCUMENTATION */], []);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["I" /* SEARCH_DOCUMENTATION */], []);
 				} else {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["H" /* SEARCH_DOCUMENTATION */], response.data);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["I" /* SEARCH_DOCUMENTATION */], response.data);
 				}
 				resolve(response);
 			}).catch(function (error) {
@@ -93103,15 +93183,15 @@ var state = {
 		return state.tags_search;
 	}
 	// Mutations
-};var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["B" /* LIST_TAG */], function (state, tags) {
+};var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["C" /* LIST_TAG */], function (state, tags) {
 	state.tags = tags;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["C" /* LIST_TAG_PURE */], function (state, tagsPure) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["D" /* LIST_TAG_PURE */], function (state, tagsPure) {
 	state.tagsPure = tagsPure;
 }), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["e" /* ADD_TAG */], function (state, tag) {
 	if (tag.data) {
 		state.tagsPure.data.push(tag.data);
 	}
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["J" /* SEARCH_TAG */], function (state, tags_search) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["K" /* SEARCH_TAG */], function (state, tags_search) {
 	state.tags_search = tags_search;
 }), _mutations);
 // Actions
@@ -93122,9 +93202,9 @@ var actions = {
 		return new Promise(function (resolve, reject) {
 			axios.get('/api/tags', { params: { sort: payload.sort, page: payload.page } }).then(function (response) {
 				if (response.data.hasOwnProperty('errors')) {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["B" /* LIST_TAG */], []);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["C" /* LIST_TAG */], []);
 				} else {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["B" /* LIST_TAG */], response.data);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["C" /* LIST_TAG */], response.data);
 				}
 				resolve(response);
 			}).catch(function (error) {
@@ -93138,9 +93218,9 @@ var actions = {
 		return new Promise(function (resolve, reject) {
 			axios.get('/api/tags/pure').then(function (response) {
 				if (response.data.hasOwnProperty('errors')) {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["C" /* LIST_TAG_PURE */], []);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["D" /* LIST_TAG_PURE */], []);
 				} else {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["C" /* LIST_TAG_PURE */], response.data);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["D" /* LIST_TAG_PURE */], response.data);
 				}
 				resolve(response);
 			}).catch(function (error) {
@@ -93174,9 +93254,9 @@ var actions = {
 				//console.log(response);
 				if (response.data.hasOwnProperty('errors')) {
 
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["J" /* SEARCH_TAG */], []);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["K" /* SEARCH_TAG */], []);
 				} else {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["J" /* SEARCH_TAG */], response.data);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["K" /* SEARCH_TAG */], response.data);
 				}
 				resolve(response);
 			}).catch(function (error) {
@@ -93220,9 +93300,9 @@ var state = {
 		return state.users_search;
 	}
 	// Mutations
-};var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["D" /* LIST_USER */], function (state, users) {
+};var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["E" /* LIST_USER */], function (state, users) {
 	state.users = users;
-}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["K" /* SEARCH_USER */], function (state, users_search) {
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["L" /* SEARCH_USER */], function (state, users_search) {
 	state.users_search = users_search;
 }), _mutations);
 // Actions
@@ -93233,9 +93313,9 @@ var actions = {
 		return new Promise(function (resolve, reject) {
 			axios.get('/api/users', { params: { sort: payload.sort, page: payload.page } }).then(function (response) {
 				if (response.data.hasOwnProperty('errors')) {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["D" /* LIST_USER */], []);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["E" /* LIST_USER */], []);
 				} else {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["D" /* LIST_USER */], response.data);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["E" /* LIST_USER */], response.data);
 				}
 				resolve(response);
 			}).catch(function (error) {
@@ -93251,9 +93331,9 @@ var actions = {
 				//console.log(response);
 				if (response.data.hasOwnProperty('errors')) {
 
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["K" /* SEARCH_USER */], []);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["L" /* SEARCH_USER */], []);
 				} else {
-					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["K" /* SEARCH_USER */], response.data);
+					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["L" /* SEARCH_USER */], response.data);
 				}
 				resolve(response);
 			}).catch(function (error) {

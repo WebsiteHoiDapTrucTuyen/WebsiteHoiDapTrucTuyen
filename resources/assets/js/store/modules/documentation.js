@@ -206,7 +206,7 @@ const actions = {
 	},
 	fetchCreateDocumentation: ({ commit }, payload ) => {
 		return new Promise((resolve, reject) => {
-			axios.post('/api/documentations/', payload.data)
+			axios.post('/api/documentations', payload.data)
 			.then(response => {
 				//console.log(response);
 	            if (response.data.hasOwnProperty('errors')) {
