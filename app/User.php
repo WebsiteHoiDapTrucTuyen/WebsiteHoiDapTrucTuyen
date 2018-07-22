@@ -6,6 +6,7 @@ use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 // use Cache;
+use Hash;
 
 class User extends Authenticatable
 {
@@ -76,5 +77,16 @@ class User extends Authenticatable
 
     public function tag_created() {
         return $this->hasMany('App\Tag', 'user_id', 'id');
+    }
+
+    public function validateForPassportPasswordGrant($password) {
+        //check for password
+        if (Hash::check($password, $this->getAuthPassword())) { 
+            //is user active?
+            if ($this->active) { 
+                return true;
+            }
+        }
+        return false;
     }
 }

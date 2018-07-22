@@ -65,7 +65,7 @@
                 axios.post('/oauth/token', oauth)
                 .then(response => {
                     // console.log(response);
-                    this.$auth.setToken(response.data.token_type + ' ' + response.data.access_token, response.data.expires_in + Date.now());
+                    this.$auth.setToken(response.data.token_type + ' ' + response.data.access_token, (+response.data.expires_in * 1000) + Date.now());
                     this.fetchCurrentUser();
                     this.$router.push({ name: 'home' });
                 })

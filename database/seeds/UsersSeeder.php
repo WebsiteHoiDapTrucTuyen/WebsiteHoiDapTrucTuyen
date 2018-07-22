@@ -60,42 +60,41 @@ class UsersSeeder extends Seeder
          //     ]
          // );
         // }
-        // //Admin account
-        // DB::table('users')->insert(
-        //     [
-        //         'permission_id' => 2,
-        //         'name' => 'Thanh Tùng',
-        //         'name_url'=>changeTitle('Thanh Tùng'),
-        //         'status' => 'Common Baby!',
-        //         'about' => 'Hi, I am Admin',
-        //         'location' => 'TP.HCM',
-        //         'job' => $job[rand(0,4)],
-        //         'avatar' => 'k17.jpg',
-        //         'email' => 'thanhtung@gmail.com',
-        //         'password' => bcrypt('123456'),
-        //         'point_reputation' => rand(100,1000),
-        //         'last_activity_time' => new DateTime(),
-        //         'created_at' => new DateTime(),
-        //         'updated_at' => new DateTime()
-        //     ]
-        // );
-        // DB::table('users')->insert(
-        //     [
-        //         'permission_id' => 2,
-        //         'name' => 'Đinh Sa',
-        //         'name_url'=>changeTitle('Đinh Sa'),
-        //         'status' => 'Common Baby!',
-        //         'about' => 'Hi, I am Admin',
-        //         'location' => 'TP.HCM',
-        //         'job' => $job[rand(0,4)],
-        //         'avatar' => 'avata.png',
-        //         'email' => 'dinhsa@gmail.com',
-        //         'password' => bcrypt('123456'),
-        //         'point_reputation' => rand(100,1000),
-        //         'last_activity_time' => new DateTime(),
-        //         'created_at' => new DateTime(),
-        //         'updated_at' => new DateTime()
-        //     ]
-        // );
+        //Admin account
+        DB::table('users')->insert(
+            [
+                'permission_id' => 2,
+                'name' => 'Thanh Tùng',
+                'name_url'=>changeTitle('Thanh Tùng'),
+                'status' => 'Common Baby!',
+                'about' => 'Hi, I am Admin',
+                'location' => 'TP.HCM',
+                'job' => $job[rand(0,4)],
+                'avatar' => 'k17.jpg',
+                'email' => 'thanhtung@gmail.com',
+                'password' => bcrypt('123456'),
+                'point_reputation' => rand(100,1000),
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime()
+            ]
+        );
+        DB::table('users')->insert(
+            [
+                'permission_id' => 2,
+                'name' => 'Đinh Sa',
+                'name_url'=>changeTitle('Đinh Sa'),
+                'status' => 'Common Baby!',
+                'about' => 'Hi, I am Admin',
+                'location' => 'TP.HCM',
+                'job' => $job[rand(0,4)],
+                'avatar' => 'avata.png',
+                'email' => 'dinhsa@gmail.com',
+                'password' => bcrypt('123456'),
+                'point_reputation' => rand(100,1000),
+                'last_activity_time' => new DateTime(),
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime()
+            ]
+        );
     }
 }

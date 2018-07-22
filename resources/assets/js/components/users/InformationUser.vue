@@ -23,10 +23,6 @@
                                 <span class="oi oi-briefcase mr-2"></span>
                                 <span>{{ user.job }}</span>
                             </li>
-                            <li class="list-group-item">
-                                <span class="oi oi-timer mr-2"></span>
-                                <span>Online</span>
-                            </li>
                         </ul>
                         <div class="card-body" v-if="checkOwner">
                             <router-link :to="{ name: 'edit-information-user', params: { id: user.id } }">Cập nhật</router-link>

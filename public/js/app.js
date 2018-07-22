@@ -74687,7 +74687,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             axios.post('/oauth/token', oauth).then(function (response) {
                 // console.log(response);
-                _this.$auth.setToken(response.data.token_type + ' ' + response.data.access_token, response.data.expires_in + Date.now());
+                _this.$auth.setToken(response.data.token_type + ' ' + response.data.access_token, +response.data.expires_in * 1000 + Date.now());
                 _this.fetchCurrentUser();
                 _this.$router.push({ name: 'home' });
             }).catch(function (error) {
@@ -82278,10 +82278,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 
 
@@ -83114,9 +83110,7 @@ var render = function() {
                       _c("span", { staticClass: "oi oi-briefcase mr-2" }),
                       _vm._v(" "),
                       _c("span", [_vm._v(_vm._s(_vm.user.job))])
-                    ]),
-                    _vm._v(" "),
-                    _vm._m(0)
+                    ])
                   ]),
                   _vm._v(" "),
                   _vm.checkOwner
@@ -83198,18 +83192,7 @@ var render = function() {
       )
     : _vm._e()
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "list-group-item" }, [
-      _c("span", { staticClass: "oi oi-timer mr-2" }),
-      _vm._v(" "),
-      _c("span", [_vm._v("Online")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
