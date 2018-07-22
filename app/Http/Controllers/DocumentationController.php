@@ -17,6 +17,8 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use App\Http\Resources\Documentation\DocumentationRelated;
 use App\Events\ActivityEvent;
+use App\Tag;
+use App\Taggable;
 
 class DocumentationController extends Controller
 {
@@ -179,14 +181,36 @@ class DocumentationController extends Controller
             return Documentation::get();
         }
         else {
-            $documentations = Documentation::join('taggables', function($join) {
-                $join->on('documentations.id', '=', 'taggables.taggable_id')
-                ->where('taggables.taggable_type', '=', 'App\Documentation');
-            })->join('tags', function($join) use ($tags) {
-                $join->on('taggables.tag_id', '=', 'tags.id')
-                ->whereIn('tags.id', explode(',', $tags));
-            })
-            ->select('documentations.*')->distinct()->get();
+            $arrayTags = explode(',', $tags);
+
+            $documentations = Documentation::where(function($query) use ($arrayTags) {
+                $documentations_id = Tag::join('taggables', function($join) use ($arrayTags) {
+                    $join->on('taggables.tag_id', '=', 'tags.id')
+                    ->where('taggables.taggable_type', '=', 'App\Documentation')
+                    ->where(function($query) use ($arrayTags) {
+                        foreach ($arrayTags as $tag) {
+                            $query->orWhere('taggables.tag_id', '=', $tag);
+                        }
+                    });
+                })
+                ->select('taggables.taggable_id')->distinct()->get();
+
+                $query->whereIn('id', $documentations_id);
+            })->get();
+
+            $documentations = $documentations->filter(function ($item, $key) use ($arrayTags) {
+                $count = 0;
+                foreach ($arrayTags as $tag) {
+                    if ($item->tags->whereIn('id', $tag)->count() > 0) {
+                        $count++;
+                    }
+                }
+                if ($count >= count($arrayTags)) {
+                    return true;
+                }
+                return false;
+            });
+            
             return $documentations;
         }
     }

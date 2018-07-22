@@ -133,10 +133,10 @@ const router = new VueRouter({
                             name: 'list-tag'
                         },
                         {
-                            path:'tag-search',
+                            path:'/tag-search',
                             component: ResultSearchTag,
                             name: 'search-tag'
-                        }
+                        },
                     ]
                 },
                 {
@@ -159,7 +159,7 @@ const router = new VueRouter({
                             name: 'edit-information-user'
                         },
                         {
-                            path: ':user-search',
+                            path: '/user-search',
                             component: ResultSearchUser,
                             name: 'search-user'
                         },

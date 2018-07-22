@@ -179,7 +179,7 @@
                     this.styleObject.display= 'block';
                 }
                 else{
-                    this.$router.push({ name: 'search-document', params: { payload }});    
+                    this.$router.push({ name: 'search-document', query: { keyword: this.keyword, tags: this.tags, subject: this.subject }});    
                 }
             },
 

@@ -102,6 +102,17 @@
                 },
             }
         },
+        beforeRouteEnter (to, from, next) {
+            // called before the route that renders this component is confirmed.
+            // does NOT have access to `this` component instance,
+            // because it has not been created yet when this guard is called!
+            if (localStorage.getItem('token') !== null) {
+                next()
+            }
+            else {
+                next('/login')
+            }
+        },
         computed: {
             optionSubject(){
                 return this.$store.getters['documentation/getSubject'].data;

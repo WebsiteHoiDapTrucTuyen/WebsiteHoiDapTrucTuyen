@@ -54,7 +54,7 @@
         data() {
             return {
                 result: '',
-                keyword: this.$route.params.payload.keyword,
+                keyword: this.$route.query.keyword,
                 message:{},
                 styleObject: {
                     display: 'none',
@@ -74,6 +74,7 @@
                 this.fetchListSearchTag(page)
             },
             fetchListSearchTag(page=1){
+                this.$router.replace({ name: 'search-tag', query: { keyword: this.keyword }});   
                 let payload = {
                     'page': page,
                     'data': {

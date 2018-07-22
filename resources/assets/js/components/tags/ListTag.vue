@@ -105,7 +105,7 @@
                     this.styleObject.display= 'block';
                 }
                 else{
-                    this.$router.push({ name: 'search-tag', params: { payload }});    
+                    this.$router.push({ name: 'search-tag', query: { keyword: this.keyword }});    
                 }
             },
         },

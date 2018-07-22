@@ -26,7 +26,8 @@ const mutations = {
 	},
 	[types.ADD_ANSWER]: (state, payload) => {
 		if (payload.data) {
-			state.answers.data.push(payload.data);			
+			state.answers.data.push(payload.data);		
+			state.answers.meta.total += 1;	
 		}
 	},
 	[types.EDIT_ANSWER]: (state, payload) => {
@@ -36,7 +37,8 @@ const mutations = {
 	},
 	[types.DELETE_ANSWER]: (state, payload) => {
 		if (payload) {
-			state.answers.data.splice(payload.index, 1);			
+			state.answers.data.splice(payload.index, 1);
+			state.answers.meta.total -= 1;			
 		}
 	},
 	[types.BEST_ANSWER]: (state, payload) => {

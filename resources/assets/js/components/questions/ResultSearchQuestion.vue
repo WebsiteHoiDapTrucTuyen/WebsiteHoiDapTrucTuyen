@@ -72,9 +72,9 @@
         },
         data() {
             return {
-                keyword: '',
+                keyword: this.$route.query.keyword,
                 result: '',
-                tags: '',
+                tags: this.$route.query.tags,
                 selectedTags: [],
                 message: {},
                 styleObject: {
@@ -91,7 +91,19 @@
                 return this.$store.getters['question/getQuestionSearch'].meta;
             },
             optionTags() {
-                return this.$store.getters['tag/getListTagPure'].data;
+                let tags = this.$store.getters['tag/getListTagPure'].data;
+                if (tags) {
+                    let arraySelectedTags = this.tags.split(',');
+                    
+                    this.selectedTags = tags.filter(tag => {
+                        if (arraySelectedTags.indexOf(tag.id.toString()) >= 0) {
+                            return true;
+                        }
+                        return false;
+                    })
+                }
+                
+                return tags;
             },
         },
         methods: {
@@ -120,9 +132,13 @@
                 this.tags = this.getStringIdSelectedTags(value)
             },
             fetchListQuestionSearch(page = 1) {
+                this.$router.replace({ name: 'search-question', query: { keyword: this.keyword, tags: this.tags }}); 
                 let payload = {
                     'page': page,
-                    'data': this.$route.params.payload
+                    'data': {
+                        'keyword': this.keyword,
+                        'tags': this.tags,
+                    }
                 }
 
                 this.$store.dispatch('question/fetchSearchQuestion', payload)
@@ -147,6 +163,7 @@
                 });
             },
             searchQuestion(page) {
+                this.$router.replace({ name: 'search-question', query: { keyword: this.keyword, tags: this.tags }}); 
                 let payload = {
                     'page': page,
                     'data':{

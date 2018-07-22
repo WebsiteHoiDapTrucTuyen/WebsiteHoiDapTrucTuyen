@@ -266,6 +266,19 @@ const actions = {
 	        });
 		});
 	},
+	fetchIncreaseView: ({ commit }, payload) => {
+		return new Promise((resolve, reject) => {
+			axios.put('/api/documentations/' + payload.id + '/increaseView')
+			.then(response => {
+				//console.log(response);
+	            resolve(response);
+	        })
+			.catch(error => {
+	            // console.log(error);
+	            reject(error);
+	        });
+		}); 
+	}
 }
 
 export default {

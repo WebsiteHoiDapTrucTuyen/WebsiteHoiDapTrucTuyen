@@ -129,6 +129,7 @@
                 this.$refs.modalDelete.open()
             },
             deleteAnswer(id, index) {
+                this.$refs.modalDelete.close()
                 let payload = {
                     'id': id,
                     'index': index,

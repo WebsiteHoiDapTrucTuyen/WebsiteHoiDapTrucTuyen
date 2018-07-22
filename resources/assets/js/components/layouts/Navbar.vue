@@ -128,7 +128,7 @@ export default {
     },
     computed: {
         currentUser() {
-        return this.$store.getters["user/getCurrentUser"].data;
+            return this.$store.getters["user/getCurrentUser"].data;
         },
         activities() {
             return this.$store.getters["activity/getListActivity"].data;
@@ -262,7 +262,7 @@ export default {
             }
             else{
                 this.styleObject = 'border-color:#CCCBCB';
-                this.$router.push({ name: 'search-question', params: { payload }}); 
+                this.$router.push({ name: 'search-question', query: { keyword: this.keyword, tags: this.tags }}); 
                 this.placeholder = 'Nhập từ khóa cần tìm';
                 this.keyword = '';   
             }

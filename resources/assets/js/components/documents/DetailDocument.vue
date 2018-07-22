@@ -186,7 +186,14 @@
 				this.$store.dispatch('documentation/fetchDetailDocumentation', payload)
 				.then(response => {
 					this.receiveCommentBroadcast('documentation', response.data.data.id)
+					setTimeout(() => {
+                        this.fetchIncreaseView(id)
+                    }, 10000)
 				})
+			},
+			fetchIncreaseView(id) {
+                let payload = { 'id': id }
+                this.$store.dispatch('documentation/fetchIncreaseView', payload)
             },
             deleteEntry() {
                 this.$refs.modalDelete.open()

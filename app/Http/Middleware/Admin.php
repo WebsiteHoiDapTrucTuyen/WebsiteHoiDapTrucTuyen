@@ -18,7 +18,7 @@ class Admin
     {
         if (Auth::check()) {
             $user = Auth::user();
-            if ($user->permission->id == 2) {
+            if ($user->active == true && $user->permission->id == 2) {
                 return $next($request);
             }
             else {

@@ -20,6 +20,8 @@ use App\Events\RemoveReferencesEvent;
 use App\Exceptions\NotOwnerException;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\Events\ActivityEvent;
+use App\Tag;
+use App\Taggable;
 
 class QuestionController extends Controller
 {
@@ -187,14 +189,41 @@ class QuestionController extends Controller
             return Question::get();
         }
         else {
-            $questions = Question::join('taggables', function($join) {
-                $join->on('questions.id', '=', 'taggables.taggable_id')
-                ->where('taggables.taggable_type', '=', 'App\Question');
-            })->join('tags', function($join) use ($tags) {
-                $join->on('taggables.tag_id', '=', 'tags.id')
-                ->whereIn('tags.id', explode(',', $tags));
-            })
-            ->select('questions.*')->distinct()->get();
+            $arrayTags = explode(',', $tags);
+
+            $questions = Question::where(function($query) use ($arrayTags) {
+                $questions_id = Tag::join('taggables', function($join) use ($arrayTags) {
+                    $join->on('taggables.tag_id', '=', 'tags.id')
+                    ->where('taggables.taggable_type', '=', 'App\Question')
+                    ->where(function($query) use ($arrayTags) {
+                        $index = 0;
+                        foreach ($arrayTags as $tag) {
+                            $query->orWhere('taggables.tag_id', '=', $tag);
+                            if ($index == 1) {
+
+                            }
+                            $index++;
+                        }
+                    });
+                })
+                ->select('taggables.taggable_id')->distinct()->get();
+
+                $query->whereIn('id', $questions_id);
+            })->get();
+
+            $questions = $questions->filter(function ($item, $key) use ($arrayTags) {
+                $count = 0;
+                foreach ($arrayTags as $tag) {
+                    if ($item->tags->whereIn('id', $tag)->count() > 0) {
+                        $count++;
+                    }
+                }
+                if ($count >= count($arrayTags)) {
+                    return true;
+                }
+                return false;
+            });
+            
             return $questions;
         }
     }

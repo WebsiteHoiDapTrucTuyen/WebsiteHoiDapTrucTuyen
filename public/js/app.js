@@ -45027,9 +45027,9 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
 	store: __WEBPACK_IMPORTED_MODULE_3__store_index__["a" /* default */]
 }).$mount('#app');
 
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.config.devtools = false;
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.config.debug = false;
-__WEBPACK_IMPORTED_MODULE_0_vue___default.a.config.silent = true;
+// Vue.config.devtools = false
+// Vue.config.debug = false
+// Vue.config.silent = true
 
 /***/ }),
 /* 157 */
@@ -72545,7 +72545,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
                 component: __WEBPACK_IMPORTED_MODULE_20__components_tags_ListTag_vue___default.a,
                 name: 'list-tag'
             }, {
-                path: 'tag-search',
+                path: '/tag-search',
                 component: __WEBPACK_IMPORTED_MODULE_23__components_tags_ResultSearchTag_vue___default.a,
                 name: 'search-tag'
             }]
@@ -72565,7 +72565,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
                 component: __WEBPACK_IMPORTED_MODULE_12__components_users_EditInformationUser_vue___default.a,
                 name: 'edit-information-user'
             }, {
-                path: ':user-search',
+                path: '/user-search',
                 component: __WEBPACK_IMPORTED_MODULE_24__components_users_ResultSearchUser_vue___default.a,
                 name: 'search-user'
             }]
@@ -72960,7 +72960,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.styleObject = 'border-color:red';
             } else {
                 this.styleObject = 'border-color:#CCCBCB';
-                this.$router.push({ name: 'search-question', params: { payload: payload } });
+                this.$router.push({ name: 'search-question', query: { keyword: this.keyword, tags: this.tags } });
                 this.placeholder = 'Nhập từ khóa cần tìm';
                 this.keyword = '';
             }
@@ -74680,7 +74680,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var oauth = {
                 grant_type: 'password',
                 client_id: 2,
-                client_secret: 'jIt1yPYFLmDOpzjRgku10TDzOC6jxSaT8KoR4Ujs',
+                client_secret: 'WcvtGSQVG563uTIGADI4oOnGuEWyGsDrjJ5fViVm',
                 username: this.email,
                 password: this.password
             };
@@ -74692,6 +74692,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.$router.push({ name: 'home' });
             }).catch(function (error) {
                 // console.log(error);
+                _this.message = 'Tài khoản hoặc mật khẩu không chính xác';
+                _this.email = '';
+                _this.password = '';
             });
         },
         fetchCurrentUser: function fetchCurrentUser() {
@@ -76180,7 +76183,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         changePage: function changePage(page) {
+            this.$router.replace({ query: { page: page } });
             this.$emit('paginate', page);
+        }
+    },
+    created: function created() {
+        var currentPage = +this.$route.query.page;
+        if (currentPage) {
+            this.changePage(currentPage);
         }
     },
     mounted: function mounted() {
@@ -77545,6 +77555,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         deleteAnswer: function deleteAnswer(id, index) {
             var _this = this;
 
+            this.$refs.modalDelete.close();
             var payload = {
                 'id': id,
                 'index': index
@@ -81254,6 +81265,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         };
     },
+    beforeRouteEnter: function beforeRouteEnter(to, from, next) {
+        // called before the route that renders this component is confirmed.
+        // does NOT have access to `this` component instance,
+        // because it has not been created yet when this guard is called!
+        if (localStorage.getItem('token') !== null) {
+            next();
+        } else {
+            next('/login');
+        }
+    },
 
     computed: {
         optionTags: function optionTags() {
@@ -83438,6 +83459,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (response.data.hasOwnProperty('errors')) {
                     _this2.message['errors'] = 'Không thể cập nhật. Vui lòng thử lại sau';
                 } else {
+                    _this2.$store.dispatch('user/fetchCurrentUser');
                     _this2.fetchInformationUser(_this2.$route.params.id);
                 }
             });
@@ -84538,7 +84560,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.message['errorskeyword'] = 'Bạn chưa nhập key search!';
                 this.styleObject.display = 'block';
             } else {
-                this.$router.push({ name: 'search-document', params: { payload: payload } });
+                this.$router.push({ name: 'search-document', query: { keyword: this.keyword, tags: this.tags, subject: this.subject } });
             }
         }
     },
@@ -85322,7 +85344,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var payload = { 'id': id };
             this.$store.dispatch('documentation/fetchDetailDocumentation', payload).then(function (response) {
                 _this.receiveCommentBroadcast('documentation', response.data.data.id);
+                setTimeout(function () {
+                    _this.fetchIncreaseView(id);
+                }, 10000);
             });
+        },
+        fetchIncreaseView: function fetchIncreaseView(id) {
+            var payload = { 'id': id };
+            this.$store.dispatch('documentation/fetchIncreaseView', payload);
         },
         deleteEntry: function deleteEntry() {
             this.$refs.modalDelete.open();
@@ -87145,6 +87174,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         };
     },
+    beforeRouteEnter: function beforeRouteEnter(to, from, next) {
+        // called before the route that renders this component is confirmed.
+        // does NOT have access to `this` component instance,
+        // because it has not been created yet when this guard is called!
+        if (localStorage.getItem('token') !== null) {
+            next();
+        } else {
+            next('/login');
+        }
+    },
 
     computed: {
         optionSubject: function optionSubject() {
@@ -87837,10 +87876,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            subject: 0,
-            keyword: '',
+            subject: this.$route.query.subject,
+            keyword: this.$route.query.keyword,
             result: '',
-            tags: '',
+            tags: this.$route.query.tags,
             selectedTags: [],
             message: {},
             styleObject: {
@@ -87861,7 +87900,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return this.$store.getters['documentation/getDocumentationSearch'].meta;
         },
         optionTags: function optionTags() {
-            return this.$store.getters['tag/getListTagPure'].data;
+            var tags = this.$store.getters['tag/getListTagPure'].data;
+            if (tags) {
+                var arraySelectedTags = this.tags.split(',');
+
+                this.selectedTags = tags.filter(function (tag) {
+                    if (arraySelectedTags.indexOf(tag.id.toString()) >= 0) {
+                        return true;
+                    }
+                    return false;
+                });
+            }
+
+            return tags;
         }
     },
     methods: {
@@ -87917,9 +87968,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
 
+            this.$router.replace({ name: 'search-document', query: { keyword: this.keyword, tags: this.tags, subject: this.subject } });
             var payload = {
                 'page': page,
-                'data': this.$route.params.payload
+                'data': {
+                    'keyword': this.keyword,
+                    'tags': this.tags,
+                    'subject': this.subject
+                }
             };
 
             this.$store.dispatch('documentation/fetchSearchDocumentation', payload).then(function (response) {
@@ -87949,6 +88005,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         searchDocumentation: function searchDocumentation(page) {
             var _this2 = this;
 
+            this.$router.replace({ name: 'search-document', query: { keyword: this.keyword, tags: this.tags, subject: this.subject } });
             var payload = {
                 'page': page,
                 'data': {
@@ -88528,7 +88585,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.message['errorskeyword'] = 'Bạn chưa nhập key search!';
                 this.styleObject.display = 'block';
             } else {
-                this.$router.push({ name: 'search-tag', params: { payload: payload } });
+                this.$router.push({ name: 'search-tag', query: { keyword: this.keyword } });
             }
         }
     },
@@ -89170,7 +89227,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.message['errorskeyword'] = 'Bạn chưa nhập key search!';
                 this.styleObject.display = 'block';
             } else {
-                this.$router.push({ name: 'search-user', params: { payload: payload } });
+                this.$router.push({ name: 'search-user', query: { keyword: this.keyword } });
             }
         }
     },
@@ -89605,7 +89662,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             result: '',
-            keyword: this.$route.params.payload.keyword,
+            keyword: this.$route.query.keyword,
             message: {},
             styleObject: {
                 display: 'none'
@@ -89630,6 +89687,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
 
+            this.$router.replace({ name: 'search-tag', query: { keyword: this.keyword } });
             var payload = {
                 'page': page,
                 'data': {
@@ -89934,7 +89992,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             result: '',
-            keyword: '',
+            keyword: this.$route.query.keyword,
             message: {},
             styleObject: {
                 display: 'none'
@@ -89965,9 +90023,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
 
+            this.$router.replace({ name: 'search-user', query: { keyword: this.keyword } });
             var payload = {
                 'page': page,
-                'data': this.$route.params.payload
+                'data': {
+                    'keyword': this.keyword
+                }
             };
 
             this.$store.dispatch('listuser/fetchSearchUser', payload).then(function (response) {
@@ -89990,6 +90051,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         searchUser: function searchUser(page) {
             var _this2 = this;
 
+            this.$router.replace({ name: 'search-user', query: { keyword: this.keyword } });
             var payload = {
                 'page': page,
                 'data': {
@@ -90546,9 +90608,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     data: function data() {
         return {
-            keyword: '',
+            keyword: this.$route.query.keyword,
             result: '',
-            tags: '',
+            tags: this.$route.query.tags,
             selectedTags: [],
             message: {},
             styleObject: {
@@ -90566,7 +90628,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return this.$store.getters['question/getQuestionSearch'].meta;
         },
         optionTags: function optionTags() {
-            return this.$store.getters['tag/getListTagPure'].data;
+            var tags = this.$store.getters['tag/getListTagPure'].data;
+            if (tags) {
+                var arraySelectedTags = this.tags.split(',');
+
+                this.selectedTags = tags.filter(function (tag) {
+                    if (arraySelectedTags.indexOf(tag.id.toString()) >= 0) {
+                        return true;
+                    }
+                    return false;
+                });
+            }
+
+            return tags;
         }
     },
     methods: {
@@ -90619,9 +90693,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
 
+            this.$router.replace({ name: 'search-question', query: { keyword: this.keyword, tags: this.tags } });
             var payload = {
                 'page': page,
-                'data': this.$route.params.payload
+                'data': {
+                    'keyword': this.keyword,
+                    'tags': this.tags
+                }
             };
 
             this.$store.dispatch('question/fetchSearchQuestion', payload).then(function (response) {
@@ -90644,6 +90722,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         searchQuestion: function searchQuestion(page) {
             var _this2 = this;
 
+            this.$router.replace({ name: 'search-question', query: { keyword: this.keyword, tags: this.tags } });
             var payload = {
                 'page': page,
                 'data': {
@@ -92446,6 +92525,7 @@ var state = {
 }), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["b" /* ADD_ANSWER */], function (state, payload) {
 	if (payload.data) {
 		state.answers.data.push(payload.data);
+		state.answers.meta.total += 1;
 	}
 }), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["s" /* EDIT_ANSWER */], function (state, payload) {
 	if (payload.data) {
@@ -92454,6 +92534,7 @@ var state = {
 }), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["k" /* DELETE_ANSWER */], function (state, payload) {
 	if (payload) {
 		state.answers.data.splice(payload.index, 1);
+		state.answers.meta.total -= 1;
 	}
 }), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_0__mutation_types__["g" /* BEST_ANSWER */], function (state, payload) {
 	if (payload) {
@@ -93120,6 +93201,19 @@ var actions = {
 				} else {
 					commit(__WEBPACK_IMPORTED_MODULE_0__mutation_types__["I" /* SEARCH_DOCUMENTATION */], response.data);
 				}
+				resolve(response);
+			}).catch(function (error) {
+				// console.log(error);
+				reject(error);
+			});
+		});
+	},
+	fetchIncreaseView: function fetchIncreaseView(_ref13, payload) {
+		var commit = _ref13.commit;
+
+		return new Promise(function (resolve, reject) {
+			axios.put('/api/documentations/' + payload.id + '/increaseView').then(function (response) {
+				//console.log(response);
 				resolve(response);
 			}).catch(function (error) {
 				// console.log(error);

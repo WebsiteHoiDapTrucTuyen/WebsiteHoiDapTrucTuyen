@@ -95,6 +95,7 @@ class UserController extends Controller
             $users = $users->sortByDesc('point_reputation');
             break;
         }
+        $users = $this->paginate($users, 20, $request->page,['path' => LengthAwarePaginator::resolveCurrentPath()]);
     	return UserList::collection($users);
     }
 

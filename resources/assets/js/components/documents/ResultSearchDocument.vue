@@ -93,10 +93,10 @@
         
         data() {
             return {
-                subject: 0,
-                keyword: '',
+                subject: this.$route.query.subject,
+                keyword: this.$route.query.keyword,
                 result: '',
-                tags: '',
+                tags: this.$route.query.tags,
                 selectedTags: [],
                 message: {},
                 styleObject: {
@@ -116,7 +116,19 @@
                 return this.$store.getters['documentation/getDocumentationSearch'].meta;
             },
             optionTags() {
-                return this.$store.getters['tag/getListTagPure'].data;
+                let tags = this.$store.getters['tag/getListTagPure'].data;
+                if (tags) {
+                    let arraySelectedTags = this.tags.split(',');
+                    
+                    this.selectedTags = tags.filter(tag => {
+                        if (arraySelectedTags.indexOf(tag.id.toString()) >= 0) {
+                            return true;
+                        }
+                        return false;
+                    })
+                }
+                
+                return tags;
             },
         },
         methods: {
@@ -147,9 +159,14 @@
                 this.tags = this.getStringIdSelectedTags(value)
             },
             fetchListSearchDocumentation(page=1){
+                this.$router.replace({ name: 'search-document', query: { keyword: this.keyword, tags: this.tags, subject: this.subject }});   
                 let payload = {
                     'page': page,
-                    'data': this.$route.params.payload
+                    'data': {
+                        'keyword': this.keyword,
+                        'tags': this.tags,
+                        'subject': this.subject
+                    }
                 }
 
                 this.$store.dispatch('documentation/fetchSearchDocumentation', payload )
@@ -184,6 +201,7 @@
                 });
             },
             searchDocumentation(page) {
+                this.$router.replace({ name: 'search-document', query: { keyword: this.keyword, tags: this.tags, subject: this.subject }});   
                 let payload = {
                     'page': page,
                     'data':{

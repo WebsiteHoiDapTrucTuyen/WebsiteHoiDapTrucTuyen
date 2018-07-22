@@ -55,7 +55,7 @@
         data() {
             return {
                result: '',
-               keyword: '',
+               keyword: this.$route.query.keyword,
                message:{},
                styleObject: {
                     display: 'none',
@@ -83,9 +83,12 @@
                 
             },
             fetchListSearchUser(page=1){
+                this.$router.replace({ name: 'search-user', query: { keyword: this.keyword }});   
                 let payload = {
                     'page': page,
-                    'data': this.$route.params.payload
+                    'data': {
+                        'keyword': this.keyword
+                    }
                 }
 
                 this.$store.dispatch('listuser/fetchSearchUser', payload )
@@ -110,6 +113,7 @@
                 });
             },
             searchUser(page) {
+                this.$router.replace({ name: 'search-user', query: { keyword: this.keyword }});   
                 let payload = {
                     'page': page,
                     'data':{

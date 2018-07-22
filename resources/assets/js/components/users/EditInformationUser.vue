@@ -185,6 +185,7 @@
                         this.message['errors'] = 'Không thể cập nhật. Vui lòng thử lại sau';
                     }
                     else {
+                        this.$store.dispatch('user/fetchCurrentUser')
                         this.fetchInformationUser(this.$route.params.id)
                     }
                 });

@@ -54,8 +54,16 @@
         },
         methods : {
             changePage(page) {
+                this.$router.replace({ query: { page: page }});    
                 this.$emit('paginate', page);
             }
+        },
+        created() {
+            let currentPage = +this.$route.query.page;
+            if (currentPage) {
+                this.changePage(currentPage);
+            }
+            
         },
         mounted() {
             // console.log('Component mounted.')

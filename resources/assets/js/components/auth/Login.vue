@@ -57,7 +57,7 @@
                 var oauth = {
                     grant_type: 'password',
                     client_id: 2,
-                    client_secret: 'jIt1yPYFLmDOpzjRgku10TDzOC6jxSaT8KoR4Ujs',
+                    client_secret: 'WcvtGSQVG563uTIGADI4oOnGuEWyGsDrjJ5fViVm',
                     username: this.email,
                     password: this.password
                 };
@@ -71,6 +71,9 @@
                 })
                 .catch(error => {
                     // console.log(error);
+                    this.message = 'Tài khoản hoặc mật khẩu không chính xác'
+                    this.email = ''
+                    this.password = ''
                 });
             },
             fetchCurrentUser() {
